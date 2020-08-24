@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "twit": "^2.2.11"
+  },
+  "name": "twitter-wentions",
+  "version": "0.1.0",
+  "description": "Domain mention search twitter bot",
+  "main": "index.js",
+  "author": "Vladimir Skok <skok@vova.io>",
+  "license": "MIT"
+}
