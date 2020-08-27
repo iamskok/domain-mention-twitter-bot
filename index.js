@@ -1,17 +1,21 @@
 const bot = require("./bot")
+const { getTweetsByPost, setPostTweet } = require("./db")
+const { getPostTitle } = require("./helpers")
 
-const DB = {
-  tweets: []
+const handleTweetURL = async (targetString, url, tweet) => {
+  if (url.includes(targetString)) {
+    const postTitle = getPostTitle(url)
+    if (postTitle) {
+      console.log(postTitle)
+      await setPostTweet(postTitle, tweet)
+    }
+  }
 }
 
-const targetString = `skok.club`
-
-const userTimelineOptions = {
-  count: 200
-}
+const targetString = process.env.TARGET_DOMAIN
 
 // Find all personal tweets mentioning `targetString` and save them.
-const getUserTimeline = () => {
+const writeUserTimelineTweets = (userTimelineOptions, targetString) => {
   bot.get(
     `statuses/user_timeline`,
     userTimelineOptions,
@@ -20,25 +24,23 @@ const getUserTimeline = () => {
         console.log(err)
       } else {
         data.forEach(tweet => {
-          tweet.entities.urls.forEach(({ expanded_url: url }) => {
-            if (url.includes(targetString)) {
-              DB.tweets.push(tweet)
-            }
+          tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
+            console.log('url', url)
+            await handleTweetURL(targetString, url, tweet)
           })
         })
       }
   })
 }
 
-getUserTimeline()
-
-const searchTweetsOptions = {
-  q: `url:${targetString}`,
-  count: 100,
+const userTimelineOptions = {
+  count: 200
 }
 
+writeUserTimelineTweets(userTimelineOptions, targetString)
+
 // Search tweets mentioning `targetString` and save them.
-const getTweets = () => {
+const writeSearchTweets = (handleTweetURL, searchTweetsOptions, targetString) => {
   bot.get(
     `search/tweets`,
     searchTweetsOptions,
@@ -47,33 +49,35 @@ const getTweets = () => {
         console.log(err)
       } else {
         data.statuses.forEach(tweet => {
-          tweet.entities.urls.forEach(({ expanded_url: url }) => {
-            if (url.includes(targetString)) {
-              DB.tweets.push(tweet)
-            }
+          tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
+            await handleTweetURL(targetString, url, tweet)
           })
         })
       }
   })
 }
 
-getTweets()
-
-const streamOptions = {
-  track: `${targetString}`
+const searchTweetsOptions = {
+  q: `url:${targetString}`,
+  count: 100,
 }
 
-const stream = bot.stream(`statuses/filter`, streamOptions)
+writeSearchTweets(handleTweetURL, searchTweetsOptions, targetString)
+
+const stream = streamOptions => bot.stream(`statuses/filter`, streamOptions)
 
 // Subscribe to the stream and save them.
-const getStream = () => {
-  stream.on(`tweet`, tweet => {
-    tweet.entities.urls.forEach(({ expanded_url: url }) => {
-      if (url.includes(targetString)) {
-        DB.tweets.push(tweet)
-      }
+const writeStreamTweets = (stream, streamOptions, targetString) => {
+  stream(streamOptions).on(`tweet`, tweet => {
+    tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
+      // await handleTweetURL(targetString, url, tweet)
+      console.log(tweet.text)
     })
   })
 }
 
-getStream()
+const streamOptions = {
+  track: targetString
+}
+
+// writeStreamTweets(stream, streamOptions, targetString)
