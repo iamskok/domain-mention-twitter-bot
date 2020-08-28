@@ -21,10 +21,23 @@ const getTweetsByPost = async post => {
   }
 }
 
+// Handles Gatsby ID field being a number type
+const stringifyObjectValue = (object, key = `id`) => {
+  if (typeof object[key] === `number`) {
+    object[key] = object[key].toString()
+  }
+
+  return object
+}
+
+// Add bigger profile image helper
+// https://stackoverflow.com/questions/21485205/how-to-get-bigger-size-user-image-with-twitter-api-1-1
+// Combine functions in normalizeTweet function
+
 const setPostTweet = async (postTitle, tweet) => {
   return await db.collection(`posts/${postTitle}/tweets`)
     .doc(tweet.id_str)
-    .set(tweet)
+    .set(stringifyObjectValue(tweet))
 }
 
 module.exports.getTweetsByPost = getTweetsByPost
