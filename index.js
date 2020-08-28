@@ -70,8 +70,7 @@ const stream = streamOptions => bot.stream(`statuses/filter`, streamOptions)
 const writeStreamTweets = (stream, streamOptions, targetString) => {
   stream(streamOptions).on(`tweet`, tweet => {
     tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
-      // await handleTweetURL(targetString, url, tweet)
-      console.log(tweet.text)
+      await handleTweetURL(targetString, url, tweet)
     })
   })
 }
@@ -80,4 +79,4 @@ const streamOptions = {
   track: targetString
 }
 
-// writeStreamTweets(stream, streamOptions, targetString)
+writeStreamTweets(stream, streamOptions, targetString)
