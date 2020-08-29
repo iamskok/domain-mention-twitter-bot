@@ -30,14 +30,21 @@ const stringifyObjectValue = (object, key = `id`) => {
   return object
 }
 
-// Add bigger profile image helper
-// https://stackoverflow.com/questions/21485205/how-to-get-bigger-size-user-image-with-twitter-api-1-1
-// Combine functions in normalizeTweet function
+// Set `profile_image_url_https` to 400x400
+const setBiggerProfileImageUrl = object => {
+  if (object.user.profile_image_url_https) {
+    object.user.profile_image_url_https = object.user.profile_image_url_https.replace(/_normal/, `_400x400`)
+  }
+
+  return object
+}
+
+const normalizeTweet = object => stringifyObjectValue(setBiggerProfileImageUrl(object))
 
 const setPostTweet = async (postTitle, tweet) => {
-  return await db.collection(`posts/${postTitle}/tweets`)
+  return await db.collection(`posts2/${postTitle}/tweets`)
     .doc(tweet.id_str)
-    .set(stringifyObjectValue(tweet))
+    .set(normalizeTweet(tweet))
 }
 
 module.exports.getTweetsByPost = getTweetsByPost
