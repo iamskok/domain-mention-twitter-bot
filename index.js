@@ -19,7 +19,9 @@ const handleTweetURL = async (targetString, url, tweet) => {
 const targetString = process.env.TARGET_DOMAIN
 
 writeUserTimelineTweets(
-  { count: 200 },
+  {
+    count: 200
+  },
   targetString,
   handleTweetURL,
 )

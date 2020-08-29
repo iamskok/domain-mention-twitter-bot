@@ -12,7 +12,6 @@ const writeUserTimelineTweets = (userTimelineOptions, targetString, handleTweetU
         if (response.statusCode === 200) {
           data.forEach(tweet => {
             tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
-              console.log('url', url)
               await handleTweetURL(targetString, url, tweet)
             })
           })
@@ -43,9 +42,7 @@ const writeSearchTweets = (searchTweetsOptions, targetString, handleTweetURL) =>
 
 // Subscribe to the stream and save them.
 const writeStreamTweets = (stream, targetString, handleTweetURL) => {
-  console.log(`start stream ....`)
   stream.on(`tweet`, tweet => {
-    console.log(tweet.text)
     tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
       await handleTweetURL(targetString, url, tweet)
     })
