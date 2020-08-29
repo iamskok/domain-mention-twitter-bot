@@ -1,14 +1,14 @@
 // Get post title from URL
-const getPostTitle = (url, base = `/blog/`) => {
-  const { pathname } = new URL(url)
+const getPostTitle = (url, base = `blog`) => {
+  let { pathname } = new URL(url)
   let postTitle
 
-  if (pathname.startsWith(base)) {
-    postTitle = pathname.slice(base.length)
+  while(pathname.startsWith(`/`)) {
+    pathname = pathname.slice(1)
+  }
 
-    if (postTitle.endsWith(`/`)) {
-      postTitle = postTitle.slice(0, postTitle.length - 1)
-    }
+  if (pathname.startsWith(base + `/`)) {
+    postTitle = pathname.slice(base.length + 1).replace(/\//g, ``)
   }
 
   return postTitle
