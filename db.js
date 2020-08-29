@@ -1,4 +1,5 @@
 const firebase = require("firebase-admin")
+const { normalizeTweet } = require("./helpers")
 
 firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -21,31 +22,12 @@ const getTweetsByPost = async post => {
   }
 }
 
-// Handles Gatsby ID field being a number type
-const stringifyObjectValue = (object, key = `id`) => {
-  if (typeof object[key] === `number`) {
-    object[key] = object[key].toString()
-  }
-
-  return object
-}
-
-// Set `profile_image_url_https` to 400x400
-const setBiggerProfileImageUrl = object => {
-  if (object.user.profile_image_url_https) {
-    object.user.profile_image_url_https = object.user.profile_image_url_https.replace(/_normal/, `_400x400`)
-  }
-
-  return object
-}
-
-const normalizeTweet = object => stringifyObjectValue(setBiggerProfileImageUrl(object))
-
 const setPostTweet = async (postTitle, tweet) => {
-  return await db.collection(`posts2/${postTitle}/tweets`)
+  return await db.collection(`posts/${postTitle}/tweets`)
     .doc(tweet.id_str)
     .set(normalizeTweet(tweet))
 }
 
 module.exports.getTweetsByPost = getTweetsByPost
 module.exports.setPostTweet = setPostTweet
+module.exports._db = db
