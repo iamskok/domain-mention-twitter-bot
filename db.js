@@ -14,9 +14,17 @@ firebase.initializeApp({
 
 const db = firebase.firestore()
 
-const getTweetsByPost = async post => {
+const getTweetsByPost = async postTitle => {
   try {
-    return await db.collection(`posts/${post}/tweets`).get()
+    return await db.collection(`posts/${postTitle}/tweets`).get()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getAllPosts = async () => {
+  try {
+    return await db.collection(`posts`).get()
   } catch (error) {
     console.log(error)
   }
@@ -32,6 +40,22 @@ const setPostTweet = async (postTitle, tweet) => {
     .set(normalizeTweet(tweet))
 }
 
+const setTweetReplies = async (postTitle, tweetId, replies) => {
+  const docRef = await db.doc(`posts/${postTitle}`)
+  return docRef.collection(`tweets`)
+    .doc(tweetId)
+    .set(
+      {
+        replies: replies.map(reply => normalizeTweet(reply))
+      },
+      {
+        merge: true
+      },
+    )
+}
+
 module.exports.getTweetsByPost = getTweetsByPost
 module.exports.setPostTweet = setPostTweet
+module.exports.setTweetReplies = setTweetReplies
+module.exports.getAllPosts = getAllPosts
 module.exports._db = db

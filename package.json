@@ -1,7 +1,4 @@
 {
-  "sripts": {
-    "start": "node index.js"
-  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "firebase-admin": "^9.1.1",
