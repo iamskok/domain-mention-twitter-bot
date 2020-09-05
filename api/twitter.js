@@ -122,10 +122,8 @@ const searchTweetReplies = (domainName, tweet, setTweetReplies) => {
             .filter(
               tweet => tweet.in_reply_to_status_id_str === tweetId
             )
-          const oldReplies = tweet.replies
-          const replies = newReplies
-          // Add old/new replies comparison logic
-          await setTweetReplies(postTitle, tweetId, replies)
+
+          await setTweetReplies(postTitle, tweetId, newReplies)
         }
       }
   })

@@ -1,6 +1,6 @@
 const admin = require("firebase-admin")
 const firebase = require("../config/firebase")
-const { normalizeTweet } = require("../helpers")
+const { dedupeTweets } = require("../helpers")
 
 const db = firebase.firestore()
 
@@ -22,8 +22,8 @@ const getAllPosts = async () => {
 
 const setTweet = async (postTitle, tweet) => {
   const docRef = await db.doc(`posts/${postTitle}`)
-  // To avoid "This document does not exist, it will not appear in
-  // queries or snapshots" error add at least one field to the document
+  // Resolve "This document does not exist, it will not appear in queries or snapshots" error
+  // by adding at least one field to the document.
   docRef.set({ updated: Date.now() })
 
   return docRef.collection(`tweets`)
@@ -31,16 +31,23 @@ const setTweet = async (postTitle, tweet) => {
     .set(tweet)
 }
 
-const setTweetReplies = async (postTitle, tweetId, replies) => {
+const setTweetReplies = async (postTitle, tweetId, newReplies) => {
   const docRef = await db.doc(`posts/${postTitle}`)
-  return docRef.collection(`tweets`)
+
+  const oldReplies = (
+    await docRef.collection(`tweets`).doc(tweetId).get()
+  ).data().replies || []
+
+  const allReplies = dedupeTweets(oldReplies, newReplies)
+
+  docRef.collection(`tweets`)
     .doc(tweetId)
     .set(
       {
-        replies: replies.map(reply => normalizeTweet(reply))
+        replies: allReplies,
       },
       {
-        merge: true
+        merge: true,
       },
     )
 }
@@ -55,8 +62,8 @@ const setTweetQuote = async (postTitle, quote) => {
         quotes: admin.firestore.FieldValue.arrayUnion(quote),
       },
       {
-        merge: true
-      }
+        merge: true,
+      },
     )
 }
 

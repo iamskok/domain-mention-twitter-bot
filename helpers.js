@@ -44,5 +44,16 @@ const setProfileImageUrls = tweet => {
 
 const normalizeTweet = tweet => stringifyIds(setProfileImageUrls(tweet))
 
+const dedupeTweets = (oldTweets, newTweets) => {
+  const oldTweetIds = oldTweets.map(({ id_str }) => id_str)
+  const dedupedNewTweets = newTweets.filter(({ id_str }) => !oldTweetIds.includes(id_str))
+
+  return [
+    ...oldTweets,
+    ...dedupedNewTweets
+  ]
+}
+
 module.exports.getPostTitle = getPostTitle
 module.exports.normalizeTweet = normalizeTweet
+module.exports.dedupeTweets = dedupeTweets
