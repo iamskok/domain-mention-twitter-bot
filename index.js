@@ -7,7 +7,7 @@ const {
 
 const domainName = process.env.DOMAIN_NAME
 
-// timeline(domainName)
-// search(domainName)
-// stream(domainName)
+timeline(domainName)
+search(domainName)
 replies(domainName)
+stream(domainName)

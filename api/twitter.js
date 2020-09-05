@@ -1,7 +1,8 @@
 const twit = require("../config/twit")
-const { getPostTitle, normalizeTweet } = require("../helpers")
+const getPostTitle = require("../utils/get-post-title")
+const normalizeTweet = require("../utils/normalize-tweet")
 
-// Find all personal tweets mentioning `domainName` and save them.
+// Find all personal tweets mentioning `domainName`.
 const readUserTimelineTweets = (domainName, setTweet) => {
   twit.get(
     `statuses/user_timeline`,
@@ -29,7 +30,7 @@ const readUserTimelineTweets = (domainName, setTweet) => {
   })
 }
 
-// Search tweets mentioning `domainName` and save them.
+// Find tweets mentioning `domainName`.
 const readSearchTweets = (domainName, setTweet) => {
   twit.get(
     `search/tweets`,
@@ -58,13 +59,13 @@ const readSearchTweets = (domainName, setTweet) => {
   })
 }
 
-// Subscribe to the stream and save them.
+// Subscribe to the stream mentioning `domainName`.
 const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
   twit.stream(
     `statuses/filter`,
     {
-      // Check Track section https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
-      // You should use “example com” as the track parameter for “example.com”
+      // Check "Track" section https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
+      // Use “example com” as the track parameter for “example.com”
       track: domainName.replace(`.`, ` `)
     }
   ).on(`tweet`, tweet => {
