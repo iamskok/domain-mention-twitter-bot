@@ -1,6 +1,6 @@
-# twitter-wentions
+# Twitter Mentions Bot
 
-Domain mention Twitter search bot.
+Search for your domain name mentions across twitter.
 
 ## Setup
 
@@ -21,7 +21,7 @@ FIREBASE_MESSAGING_SENDER_ID=345687693302
 FIREBASE_APP_ID=1:384557623309:web:acf821f7321f636390d938
 FIREBASE_MEASUREMENT_ID=G-WE339SORBL
 
-TARGET_DOMAIN=example.com
+DOMAIN_NAME=example.com
 ```
 
 ## Useful links
