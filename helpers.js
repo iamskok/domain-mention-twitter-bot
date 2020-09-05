@@ -14,27 +14,35 @@ const getPostTitle = (url, base = `blog`) => {
   return postTitle
 }
 
-// Handles Gatsby ID field being a number type
-const stringifyObjectValue = (object, key = `id`) => {
-  if (typeof object[key] === `number`) {
-    object[key] = object[key].toString()
+// Resolve Gatsby issue with ID field being a number
+const stringifyIds = tweet => {
+  if (tweet?.id && typeof tweet?.id === `number`) {
+    tweet.id = tweet.id.toString()
   }
 
-  return object
-}
-
-// Set `profile_image_url_https` to 400x400
-const setBiggerProfileImageUrl = object => {
-  if (object.user.profile_image_url_https) {
-    object.user.profile_image_url_https = object.user.profile_image_url_https.replace(/_normal/, `_400x400`)
+  if (tweet?.quoted_status?.id && typeof tweet?.quoted_status?.id === `number`) {
+    tweet.quoted_status.id = tweet.quoted_status.id.toString()
   }
 
-  return object
+  return tweet
 }
 
-const normalizeTweet = object => stringifyObjectValue(setBiggerProfileImageUrl(object))
+// Set `profile_image_url_https` in quote and reply to 400x400
+const setProfileImageUrls = tweet => {
+  if (tweet?.user?.profile_image_url_https) {
+    tweet.user.profile_image_url_https = tweet.user.profile_image_url_https
+      .replace(/_normal/, `_400x400`)
+  }
+
+  if (tweet?.quoted_status?.user?.profile_image_url_https) {
+    tweet.quoted_status.user.profile_image_url_https = tweet.quoted_status.user.profile_image_url_https
+      .replace(/_normal/, `_400x400`)
+  }
+
+  return tweet
+}
+
+const normalizeTweet = tweet => stringifyIds(setProfileImageUrls(tweet))
 
 module.exports.getPostTitle = getPostTitle
-module.exports.stringifyObjectValue = stringifyObjectValue
-module.exports.setBiggerProfileImageUrl = setBiggerProfileImageUrl
 module.exports.normalizeTweet = normalizeTweet

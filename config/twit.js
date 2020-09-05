@@ -1,7 +1,7 @@
 const Twit = require("twit")
-require("dotenv").config({ path: ".env" })
+require("dotenv").config({ path: __dirname + "/../.env" })
 
-const bot = new Twit({
+const twit = new Twit({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
   access_token: process.env.TWITTER_ACCESS_TOKEN,
@@ -9,4 +9,4 @@ const bot = new Twit({
   timeout_ms: 60 * 1000,
 })
 
-module.exports = bot
+module.exports = twit
