@@ -1,5 +1,5 @@
-const twitAppAuth = require("../../config/twit-app-auth")
-const dedupeTweets = require("../../utils/dedupe-tweets")
+import twitAppAuth from "../../config/twit-app-auth.js"
+import dedupeTweets from "../../utils/dedupe-tweets.js"
 
 // Search replies for all tweets that are stored in the DB via `search/tweets` endpoint.
 const searchTweetReplies = async (tweet, oldReplies) => {
@@ -45,4 +45,4 @@ const searchTweetReplies = async (tweet, oldReplies) => {
   })
 }
 
-module.exports = searchTweetReplies
+export default searchTweetReplies

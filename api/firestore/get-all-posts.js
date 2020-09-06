@@ -1,4 +1,4 @@
-const db = require("./db")
+import db from "./db.js"
 
 const getAllPosts = async () => {
   try {
@@ -8,4 +8,4 @@ const getAllPosts = async () => {
   }
 }
 
-module.exports = getAllPosts
+export default getAllPosts

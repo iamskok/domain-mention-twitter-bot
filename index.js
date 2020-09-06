@@ -1,7 +1,7 @@
-const timeline = require("./api/bot/timeline")
-const search = require("./api/bot/search")
-const stream = require("./api/bot/stream")
-const replies = require("./api/bot/replies")
+import timeline from "./api/bot/timeline.js"
+import search from "./api/bot/search.js"
+import replies from "./api/bot/replies.js"
+import stream from "./api/bot/stream.js"
 
 const domainName = process.env.DOMAIN_NAME
 

@@ -1,7 +1,9 @@
-const Twit = require("twit")
-const genericTweeterAuth = require("./generic-tweeter-auth")
+import Twit from "twit"
+import dotenv from "dotenv"
+import path from "path"
+import genericTweeterAuth from "./generic-tweeter-auth.js"
 
-require("dotenv").config({ path: __dirname + "/../.env" })
+dotenv.config({ path: path.resolve() + "/.env" })
 
 // Used for `search/tweets` endpoint for a greater request limit.
 const twitAppAuth = new Twit({
@@ -9,4 +11,4 @@ const twitAppAuth = new Twit({
   app_only_auth: true,
 })
 
-module.exports = twitAppAuth
+export default twitAppAuth

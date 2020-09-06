@@ -1,6 +1,6 @@
-const twitUserAuth = require("../../config/twit-user-auth")
-const getPostTitle = require("../../utils/get-post-title")
-const normalizeTweet = require("../../utils/normalize-tweet")
+import twitUserAuth from "../../config/twit-user-auth.js"
+import getPostTitle from "../../utils/get-post-title.js"
+import normalizeTweet from "../../utils/normalize-tweet.js"
 
 // Subscribe to the stream mentioning `domainName` via `statuses/filter` endpoint.
 const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
@@ -14,18 +14,19 @@ const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
   ).on(`tweet`, tweet => {
     // Avoid catching retweets.
     if (!tweet.retweeted_status) {
+      // Handle tweet is a quote case.
       if (tweet.quoted_status_id_str) {
-        const quote = tweet
-        quote.quoted_status.entities.urls.forEach(async ({ expanded_url: url }) => {
+        tweet.quoted_status.entities.urls.forEach(async ({ expanded_url: url }) => {
           if (url.includes(domainName)) {
             const postTitle = getPostTitle(url)
 
             if (postTitle) {
-              await setTweetQuote(postTitle, normalizeTweet(quote))
+              await setTweetQuote(postTitle, normalizeTweet(tweet))
             }
           }
         })
       } else {
+        // Handle new tweet case.
         tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
           if (url.includes(domainName)) {
             const postTitle = getPostTitle(url)
@@ -40,4 +41,4 @@ const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
   })
 }
 
-module.exports = readStreamTweets
+export default readStreamTweets

@@ -1,4 +1,7 @@
-require("dotenv").config({ path: __dirname + "/../.env" })
+import dotenv from "dotenv"
+import path from "path"
+
+dotenv.config({ path: path.resolve() + "/.env" })
 
 // Generic config used in App and User auth.
 const genericTweeterAuth = {
@@ -7,4 +10,4 @@ const genericTweeterAuth = {
   timeout_ms: 60 * 1000,
 }
 
-module.exports = genericTweeterAuth
+export default genericTweeterAuth

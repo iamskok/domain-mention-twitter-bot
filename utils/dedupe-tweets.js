@@ -8,4 +8,4 @@ const dedupeTweets = (oldTweets, newTweets) => {
   ]
 }
 
-module.exports = dedupeTweets
+export default dedupeTweets

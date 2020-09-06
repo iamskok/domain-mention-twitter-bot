@@ -1,4 +1,4 @@
-const db = require("./db")
+import db from "./db.js"
 
 const getTweetsByPost = async postTitle => {
   try {
@@ -8,4 +8,4 @@ const getTweetsByPost = async postTitle => {
   }
 }
 
-module.exports = getTweetsByPost
+export default getTweetsByPost

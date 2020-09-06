@@ -1,4 +1,4 @@
-const db = require("./db")
+import db from "./db.js"
 
 const setTweetReplies = async (postTitle, tweetId, replies) => {
   const docRef = db.doc(`posts/${postTitle}`)
@@ -15,4 +15,4 @@ const setTweetReplies = async (postTitle, tweetId, replies) => {
     )
 }
 
-module.exports = setTweetReplies
+export default setTweetReplies

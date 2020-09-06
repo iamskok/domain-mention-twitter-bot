@@ -1,6 +1,6 @@
 # Twitter Mentions Bot
 
-Search for your domain name mentions across twitter.
+Search domain name mentions across twitter.
 
 ## Setup
 

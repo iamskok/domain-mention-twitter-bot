@@ -1,5 +1,5 @@
-const twitUserAuth = require("../../config/twit-user-auth")
-const getPostTitle = require("../../utils/get-post-title")
+import twitUserAuth from "../../config/twit-user-auth.js"
+import getPostTitle from "../../utils/get-post-title.js"
 
 // Find all personal tweets mentioning `domainName` via `statuses/user_timeline` endpoint.
 const readUserTimelineTweets = (domainName, setTweet) => {
@@ -29,4 +29,5 @@ const readUserTimelineTweets = (domainName, setTweet) => {
   })
 }
 
-module.exports = readUserTimelineTweets
+export default readUserTimelineTweets
+

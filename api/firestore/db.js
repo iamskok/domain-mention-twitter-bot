@@ -1,5 +1,5 @@
-const firebase = require("../../config/firebase")
+import firebase from "../../config/firebase.js"
 
 const db = firebase.firestore()
 
-module.exports = db
+export default db

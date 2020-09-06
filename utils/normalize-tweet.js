@@ -35,4 +35,4 @@ const setProfileImageUrls = tweet => {
 // Apply all tweet updates at once.
 const normalizeTweet = tweet => stringifyIds(setProfileImageUrls(tweet))
 
-module.exports = normalizeTweet
+export default normalizeTweet

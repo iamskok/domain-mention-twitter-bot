@@ -1,7 +1,9 @@
-const Twit = require("twit")
-const genericTweeterAuth = require("./generic-tweeter-auth")
+import Twit from "twit"
+import dotenv from "dotenv"
+import path from "path"
+import genericTweeterAuth from "./generic-tweeter-auth.js"
 
-require("dotenv").config({ path: __dirname + "/../.env" })
+dotenv.config({ path: path.resolve() + "/.env" })
 
 // Used for `search/*` endpoints.
 const twitUserAuth = new Twit({
@@ -10,4 +12,4 @@ const twitUserAuth = new Twit({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 })
 
-module.exports = twitUserAuth
+export default twitUserAuth

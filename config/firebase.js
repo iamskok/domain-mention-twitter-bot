@@ -1,5 +1,8 @@
-const admin = require("firebase-admin")
-require("dotenv").config({ path: __dirname + "/../.env" })
+import admin from "firebase-admin"
+import dotenv from "dotenv"
+import path from "path"
+
+dotenv.config({ path: path.resolve() + "/.env" })
 
 const firebase = admin.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -12,4 +15,4 @@ const firebase = admin.initializeApp({
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 })
 
-module.exports = firebase
+export default firebase

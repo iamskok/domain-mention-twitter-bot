@@ -1,5 +1,5 @@
-const twitAppAuth = require("../../config/twit-app-auth")
-const getPostTitle = require("../../utils/get-post-title")
+import twitAppAuth from "../../config/twit-app-auth.js"
+import getPostTitle from "../../utils/get-post-title.js"
 
 // Find tweets mentioning `domainName` via `search/tweets` endpoint.
 const readSearchTweets = (domainName, setTweet) => {
@@ -30,4 +30,4 @@ const readSearchTweets = (domainName, setTweet) => {
   })
 }
 
-module.exports = readSearchTweets
+export default readSearchTweets

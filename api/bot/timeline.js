@@ -1,6 +1,6 @@
-const setTweet = require("../firestore/set-tweet")
-const readUserTimelineTweets = require("../twitter/read-user-timeline-tweets")
+import setTweet from "../firestore/set-tweet.js"
+import readUserTimelineTweets from "../twitter/read-user-timeline-tweets.js"
 
 const timeline = domainName => readUserTimelineTweets(domainName, setTweet)
 
-module.exports = timeline
+export default timeline

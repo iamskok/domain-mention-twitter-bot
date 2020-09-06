@@ -1,7 +1,7 @@
-const setTweet = require("../firestore/set-tweet")
-const setTweetQuote = require("../firestore/set-tweet-quote")
-const readStreamTweets = require("../twitter/read-stream-tweets")
+import setTweet from "../firestore/set-tweet.js"
+import setTweetQuote from "../firestore/set-tweet-quote.js"
+import readStreamTweets from "../twitter/read-stream-tweets.js"
 
 const stream = domainName => readStreamTweets(domainName, setTweetQuote, setTweet)
 
-module.exports = stream
+export default stream

@@ -1,6 +1,6 @@
-const setTweet = require("../firestore/set-tweet")
-const readSearchTweets = require("../twitter/read-search-tweets")
+import setTweet from "../firestore/set-tweet.js"
+import readSearchTweets from "../twitter/read-search-tweets.js"
 
 const search = domainName => readSearchTweets(domainName, setTweet)
 
-module.exports = search
+export default search

@@ -16,4 +16,4 @@ const getPostTitle = (url, base = `blog`) => {
   return postTitle
 }
 
-module.exports = getPostTitle
+export default getPostTitle

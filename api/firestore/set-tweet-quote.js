@@ -1,5 +1,5 @@
-const admin = require("firebase-admin")
-const db = require("./db")
+import admin from "firebase-admin"
+import db from "./db.js"
 
 const setTweetQuote = async (postTitle, quote) => {
   const docRef = await db.doc(`posts/${postTitle}`)
@@ -16,4 +16,4 @@ const setTweetQuote = async (postTitle, quote) => {
     )
 }
 
-module.exports = setTweetQuote
+export default setTweetQuote

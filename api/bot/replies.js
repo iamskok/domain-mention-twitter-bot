@@ -1,8 +1,8 @@
-const getTweetsByPost = require("../firestore/get-tweets-by-post")
-const getTweetReplies = require("../firestore/get-tweet-replies")
-const setTweetReplies = require("../firestore/set-tweet-replies")
-const getAllPosts = require("../firestore/get-all-posts")
-const searchTweetReplies = require("../twitter/search-tweet-replies")
+import getTweetsByPost from "../firestore/get-tweets-by-post.js"
+import getTweetReplies from "../firestore/get-tweet-replies.js"
+import setTweetReplies from "../firestore/set-tweet-replies.js"
+import getAllPosts from "../firestore/get-all-posts.js"
+import searchTweetReplies from "../twitter/search-tweet-replies.js"
 
 const replies = () => {
   getAllPosts().then(posts => {
@@ -23,4 +23,4 @@ const replies = () => {
   })
 }
 
-module.exports = replies
+export default replies
