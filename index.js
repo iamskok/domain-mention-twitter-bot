@@ -1,9 +1,7 @@
-const {
-  timeline,
-  search,
-  stream,
-  replies
-} = require("./api/detective")
+const timeline = require("./api/bot/timeline")
+const search = require("./api/bot/search")
+const stream = require("./api/bot/stream")
+const replies = require("./api/bot/replies")
 
 const domainName = process.env.DOMAIN_NAME
 
