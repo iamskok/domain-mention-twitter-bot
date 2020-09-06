@@ -1,11 +1,12 @@
-const twit = require("../config/twit")
+const twitAppAuth = require("../config/twit-app-auth")
+const twitUserAuth = require("../config/twit-user-auth")
 const getPostTitle = require("../utils/get-post-title")
 const normalizeTweet = require("../utils/normalize-tweet")
 const dedupeTweets = require("../utils/dedupe-tweets")
 
 // Find all personal tweets mentioning `domainName`.
 const readUserTimelineTweets = (domainName, setTweet) => {
-  twit.get(
+  twitUserAuth.get(
     `statuses/user_timeline`,
     {
       count: 200
@@ -33,7 +34,7 @@ const readUserTimelineTweets = (domainName, setTweet) => {
 
 // Find tweets mentioning `domainName`.
 const readSearchTweets = (domainName, setTweet) => {
-  twit.get(
+  twitAppAuth.get(
     `search/tweets`,
     {
       q: `url:${domainName}`,
@@ -62,7 +63,7 @@ const readSearchTweets = (domainName, setTweet) => {
 
 // Subscribe to the stream mentioning `domainName`.
 const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
-  twit.stream(
+  twitUserAuth.stream(
     `statuses/filter`,
     {
       // Check "Track" section https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
@@ -103,7 +104,7 @@ const searchTweetReplies = async (tweet, oldReplies) => {
   const tweetId = tweet.id_str
 
   return new Promise((resolve, reject) => {
-    twit.get(
+    twitAppAuth.get(
       `search/tweets`,
       {
         q: `to:${userName}`,

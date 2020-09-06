@@ -1,12 +1,13 @@
 const Twit = require("twit")
+const genericTweeterAuth = require("./generic-tweeter-auth")
+
 require("dotenv").config({ path: __dirname + "/../.env" })
 
-const twit = new Twit({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+// Used for `search/*` endpoints.
+const twitUserAuth = new Twit({
+  ...genericTweeterAuth,
   access_token: process.env.TWITTER_ACCESS_TOKEN,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-  timeout_ms: 60 * 1000,
 })
 
-module.exports = twit
+module.exports = twitUserAuth
