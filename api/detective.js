@@ -1,6 +1,7 @@
 const {
   getTweetsByPost,
   setTweet,
+  getTweetReplies,
   setTweetReplies,
   setTweetQuote,
   getAllPosts,
@@ -18,14 +19,20 @@ const search = domainName => readSearchTweets(domainName, setTweet)
 
 const stream = domainName => readStreamTweets(domainName, setTweetQuote, setTweet)
 
-const replies = domainName => {
+const replies = () => {
   getAllPosts().then(posts => {
     posts.forEach(async doc => {
       const postTitle = doc.id
       const tweets = await getTweetsByPost(postTitle)
   
-      tweets.forEach(tweet => {
-        searchTweetReplies(domainName, tweet.data(), setTweetReplies)
+      tweets.forEach(async tweet => {
+        const tweetData = tweet.data()
+        const tweetId = tweetData.id_str
+
+        const oldReplies = await getTweetReplies(postTitle, tweetId)
+        const replies = await searchTweetReplies(tweetData, oldReplies)
+
+        await setTweetReplies(postTitle, tweetId, replies)
       })
     })
   })

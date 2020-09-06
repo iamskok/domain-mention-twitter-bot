@@ -31,20 +31,24 @@ const setTweet = async (postTitle, tweet) => {
     .set(tweet)
 }
 
-const setTweetReplies = async (postTitle, tweetId, newReplies) => {
-  const docRef = await db.doc(`posts/${postTitle}`)
+const getTweetReplies = async (postTitle, tweetId) => {
+  const docRef = db.doc(`posts/${postTitle}`)
 
-  const oldReplies = (
+  return (
     await docRef.collection(`tweets`).doc(tweetId).get()
-  ).data().replies || []
+  )
+  .data()
+  .replies || []
+}
 
-  const allReplies = dedupeTweets(oldReplies, newReplies)
+const setTweetReplies = async (postTitle, tweetId, replies) => {
+  const docRef = db.doc(`posts/${postTitle}`)
 
-  docRef.collection(`tweets`)
+  return await docRef.collection(`tweets`)
     .doc(tweetId)
     .set(
       {
-        replies: allReplies,
+        replies: replies,
       },
       {
         merge: true,
@@ -69,6 +73,7 @@ const setTweetQuote = async (postTitle, quote) => {
 
 module.exports.getTweetsByPost = getTweetsByPost
 module.exports.setTweet = setTweet
+module.exports.getTweetReplies = getTweetReplies
 module.exports.setTweetReplies = setTweetReplies
 module.exports.setTweetQuote = setTweetQuote
 module.exports.getAllPosts = getAllPosts
