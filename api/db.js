@@ -1,6 +1,5 @@
 const admin = require("firebase-admin")
 const firebase = require("../config/firebase")
-const dedupeTweets = require("../utils/dedupe-tweets")
 
 const db = firebase.firestore()
 
