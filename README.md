@@ -1,4 +1,4 @@
-# Twitter Mentions Bot
+# Domain Mention Twitter Bot
 
 Search domain name mentions across twitter.
 
