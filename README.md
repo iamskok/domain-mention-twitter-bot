@@ -24,6 +24,20 @@ FIREBASE_MEASUREMENT_ID=G-WE339SORBL
 DOMAIN_NAME=example.com
 ```
 
+## DB export
+
+1. Use `FIREBASE_STORAGE_BUCKET` variable in `gcloud firestore export`
+2. Get firebase service account credentials - https://console.firebase.google.com/u/0/project/{FIREBASE_PROJECT_ID}/settings/serviceaccounts/adminsdk
+3. Install `firestore-export` package to convert DB in `json`.
+
+```sh
+gcloud firestore export gs://example.appspot.com
+npm install -g node-firestore-import-export
+firestore-export --accountCredentials firebase-adminsdk.json --backupFile myDatabase.json
+```
+
+Alternatively navigate to [Google Cloud Storage](https://console.cloud.google.com/storage/).
+
 ## Useful links
 
 * [Could not load the default credentials](https://stackoverflow.com/a/42059661/3614631)
