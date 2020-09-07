@@ -27,13 +27,25 @@ const searchTweetReplies = async (tweet, oldReplies) => {
 
           // All transformed replies of the current tweet.
           const updatedReplies = [];
+          const childRepliesPromises = [];
 
           for (let i = 0; i < replies.length; i += 1) {
-            const childTweet = replies[i];
-            const childReplies = childTweet.replies || [];
+            childRepliesPromises.push(new Promise((_resolve) => {
+              const childTweet = replies[i];
+              const childReplies = childTweet.replies || [];
 
-            // Search all replies of the child tweet.
-            childTweet.replies = await searchTweetReplies(childTweet, childReplies);
+              // Search all replies of the child tweet.
+              _resolve(searchTweetReplies(childTweet, childReplies));
+            }));
+          }
+
+          const childReplies = await Promise.all(childRepliesPromises);
+
+          // Compose child replies with tweet replies.
+          for (let i = 0; i < childReplies.length; i += 1) {
+            const childTweet = replies[i];
+
+            childTweet.replies = childReplies[i];
             updatedReplies.push(childTweet);
           }
 
