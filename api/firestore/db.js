@@ -1,5 +1,5 @@
-import firebase from "../../config/firebase.js"
+import firebase from '../../config/firebase.js';
 
-const db = firebase.firestore()
+const db = firebase.firestore();
 
-export default db
+export default db;

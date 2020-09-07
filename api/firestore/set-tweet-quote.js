@@ -1,10 +1,10 @@
-import admin from "firebase-admin"
-import db from "./db.js"
+import admin from 'firebase-admin';
+import db from './db.js';
 
 const setTweetQuote = async (postTitle, quote) => {
-  const docRef = await db.doc(`posts/${postTitle}`)
+  const docRef = await db.doc(`posts/${postTitle}`);
 
-  return docRef.collection(`tweets`)
+  return docRef.collection('tweets')
     .doc(quote.quoted_status.id_str)
     .set(
       {
@@ -13,7 +13,7 @@ const setTweetQuote = async (postTitle, quote) => {
       {
         merge: true,
       },
-    )
-}
+    );
+};
 
-export default setTweetQuote
+export default setTweetQuote;

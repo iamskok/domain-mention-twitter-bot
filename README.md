@@ -40,4 +40,4 @@ Alternatively navigate to [Google Cloud Storage](https://console.cloud.google.co
 
 ## Useful links
 
-* [Could not load the default credentials](https://stackoverflow.com/a/42059661/3614631)
+- [Could not load the default credentials](https://stackoverflow.com/a/42059661/3614631)

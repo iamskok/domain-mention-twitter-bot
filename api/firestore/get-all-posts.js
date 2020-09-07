@@ -1,11 +1,11 @@
-import db from "./db.js"
+import db from './db.js';
 
 const getAllPosts = async () => {
   try {
-    return await db.collection(`posts`).get()
+    return await db.collection('posts').get();
   } catch (error) {
-    console.error(error)
+    throw new Error(error);
   }
-}
+};
 
-export default getAllPosts
+export default getAllPosts;

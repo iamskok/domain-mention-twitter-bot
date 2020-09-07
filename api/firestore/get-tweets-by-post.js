@@ -1,11 +1,11 @@
-import db from "./db.js"
+import db from './db.js';
 
-const getTweetsByPost = async postTitle => {
+const getTweetsByPost = async (postTitle) => {
   try {
-    return await db.collection(`posts/${postTitle}/tweets`).get()
+    return await db.collection(`posts/${postTitle}/tweets`).get();
   } catch (error) {
-    console.error(error)
+    throw new Error(error);
   }
-}
+};
 
-export default getTweetsByPost
+export default getTweetsByPost;

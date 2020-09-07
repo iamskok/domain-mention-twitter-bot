@@ -1,13 +1,13 @@
-import db from "./db.js"
+import db from './db.js';
 
 const getTweetReplies = async (postTitle, tweetId) => {
-  const docRef = db.doc(`posts/${postTitle}`)
+  const docRef = db.doc(`posts/${postTitle}`);
 
   return (
-    await docRef.collection(`tweets`).doc(tweetId).get()
+    await docRef.collection('tweets').doc(tweetId).get()
   )
-  .data()
-  .replies || []
-}
+    .data()
+    .replies || [];
+};
 
-export default getTweetReplies
+export default getTweetReplies;

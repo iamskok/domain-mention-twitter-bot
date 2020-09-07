@@ -1,8 +1,8 @@
-import admin from "firebase-admin"
-import dotenv from "dotenv"
-import path from "path"
+import admin from 'firebase-admin';
+import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config({ path: path.resolve() + "/.env" })
+dotenv.config({ path: `${path.resolve()}/.env` });
 
 const firebase = admin.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,6 +13,6 @@ const firebase = admin.initializeApp({
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
-})
+});
 
-export default firebase
+export default firebase;

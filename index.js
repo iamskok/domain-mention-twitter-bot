@@ -1,11 +1,11 @@
-import timeline from "./api/bot/timeline.js"
-import search from "./api/bot/search.js"
-import replies from "./api/bot/replies.js"
-import stream from "./api/bot/stream.js"
+import timeline from './api/bot/timeline.js';
+import search from './api/bot/search.js';
+import replies from './api/bot/replies.js';
+import stream from './api/bot/stream.js';
 
-const domainName = process.env.DOMAIN_NAME
+const domainName = process.env.DOMAIN_NAME;
 
-timeline(domainName)
-search(domainName)
-replies(domainName)
-stream(domainName)
+timeline(domainName);
+search(domainName);
+replies(domainName);
+stream(domainName);
