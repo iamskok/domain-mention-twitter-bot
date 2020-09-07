@@ -17,9 +17,9 @@
     "prettier": "prettier --write \"**/*.md\""
   },
   "devDependencies": {
-    "eslint": "^7.8.1",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "prettier": "^2.1.1"
+    "eslint": "7.8.1",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-plugin-import": "2.22.0",
+    "prettier": "2.1.1"
   }
 }
