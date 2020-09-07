@@ -1,6 +1,7 @@
 dist
 node_modules
-.env
-.DS_Store
 firebase-adminsdk.json
 TODO.md
+.env
+.DS_Store
+.eslintcache
