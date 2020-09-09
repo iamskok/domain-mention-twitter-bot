@@ -4,7 +4,7 @@ import json
 f = open('myDatabase.json', 'rt')
 data = json.loads(f.read())
 f.close()
-tweet = data["__collections__"]["posts"]["amstelvar"]["__collections__"]["tweets"]["1302659072550940673"]
+tweet = data["__collections__"]["posts"]["amstelvar"]["__collections__"]["tweets"]["1303053417460445184"]
 
 # Usage example
 #
