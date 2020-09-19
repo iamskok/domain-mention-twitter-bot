@@ -5,7 +5,7 @@ import stream from './api/bot/stream.js';
 
 const domainName = process.env.DOMAIN_NAME;
 
-timeline(domainName);
-search(domainName);
+// timeline(domainName);
+// search(domainName);
 responses();
-stream(domainName);
+// stream(domainName);

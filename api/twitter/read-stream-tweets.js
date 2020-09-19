@@ -1,4 +1,4 @@
-import twitUserAuth from '../../config/twit-user-auth.js';
+import twitUserAuth from '../../services/twit-user-auth.js';
 import getPostTitle from '../../utils/get-post-title.js';
 import normalizeTweet from '../../utils/normalize-tweet.js';
 

@@ -1,4 +1,4 @@
-import twitUserAuth from '../../config/twit-user-auth.js';
+import twitUserAuth from '../../services/twit-user-auth.js';
 import dedupeTweets from '../../utils/dedupe-tweets.js';
 import tweetURL from '../../utils/tweet-url.js';
 
@@ -19,13 +19,18 @@ const searchTweetResponses = (tweet, tweetType, oldResponses) => {
       },
       async (error, data, response) => {
         if (error) {
-          reject(error);
+          // Handle "Rate limit exceeded." error. Error code 88.
+          if (error.message.toLowerCase().includes('rate limit exceeded')) {
+            setTimeout(async () => {
+              resolve(await searchTweetResponses(tweet, tweetType, oldResponses));
+            }, 15 * 60 * 1000);
+          } else {
+            reject(error);
+          }
         } else if (response.statusCode === 200) {
           // Filter new responses by quotes or replies.
           const newResponses = isReply
-            ? data.statuses.filter(
-              (reply) => reply.in_reply_to_status_id_str === tweetId,
-            )
+            ? data.statuses.filter((reply) => reply.in_reply_to_status_id_str === tweetId)
             : data.statuses.filter((quote) => quote.quoted_status_id_str === tweetId);
 
           // All replies or quotes of the current tweet (includes nested replies and quotes).
