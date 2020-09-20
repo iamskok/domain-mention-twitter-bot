@@ -22,8 +22,15 @@ const responses = () => {
         const allReplies = await searchTweetResponses(tweetData, 'reply', oldReplies);
         const allQuotes = await searchTweetResponses(tweetData, 'quote', oldQuotes);
 
-        await setTweetReplies(postTitle, tweetId, allReplies);
-        await setTweetQuotes(postTitle, tweetId, allQuotes);
+        // Prevent adding `undefined` in the DB.
+        if (allReplies) {
+          await setTweetReplies(postTitle, tweetId, allReplies);
+        }
+
+        // Prevent adding `undefined` in the DB.
+        if (allQuotes) {
+          await setTweetQuotes(postTitle, tweetId, allQuotes);
+        }
       });
     });
   });

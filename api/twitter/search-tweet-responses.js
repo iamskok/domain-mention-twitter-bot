@@ -2,9 +2,16 @@ import twitUserAuth from '../../services/twit-user-auth.js';
 import dedupeTweets from '../../utils/dedupe-tweets.js';
 import tweetURL from '../../utils/tweet-url.js';
 
+const { RECURSION_DEPTH_LIMIT } = process.env;
+
 // Search tweet replies or quotes with nested replies/quotes
-const searchTweetResponses = (tweet, tweetType, oldResponses) => {
+const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
   const responsesPromise = new Promise((resolve, reject) => {
+    if (depth >= RECURSION_DEPTH_LIMIT) {
+      resolve(undefined);
+      return;
+    }
+
     const userName = tweet.user.screen_name;
     const tweetId = tweet.id_str;
     const isReply = tweetType === 'reply';
@@ -22,7 +29,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses) => {
           // Handle "Rate limit exceeded." error. Error code 88.
           if (error.message.toLowerCase().includes('rate limit exceeded')) {
             setTimeout(async () => {
-              resolve(await searchTweetResponses(tweet, tweetType, oldResponses));
+              resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
             }, 15 * 60 * 1000);
           } else {
             reject(error);
@@ -49,7 +56,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses) => {
               const childReplies = childTweet.replies || [];
 
               // Search for all replies of the child tweet.
-              _resolve(searchTweetResponses(childTweet, 'reply', childReplies));
+              _resolve(searchTweetResponses(childTweet, 'reply', childReplies, depth + 1));
             }));
 
             // Create an array of child quotes promises.
@@ -57,7 +64,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses) => {
               const childQuotes = childTweet.quotes || [];
 
               // Search for all quotes of the child tweet.
-              _resolve(searchTweetResponses(childTweet, 'quote', childQuotes));
+              _resolve(searchTweetResponses(childTweet, 'quote', childQuotes, depth + 1));
             }));
           }
 
@@ -67,9 +74,19 @@ const searchTweetResponses = (tweet, tweetType, oldResponses) => {
           // Compose child tweet with replies and quotes.
           for (let i = 0; i < responses.length; i += 1) {
             const childTweet = responses[i];
+            if (childReplies[i]) {
+              childTweet.replies = childReplies[i];
+            } else {
+              // Handle `undefined` value if `RECURSION_DEPTH_LIMIT` is exceeded.
+              delete childTweet.replies;
+            }
 
-            childTweet.replies = childReplies[i];
-            childTweet.quotes = childQuotes[i];
+            if (childQuotes[i]) {
+              childTweet.quotes = childQuotes[i];
+            } else {
+              // Handle `undefined` value if `RECURSION_DEPTH_LIMIT` is exceeded.
+              delete childTweet.quotes;
+            }
 
             updatedResponses.push(childTweet);
           }
