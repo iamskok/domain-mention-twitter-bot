@@ -8,8 +8,8 @@ import searchTweetResponses from '../twitter/search-tweet-responses.js';
 
 const responses = () => {
   getAllPosts().then((posts) => {
-    posts.forEach(async (doc) => {
-      const postTitle = doc.id;
+    posts.forEach(async (post) => {
+      const postTitle = post.id;
       const tweets = await getTweetsByPost(postTitle);
 
       tweets.forEach(async (tweet) => {
