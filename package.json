@@ -10,7 +10,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "firebase-admin": "^9.1.1",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "winston": "^3.3.3"
   },
   "scripts": {
     "eslint": "eslint --fix --cache .",
