@@ -4,10 +4,10 @@ import responses from './api/bot/responses.js';
 import stream from './api/bot/stream.js';
 import comments from './api/bot/comments.js';
 
-const domainName = process.env.DOMAIN_NAME;
+const { DOMAIN_NAME } = process.env;
 
-timeline(domainName);
-search(domainName);
+timeline(DOMAIN_NAME);
+search(DOMAIN_NAME);
 responses();
-stream(domainName);
 comments();
+stream(DOMAIN_NAME);
