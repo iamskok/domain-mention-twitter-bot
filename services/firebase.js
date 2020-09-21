@@ -1,6 +1,6 @@
 import admin from 'firebase-admin';
-import dotenv from 'dotenv';
-import path from 'path';
+// eslint-disable-next-line no-unused-vars
+import dotenvConfig from '../config/dotenv.js';
 
 const {
   FIREBASE_API_KEY,
@@ -12,8 +12,6 @@ const {
   FIREBASE_APP_ID,
   FIREBASE_MEASUREMENT_ID,
 } = process.env;
-
-dotenv.config({ path: `${path.resolve()}/.env` });
 
 const firebase = admin.initializeApp({
   apiKey: FIREBASE_API_KEY,

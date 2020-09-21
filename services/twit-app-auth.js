@@ -1,13 +1,18 @@
 import Twit from 'twit';
-import dotenv from 'dotenv';
-import path from 'path';
-import twitAuth from '../config/twit-auth.js';
+// eslint-disable-next-line no-unused-vars
+import dotenvConfig from '../config/dotenv.js';
+import timeout from '../constants/twit.js';
 
-dotenv.config({ path: `${path.resolve()}/.env` });
+const {
+  TWITTER_CONSUMER_KEY,
+  TWITTER_CONSUMER_SECRET,
+} = process.env;
 
 // Used for `search/tweets` endpoint for a greater request limit.
 const twitAppAuth = new Twit({
-  ...twitAuth,
+  consumer_key: TWITTER_CONSUMER_KEY,
+  consumer_secret: TWITTER_CONSUMER_SECRET,
+  timeout_ms: timeout,
   app_only_auth: true,
 });
 
