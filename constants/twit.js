@@ -1,3 +1,3 @@
-const timeout = 60000;
+const TIMEOUT = 60000;
 
-export default timeout;
+export default TIMEOUT;

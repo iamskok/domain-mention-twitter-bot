@@ -1,5 +1,5 @@
 import path from 'path';
 
-const envPath = `${path.resolve()}/.env`;
+const ENV_PATH = `${path.resolve()}/.env`;
 
-export default envPath;
+export default ENV_PATH;
