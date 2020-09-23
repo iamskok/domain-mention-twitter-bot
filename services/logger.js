@@ -31,7 +31,6 @@ const logger = createLogger({
     format.errors({ stack: true }),
     format.splat(),
     format.json(),
-    format.ms(),
   ),
   transports: [
     // Write error logs to `/logs/error.log`.
