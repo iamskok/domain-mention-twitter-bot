@@ -22,6 +22,8 @@ const { createLogger, format, transports } = winston;
 const logger = createLogger({
   levels,
   level: 'debug',
+  // Don't exit after logging an uncaughtException.
+  exitOnError: false,
   format: format.combine(
     format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
@@ -38,7 +40,9 @@ const logger = createLogger({
     }),
     // Write all logs to `/logs/combined.log`.
     new transports.File({
-      filename: `${path.resolve()}/logs/combined.log`, level: 'debug',
+      filename: `${path.resolve()}/logs/combined.log`,
+      level: 'debug',
+      // handleRejections: true,
     }),
   ],
 });
