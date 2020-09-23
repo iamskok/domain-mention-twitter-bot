@@ -38,6 +38,12 @@ const logger = createLogger({
     new transports.File({
       filename: `${path.resolve()}/logs/error.log`, level: 'error',
     }),
+    // Write error, warning and info logs to `/logs/info.log`.
+    new transports.File({
+      filename: `${path.resolve()}/logs/info.log`,
+      level: 'info',
+      // handleRejections: true,
+    }),
     // Write all logs to `/logs/combined.log`.
     new transports.File({
       filename: `${path.resolve()}/logs/combined.log`,
