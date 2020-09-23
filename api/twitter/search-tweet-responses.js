@@ -7,13 +7,8 @@ const { RECURSION_DEPTH_LIMIT } = process.env;
 
 // Search tweet replies or quotes with nested replies/quotes
 const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
-  logger.log('info', 'Call searchTweetResponses()');
-  logger.log('debug', '>>>> Entering searchTweetResponses()', {
-    tweet,
-    tweetType,
-    oldResponses,
-    depth,
-  });
+  logger.log('info', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth})`);
+  logger.log('debug', `>>>> Entering searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth})`);
 
   const responsesPromise = new Promise((resolve, reject) => {
     logger.log('debug', 'create responsesPromise');
@@ -55,10 +50,10 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
           // Handle "Rate limit exceeded." error. Error code 88.
           if (error.message.toLowerCase().includes('rate limit exceeded')) {
             logger.log('info', 'Twitter API returned `Rate limit exceeded` error');
-            logger.log('debug', `Wait for ${15 * 60 * 1000}ms before calling searchTweetResponses()`);
+            logger.log('debug', 'Wait for 15mins before calling searchTweetResponses()');
 
             setTimeout(async () => {
-              logger.log('debug', `Call searchTweetResponses() after waiting for ${15 * 60 * 1000}ms`);
+              logger.log('debug', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth}) again after waiting for 15mins`);
 
               resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
             }, 15 * 60 * 1000);
@@ -100,13 +95,11 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
             const childTweet = responses[i];
 
-            logger.log('debug', 'Get childTweet');
-
             // Create an array of child replies promises.
             childRepliesPromises.push(new Promise((_resolve) => {
               const childReplies = childTweet.replies || [];
 
-              logger.log('debug', 'Search for all child tweet replies. Call searchTweetResponses()');
+              logger.log('debug', `Search for all child tweet replies. Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth + 1})`);
 
               // Search for all replies of the child tweet.
               _resolve(searchTweetResponses(childTweet, 'reply', childReplies, depth + 1));
@@ -116,7 +109,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             childQuotesPromises.push(new Promise((_resolve) => {
               const childQuotes = childTweet.quotes || [];
 
-              logger.log('debug', 'Search for all child tweet replies. Call searchTweetResponses()');
+              logger.log('debug', `Search for all child tweet replies. Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth + 1})`);
 
               // Search for all quotes of the child tweet.
               _resolve(searchTweetResponses(childTweet, 'quote', childQuotes, depth + 1));
@@ -134,8 +127,6 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             logger.log('debug', 'Loop over all responses to compose child tweets with replies and quotes');
 
             const childTweet = responses[i];
-
-            logger.log('debug', 'Get childTweet');
 
             if (childReplies[i]) {
               childTweet.replies = childReplies[i];
