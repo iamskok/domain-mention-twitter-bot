@@ -7,14 +7,18 @@ const { RECURSION_DEPTH_LIMIT } = process.env;
 
 // Search tweet replies or quotes with nested replies/quotes
 const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
-  logger.log('info', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth})`);
-  logger.log('debug', `>>>> Entering searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth})`);
+  logger.log('info', '>>>> Enter searchTweetResponses');
+  logger.log('verbose', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth})`);
+  logger.log('debug', {
+    tweet,
+    tweetType,
+    oldResponses,
+    depth,
+  });
 
   const responsesPromise = new Promise((resolve, reject) => {
-    logger.log('debug', 'create responsesPromise');
-
     if (depth >= RECURSION_DEPTH_LIMIT) {
-      logger.log('debug', `Depth limit - ${depth} exceeded recursion depth limit - ${RECURSION_DEPTH_LIMIT}`);
+      logger.log('info', `Depth limit - ${depth} exceeded recursion depth limit - ${RECURSION_DEPTH_LIMIT}`);
 
       resolve(undefined);
       return;
@@ -24,9 +28,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
     const tweetId = tweet.id_str;
     const isReply = tweetType === 'reply';
 
-    logger.log('info', `Manipulate https://twitter.com/${userName}/status/${tweetId} tweet`);
-    logger.log('debug', `userName: ${userName}`);
-    logger.log('debug', `tweetId: ${tweetId}`);
+    logger.log('verbose', `Manipulate https://twitter.com/${userName}/status/${tweetId} tweet`);
 
     logger.log('debug', 'Call twitUserAuth.get() with', {
       endpoint: 'search/tweets',
@@ -50,10 +52,16 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
           // Handle "Rate limit exceeded." error. Error code 88.
           if (error.message.toLowerCase().includes('rate limit exceeded')) {
             logger.log('info', 'Twitter API returned `Rate limit exceeded` error');
-            logger.log('debug', 'Wait for 15mins before calling searchTweetResponses()');
+            logger.log('verbose', 'Wait for 15mins before calling searchTweetResponses()');
 
             setTimeout(async () => {
-              logger.log('debug', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth}) again after waiting for 15mins`);
+              logger.log('verbose', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth}) again after waiting for 15mins`);
+              logger.log('debug', {
+                tweet,
+                tweetType,
+                oldResponses,
+                depth,
+              });
 
               resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
             }, 15 * 60 * 1000);
@@ -91,7 +99,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
           const childQuotesPromises = [];
 
           for (let i = 0; i < responses.length; i += 1) {
-            logger.log('debug', 'Loop over responses');
+            logger.log('debug', 'Loop over all responses');
 
             const childTweet = responses[i];
 
@@ -99,7 +107,12 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             childRepliesPromises.push(new Promise((_resolve) => {
               const childReplies = childTweet.replies || [];
 
-              logger.log('debug', `Search for all child tweet replies. Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth + 1})`);
+              logger.log('debug', 'Search for all child tweet replies. Call searchTweetResponses()', {
+                tweet,
+                tweetType,
+                oldResponses,
+                depth: depth + 1,
+              });
 
               // Search for all replies of the child tweet.
               _resolve(searchTweetResponses(childTweet, 'reply', childReplies, depth + 1));
@@ -109,7 +122,12 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             childQuotesPromises.push(new Promise((_resolve) => {
               const childQuotes = childTweet.quotes || [];
 
-              logger.log('debug', `Search for all child tweet replies. Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth + 1})`);
+              logger.log('debug', 'Search for all child tweet quotes. Call searchTweetResponses()', {
+                tweet,
+                tweetType,
+                oldResponses,
+                depth: depth + 1,
+              });
 
               // Search for all quotes of the child tweet.
               _resolve(searchTweetResponses(childTweet, 'quote', childQuotes, depth + 1));
@@ -131,9 +149,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             if (childReplies[i]) {
               childTweet.replies = childReplies[i];
 
-              logger.log('debug', 'Push childReply in childTweet.replies array', {
-                childReply: childReplies[i],
-              });
+              logger.log('debug', 'Push childReply in childTweet.replies array', childReplies[i]);
             } else {
               // Handle `undefined` value if `RECURSION_DEPTH_LIMIT` is exceeded.
               delete childTweet.replies;
@@ -144,7 +160,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             if (childQuotes[i]) {
               childTweet.quotes = childQuotes[i];
 
-              logger.log('debug', 'Push childQuote in childTweet.quotes array');
+              logger.log('debug', 'Push childQuote in childTweet.quotes array', childQuotes[i]);
             } else {
               // Handle `undefined` value if `RECURSION_DEPTH_LIMIT` is exceeded.
               delete childTweet.quotes;
@@ -165,7 +181,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
     );
   });
 
-  logger.log('debug', '<<<< Exiting searchTweetResponses()');
+  logger.log('info', '<<<< Exit searchTweetResponses()');
 
   return responsesPromise;
 };
