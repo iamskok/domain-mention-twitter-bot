@@ -34,7 +34,19 @@ const setProfileImageUrls = (tweet) => {
   return transformedTweet;
 };
 
+// Remove nested array of coordinates (Firestore limitation).
+// https://stackoverflow.com/questions/54785637/cloud-functions-error-cannot-convert-an-array-value-in-an-array-value
+const removePlaceBoundingBoxCoordinates = (tweet) => {
+  const transformedTweet = { ...tweet };
+
+  delete transformedTweet?.place?.bounding_box?.coordinates;
+
+  return transformedTweet;
+};
+
 // Apply all tweet updates at once.
-const normalizeTweet = (tweet) => stringifyIds(setProfileImageUrls(tweet));
+const normalizeTweet = (tweet) => removePlaceBoundingBoxCoordinates(
+  stringifyIds(setProfileImageUrls(tweet)),
+);
 
 export default normalizeTweet;
