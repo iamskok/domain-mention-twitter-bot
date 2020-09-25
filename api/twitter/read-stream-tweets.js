@@ -1,9 +1,12 @@
 import twitUserAuth from '../../services/twit-user-auth.js';
 import getPostTitle from '../../utils/get-post-title.js';
 import normalizeTweet from '../../utils/normalize-tweet.js';
+import logger from '../../services/logger.js';
 
 // Subscribe to the stream mentioning `domainName` via `statuses/filter` endpoint.
-const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
+const readStreamTweets = (domainName, setTweet) => {
+  logger.log('info', '>>>> Enter readStreamTweets');
+
   twitUserAuth.stream(
     'statuses/filter',
     {
@@ -12,31 +15,25 @@ const readStreamTweets = (domainName, setTweetQuote, setTweet) => {
       track: domainName.replace('.', ' '),
     },
   ).on('tweet', (tweet) => {
-    // Avoid catching retweets.
-    if (!tweet.retweeted_status) {
-      // Handle tweet is a quote case.
-      if (tweet.quoted_status_id_str) {
-        tweet.quoted_status.entities.urls.forEach(async ({ expanded_url: url }) => {
-          if (url.includes(domainName)) {
-            const postTitle = getPostTitle(url);
+    // Avoid catching retweets and quotes.
+    if (!tweet.retweeted_status && !tweet.quoted_status_id_str) {
+      logger.log('info', `Received https://twitter.com/${tweet.user.screen_name}/statuses/${tweet.id_str} tweet`);
+      // Handle new tweet case.
+      tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
+        if (url.includes(domainName)) {
+          logger.log('debug', `Tweet includes ${domainName} URL`);
 
-            if (postTitle) {
-              await setTweetQuote(postTitle, normalizeTweet(tweet));
-            }
-          }
-        });
-      } else {
-        // Handle new tweet case.
-        tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
-          if (url.includes(domainName)) {
-            const postTitle = getPostTitle(url);
+          const postTitle = getPostTitle(url);
 
-            if (postTitle) {
-              await setTweet(postTitle, normalizeTweet(tweet));
-            }
+          logger.log('debug', `Tweet relates to ${postTitle} blog post`);
+
+          if (postTitle) {
+            await setTweet(postTitle, normalizeTweet(tweet));
+
+            logger.log('debug', `Add tweet to ${postTitle} document`);
           }
-        });
-      }
+        }
+      });
     }
   });
 };
