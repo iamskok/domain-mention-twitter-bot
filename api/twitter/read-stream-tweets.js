@@ -1,11 +1,12 @@
 import twitUserAuth from '../../services/twit-user-auth.js';
 import getPostTitle from '../../utils/get-post-title.js';
 import normalizeTweet from '../../utils/normalize-tweet.js';
+import tweetURL from '../../utils/tweet-url.js';
 import logger from '../../services/logger.js';
 
 // Subscribe to the stream mentioning `domainName` via `statuses/filter` endpoint.
 const readStreamTweets = (domainName, setTweet) => {
-  logger.log('info', '>>>> Enter readStreamTweets');
+  logger.log('info', 'Start listening for twitter stream - `readStreamTweets`');
 
   twitUserAuth.stream(
     'statuses/filter',
@@ -17,7 +18,7 @@ const readStreamTweets = (domainName, setTweet) => {
   ).on('tweet', (tweet) => {
     // Avoid catching retweets and quotes.
     if (!tweet.retweeted_status && !tweet.quoted_status_id_str) {
-      logger.log('info', `Received https://twitter.com/${tweet.user.screen_name}/statuses/${tweet.id_str} tweet`);
+      logger.log('info', `Received tweet ${tweetURL(tweet)}`);
       // Handle new tweet case.
       tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
         if (url.includes(domainName)) {
@@ -25,12 +26,10 @@ const readStreamTweets = (domainName, setTweet) => {
 
           const postTitle = getPostTitle(url);
 
-          logger.log('debug', `Tweet relates to ${postTitle} blog post`);
-
           if (postTitle) {
-            await setTweet(postTitle, normalizeTweet(tweet));
+            logger.log('verbose', `Add ${tweetURL(tweet)} tweet to ${postTitle}/tweet/${tweet.id_str} document`);
 
-            logger.log('debug', `Add tweet to ${postTitle} document`);
+            await setTweet(postTitle, normalizeTweet(tweet));
           }
         }
       });

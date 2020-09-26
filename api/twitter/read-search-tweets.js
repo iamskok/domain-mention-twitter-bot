@@ -1,5 +1,6 @@
 import twitAppAuth from '../../services/twit-app-auth.js';
 import getPostTitle from '../../utils/get-post-title.js';
+import tweetURL from '../../utils/tweet-url.js';
 import logger from '../../services/logger.js';
 
 // Find tweets mentioning `domainName` via `search/tweets` endpoint.
@@ -28,12 +29,12 @@ const readSearchTweets = (domainName, setTweet) => {
           logger.log('verbose', 'Wait for 15mins before calling readSearchTweets()');
 
           setTimeout(async () => {
-            logger.log('verbose', 'Call searchTweetResponses() again after 15mins wait');
+            logger.log('verbose', 'Call `searchTweetResponses` again after 15mins wait');
 
             readSearchTweets(domainName, setTweet);
           }, 15 * 60 * 1000);
         } else {
-          logger.log('error', 'Error in readSearchTweets => twitUserAuth.get()', {
+          logger.log('error', 'Error in `readSearchTweets` => `twitUserAuth.get`', {
             endpoint: 'search/tweets',
             options: {
               q: `url:${domainName}`,
@@ -54,12 +55,10 @@ const readSearchTweets = (domainName, setTweet) => {
 
               const postTitle = getPostTitle(url);
 
-              logger.log('debug', `Tweet relates to ${postTitle} blog post`);
-
               if (postTitle) {
-                await setTweet(postTitle, tweet);
+                logger.log('verbose', `Add ${tweetURL(tweet)} tweet to ${postTitle}/tweet/${tweet.id_str} document`);
 
-                logger.log('debug', `Add tweet to ${postTitle} document`);
+                await setTweet(postTitle, tweet);
               }
             }
           });
@@ -68,7 +67,7 @@ const readSearchTweets = (domainName, setTweet) => {
     },
   );
 
-  logger.log('info', '>>>> Exit readSearchTweets');
+  logger.log('info', '>>>> Exit `readSearchTweets`');
 };
 
 export default readSearchTweets;
