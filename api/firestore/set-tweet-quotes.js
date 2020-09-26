@@ -1,6 +1,9 @@
 import db from './db.js';
+import logger from '../../services/logger.js';
 
 const setTweetQuotes = async (postTitle, tweetId, quotes) => {
+  logger.log('info', '>>>> Call setTweetQuotes');
+
   const docRef = db.doc(`posts/${postTitle}`);
 
   try {
@@ -13,7 +16,13 @@ const setTweetQuotes = async (postTitle, tweetId, quotes) => {
       },
     );
   } catch (error) {
-    throw new Error(error);
+    logger.log('error', 'Error in setTweetQuotes()', {
+      postTitle,
+      tweetId,
+      quotes,
+    }, error);
+
+    throw new Error('setTweetQuotes:', error);
   }
 };
 
