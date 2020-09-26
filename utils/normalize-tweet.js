@@ -40,6 +40,10 @@ const removePlaceBoundingBoxCoordinates = (tweet) => {
   const transformedTweet = { ...tweet };
 
   delete transformedTweet?.place?.bounding_box?.coordinates;
+  delete transformedTweet?.quoted_status?.place?.bounding_box?.coordinates;
+  delete transformedTweet?.retweeted_status?.place?.bounding_box?.coordinates;
+  delete transformedTweet?.retweeted_status?.quoted_status?.place?.bounding_box?.coordinates;
+  delete transformedTweet?.quoted_status?.retweeted_status?.place?.bounding_box?.coordinates;
 
   return transformedTweet;
 };
