@@ -1,5 +1,6 @@
 import path from 'path';
 import winston from 'winston';
+import timestamp from '../utils/timestamp.js';
 
 const levels = {
   error: 0,
@@ -28,7 +29,7 @@ const logger = createLogger({
   exitOnError: false,
   format: format.combine(
     format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss',
+      format: timestamp,
     }),
     format.errors({ stack: true }),
     format.splat(),
