@@ -1,40 +1,39 @@
 import path from 'path';
 import winston from 'winston';
-import timestamp from '../utils/timestamp.js';
+import customTimestamp from '../utils/timestamp.js';
+import { LEVELS, COLORS } from '../constants/logger.js';
 
-const levels = {
-  error: 0,
-  warn: 1,
-  info: 2,
-  verbose: 3,
-  debug: 4,
-};
-
-const colors = {
-  error: 'underline red',
-  warn: 'yellow',
-  info: 'cyan',
-  verbose: 'green',
-  debug: 'white',
-};
-
-winston.addColors(colors);
+winston.addColors(COLORS);
 
 const { createLogger, format, transports } = winston;
 
+const customFormat = format.combine(
+  format.colorize({ all: true }),
+  format.timestamp({
+    format: customTimestamp,
+  }),
+  format.splat(),
+  format.errors(),
+  format.printf(
+    ({
+      timestamp,
+      level,
+      message,
+      ...rest
+    }) => {
+      let restString = JSON.stringify(rest, undefined, 2);
+      restString = restString === '{}' ? '' : restString;
+      return `[${timestamp}] ${level} - ${message} ${restString}`;
+    },
+  ),
+);
+
 const logger = createLogger({
-  levels,
+  levels: LEVELS,
   level: 'debug',
   // Don't exit after logging an `uncaughtException`.
   exitOnError: false,
-  format: format.combine(
-    format.timestamp({
-      format: timestamp,
-    }),
-    format.errors({ stack: true }),
-    format.splat(),
-    format.json(),
-  ),
+  format: customFormat,
   transports: [
     // Write error logs to `/logs/error.log`.
     new transports.File({
@@ -51,9 +50,9 @@ const logger = createLogger({
       filename: `${path.resolve()}/logs/verbose.log`,
       level: 'verbose',
     }),
-    // Write all logs to `/logs/combined.log`.
+    // Write all logs to `/logs/debug.log`.
     new transports.File({
-      filename: `${path.resolve()}/logs/combined.log`,
+      filename: `${path.resolve()}/logs/debug.log`,
       level: 'debug',
     }),
   ],
@@ -67,10 +66,7 @@ const logger = createLogger({
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new transports.Console({
     level: 'verbose',
-    format: format.combine(
-      format.colorize(),
-      format.simple(),
-    ),
+    format: customFormat,
   }));
 }
 
