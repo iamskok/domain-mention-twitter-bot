@@ -1,5 +1,6 @@
 import db from './db.js';
 import logger from '../../services/logger.js';
+import firestoreURL from '../../utils/firestore-url.js';
 
 const getTweetReplies = async (postTitle, tweetId) => {
   logger.log('info', '>>>> Enter `firebase/getTweetReplies`');
@@ -15,6 +16,7 @@ const getTweetReplies = async (postTitle, tweetId) => {
       tweetId,
       replies,
     });
+    logger.log('verbose', `Get tweet replies from firebase ${firestoreURL({ postTitle, tweetId })}`);
     logger.log('info', '>>>> Exit `firebase/getTweetReplies`');
 
     return replies;

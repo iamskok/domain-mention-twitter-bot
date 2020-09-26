@@ -1,5 +1,6 @@
 import db from './db.js';
 import logger from '../../services/logger.js';
+import firestoreURL from '../../utils/firestore-url.js';
 
 const setTweetReplies = async (postTitle, tweetId, replies) => {
   logger.log('info', '>>>> Enter `firebase/setTweetReplies`');
@@ -15,6 +16,8 @@ const setTweetReplies = async (postTitle, tweetId, replies) => {
         merge: true,
       },
     ).then(() => {
+      logger.log('debug', '`firebase/setTweetReplies` replies', { replies });
+      logger.log('verbose', `Save tweet replies in firebase ${firestoreURL({ postTitle, tweetId })}`);
       logger.log('info', '>>>> Exit `firebase/setTweetReplies`');
     });
   } catch (error) {

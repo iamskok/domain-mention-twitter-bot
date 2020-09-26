@@ -1,5 +1,6 @@
 import db from './db.js';
 import logger from '../../services/logger.js';
+import firestoreURL from '../../utils/firestore-url.js';
 
 const getAllPosts = async () => {
   logger.log('info', '>>>> Enter `firebase/getAllPosts`');
@@ -7,7 +8,8 @@ const getAllPosts = async () => {
   try {
     const collection = await db.collection('posts').get();
 
-    logger.log('debug', '`firebase/getAllPosts` collection', collection);
+    logger.log('debug', '`firebase/getAllPosts` collection', { collection });
+    logger.log('verbose', `Get all posts from firebase ${firestoreURL()}`);
     logger.log('info', '>>>> Exit `firebase/getAllPosts`');
 
     return collection;

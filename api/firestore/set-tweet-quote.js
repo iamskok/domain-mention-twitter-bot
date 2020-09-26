@@ -1,6 +1,7 @@
 import admin from 'firebase-admin';
 import db from './db.js';
 import logger from '../../services/logger.js';
+import firestoreURL from '../../utils/firestore-url.js';
 
 const setTweetQuote = async (postTitle, quote) => {
   logger.log('info', '>>>> Enter `firebase/setTweetQuote`');
@@ -18,6 +19,8 @@ const setTweetQuote = async (postTitle, quote) => {
           merge: true,
         },
       ).then(() => {
+        logger.log('debug', '`firebase/setTweetQuote` quote', { quote });
+        logger.log('verbose', `Save tweet quote in firebase ${firestoreURL({ postTitle, tweetId: quote.quoted_status.id_str })}`);
         logger.log('info', '>>>> Exit `firebase/setTweetQuote`');
       });
   } catch (error) {
