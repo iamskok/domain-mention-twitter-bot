@@ -5,9 +5,16 @@ import setTweetQuotes from '../firestore/set-tweet-quotes.js';
 import setTweetReplies from '../firestore/set-tweet-replies.js';
 import getAllPosts from '../firestore/get-all-posts.js';
 import searchTweetResponses from '../twitter/search-tweet-responses.js';
+import logger from '../../services/logger.js';
 
 const responses = () => {
+  logger.log('info', '>>>> Enter `bot/responses`');
+
   getAllPosts().then((posts) => {
+    logger.log('debug', '`bot/responses` => `getAllPosts`', {
+      posts,
+    });
+
     posts.forEach(async (post) => {
       const postTitle = post.id;
       const tweets = await getTweetsByPost(postTitle);
@@ -33,6 +40,12 @@ const responses = () => {
         }
       });
     });
+  }).catch((error) => {
+    logger.log('error', '`bot/responses`', {
+      errorObject: error,
+    });
+  }).finally(() => {
+    logger.log('info', '>>>> Exit `bot/responses`');
   });
 };
 

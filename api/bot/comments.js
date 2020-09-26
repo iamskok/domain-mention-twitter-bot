@@ -3,9 +3,16 @@ import getTweetsByPost from '../firestore/get-tweets-by-post.js';
 import setCommentsByPost from '../firestore/set-comments-by-post.js';
 import removeTweetResponses from '../../utils/remove-tweet-responses.js';
 import sortTweetsByTime from '../../utils/sort-tweets-by-time.js';
+import logger from '../../services/logger.js';
 
 const comments = () => {
+  logger.log('info', '>>>> Enter `bot/comments`');
+
   getAllPosts().then((posts) => {
+    logger.log('debug', '`bot/comments` => `getAllPosts`', {
+      posts,
+    });
+
     posts.forEach(async (post) => {
       const commentsByPost = [];
       const tweets = [];
@@ -21,6 +28,12 @@ const comments = () => {
 
       setCommentsByPost(postTitle, normalizedCommentsByPost);
     });
+  }).catch((error) => {
+    logger.log('error', '`bot/comments`', {
+      errorObject: error,
+    });
+  }).finally(() => {
+    logger.log('info', '>>>> Exit `bot/comments`');
   });
 };
 
