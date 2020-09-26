@@ -2,6 +2,7 @@ import twitAppAuth from '../../services/twit-app-auth.js';
 import getPostTitle from '../../utils/get-post-title.js';
 import tweetURL from '../../utils/tweet-url.js';
 import logger from '../../services/logger.js';
+import TWITTER_TIMEOUT from '../../constants/twitter.js'
 
 // Find tweets mentioning `domainName` via `search/tweets` endpoint.
 const readSearchTweets = (domainName, setTweet) => {
@@ -32,7 +33,7 @@ const readSearchTweets = (domainName, setTweet) => {
             logger.log('verbose', 'Call `twitter/searchTweetResponses` again after 15mins wait');
 
             readSearchTweets(domainName, setTweet);
-          }, 15 * 60 * 1000);
+          }, TWITTER_TIMEOUT);
         } else {
           logger.log('error', 'Error in `twitter/readSearchTweets` => `twitUserAuth.get`', {
             endpoint: 'search/tweets',

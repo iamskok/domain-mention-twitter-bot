@@ -2,6 +2,7 @@ import twitUserAuth from '../../services/twit-user-auth.js';
 import dedupeTweets from '../../utils/dedupe-tweets.js';
 import normalizeTweet from '../../utils/normalize-tweet.js';
 import tweetURL from '../../utils/tweet-url.js';
+import TWITTER_TIMEOUT from '../../constants/twitter.js'
 import logger from '../../services/logger.js';
 
 const { RECURSION_DEPTH_LIMIT } = process.env;
@@ -72,7 +73,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
                 reject(recursiveSearchTweetResponsesError);
               }
-            }, 15 * 60 * 1000);
+            }, TWITTER_TIMEOUT);
           } else {
             logger.log('error', 'Error in `twitter/searchTweetResponses` => `twitUserAuth.get`', {
               endpoint: 'search/tweets',
