@@ -1,7 +1,7 @@
 import Twit from 'twit';
 // eslint-disable-next-line no-unused-vars
 import dotenvConfig from '../config/dotenv.js';
-import TIMEOUT from '../constants/twit.js';
+import TWIT_TIMEOUT from '../constants/twit.js';
 
 const {
   TWITTER_ACCESS_TOKEN,
@@ -16,7 +16,7 @@ const twitUserAuth = new Twit({
   consumer_secret: TWITTER_CONSUMER_SECRET,
   access_token: TWITTER_ACCESS_TOKEN,
   access_token_secret: TWITTER_ACCESS_TOKEN_SECRET,
-  timeout_ms: TIMEOUT,
+  timeout_ms: TWIT_TIMEOUT,
 });
 
 export default twitUserAuth;

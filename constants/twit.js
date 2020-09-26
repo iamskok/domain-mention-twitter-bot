@@ -1,3 +1,3 @@
-const TIMEOUT = 60000;
+const TWIT_TIMEOUT = 60000;
 
-export default TIMEOUT;
+export default TWIT_TIMEOUT;
