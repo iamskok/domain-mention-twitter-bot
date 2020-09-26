@@ -11,7 +11,10 @@ const getTweetReplies = async (postTitle, tweetId) => {
       await docRef.collection('tweets').doc(tweetId).get()
     ).data().replies || [];
 
-    logger.log('debug', '`firebase/getTweetReplies` replies', replies);
+    logger.log('debug', '`firebase/getTweetReplies`', {
+      tweetId,
+      replies,
+    });
     logger.log('info', '>>>> Exit `firebase/getTweetReplies`');
 
     return replies;

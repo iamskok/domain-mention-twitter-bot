@@ -11,7 +11,10 @@ const getTweetQuotes = async (postTitle, tweetId) => {
       await docRef.collection('tweets').doc(tweetId).get()
     ).data().quotes || [];
 
-    logger.log('debug', '`firebase/getTweetQuotes` quotes', quotes);
+    logger.log('debug', '`firebase/getTweetQuotes` quotes', {
+      tweetId,
+      quotes,
+    });
     logger.log('info', '>>>> Exit `firebase/getTweetQuotes`');
 
     return quotes;
