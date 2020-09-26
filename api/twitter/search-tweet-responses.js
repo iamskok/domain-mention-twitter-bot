@@ -1,5 +1,6 @@
 import twitUserAuth from '../../services/twit-user-auth.js';
 import dedupeTweets from '../../utils/dedupe-tweets.js';
+import normalizeTweet from '../../utils/normalize-tweet.js';
 import tweetURL from '../../utils/tweet-url.js';
 import logger from '../../services/logger.js';
 
@@ -8,8 +9,7 @@ const { RECURSION_DEPTH_LIMIT } = process.env;
 // Search tweet replies or quotes with nested replies/quotes
 const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
   logger.log('info', '>>>> Enter searchTweetResponses');
-  logger.log('verbose', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth})`);
-  logger.log('debug', {
+  logger.log('debug', 'Call searchTweetResponses with', {
     tweet,
     tweetType,
     oldResponses,
@@ -18,7 +18,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
   const responsesPromise = new Promise((resolve, reject) => {
     if (depth >= RECURSION_DEPTH_LIMIT) {
-      logger.log('info', `Depth limit - ${depth} exceeded recursion depth limit - ${RECURSION_DEPTH_LIMIT}`);
+      logger.log('verbose', `Depth limit - ${depth} exceeded recursion depth limit - ${RECURSION_DEPTH_LIMIT}`);
 
       resolve(undefined);
       return;
@@ -55,7 +55,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             logger.log('verbose', 'Wait for 15mins before calling searchTweetResponses()');
 
             setTimeout(async () => {
-              logger.log('verbose', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth}) again after waiting for 15mins`);
+              logger.log('verbose', `Call searchTweetResponses(tweetObject, ${tweetType}, oldResponsesObject, ${depth}) again after 15mins wait`);
               logger.log('debug', {
                 tweet,
                 tweetType,
@@ -66,7 +66,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
               resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
             }, 15 * 60 * 1000);
           } else {
-            logger.log('error', 'Error in twitUserAuth.get()', {
+            logger.log('error', 'Error in searchTweetResponses => twitUserAuth.get()', {
               endpoint: 'search/tweets',
               options: {
                 q: isReply ? `to:${userName}` : tweetURL(userName, tweetId),
@@ -74,7 +74,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
                 sinceId: tweetId,
               },
             },
-            `Error message: ${error}`);
+            error);
 
             reject(error);
           }
@@ -89,7 +89,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
           logger.log('debug', 'Filter new responses');
 
           // All replies or quotes of the current tweet (includes nested replies and quotes).
-          const responses = dedupeTweets(oldResponses, newResponses);
+          const responses = dedupeTweets(oldResponses, newResponses.map(normalizeTweet));
 
           logger.log('debug', 'Dedupe responses');
 
