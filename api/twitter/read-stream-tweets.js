@@ -6,7 +6,7 @@ import logger from '../../services/logger.js';
 
 // Subscribe to the stream mentioning `domainName` via `statuses/filter` endpoint.
 const readStreamTweets = (domainName, setTweet) => {
-  logger.log('info', 'Start listening for twitter stream - `readStreamTweets`');
+  logger.log('info', 'Start listening for twitter stream - `twitter/readStreamTweets`');
 
   twitUserAuth.stream(
     'statuses/filter',

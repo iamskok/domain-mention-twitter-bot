@@ -5,7 +5,7 @@ import logger from '../../services/logger.js';
 
 // Find tweets mentioning `domainName` via `search/tweets` endpoint.
 const readSearchTweets = (domainName, setTweet) => {
-  logger.log('info', '>>>> Enter readSearchTweets');
+  logger.log('info', '>>>> Enter `twitter/readSearchTweets`');
 
   twitAppAuth.get(
     'search/tweets',
@@ -26,22 +26,24 @@ const readSearchTweets = (domainName, setTweet) => {
         // Handle "Rate limit exceeded." error. Error code 88.
         if (error.message.toLowerCase().includes('rate limit exceeded')) {
           logger.log('info', 'Twitter API returned `Rate limit exceeded` error');
-          logger.log('verbose', 'Wait for 15mins before calling readSearchTweets()');
+          logger.log('verbose', 'Wait for 15mins before calling `twitter/readSearchTweets`');
 
           setTimeout(async () => {
-            logger.log('verbose', 'Call `searchTweetResponses` again after 15mins wait');
+            logger.log('verbose', 'Call `twitter/searchTweetResponses` again after 15mins wait');
 
             readSearchTweets(domainName, setTweet);
           }, 15 * 60 * 1000);
         } else {
-          logger.log('error', 'Error in `readSearchTweets` => `twitUserAuth.get`', {
+          logger.log('error', 'Error in `twitter/readSearchTweets` => `twitUserAuth.get`', {
             endpoint: 'search/tweets',
             options: {
               q: `url:${domainName}`,
               count: 100,
             },
           },
-          error);
+          {
+            errorObject: error,
+          });
 
           throw new Error(error);
         }
@@ -67,7 +69,7 @@ const readSearchTweets = (domainName, setTweet) => {
     },
   );
 
-  logger.log('info', '>>>> Exit `readSearchTweets`');
+  logger.log('info', '>>>> Exit `twitter/readSearchTweets`');
 };
 
 export default readSearchTweets;

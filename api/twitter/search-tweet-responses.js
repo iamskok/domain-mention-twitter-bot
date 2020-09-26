@@ -8,8 +8,8 @@ const { RECURSION_DEPTH_LIMIT } = process.env;
 
 // Search tweet replies or quotes with nested replies/quotes
 const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
-  logger.log('info', '>>>> Enter `searchTweetResponses`');
-  logger.log('debug', 'Call `searchTweetResponses` with', {
+  logger.log('info', '>>>> Enter `twitter/searchTweetResponses`');
+  logger.log('debug', 'Call `twitter/searchTweetResponses` with', {
     tweet,
     tweetType,
     oldResponses,
@@ -30,7 +30,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
     logger.log('verbose', `Manipulate ${tweetURL(tweet)} tweet`);
 
-    logger.log('debug', '`searchTweetResponses` => `twitUserAuth.get` with', {
+    logger.log('debug', '`twitter/searchTweetResponses` => `twitUserAuth.get` with', {
       endpoint: 'search/tweets',
       options: {
         q: isReply ? `to:${userName}` : tweetURL(tweet),
@@ -55,7 +55,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             logger.log('verbose', 'Wait for 15mins before calling `searchTweetResponses`');
 
             setTimeout(async () => {
-              logger.log('verbose', 'Call `searchTweetResponses` again after 15mins wait');
+              logger.log('verbose', 'Call `twitter/searchTweetResponses` again after 15mins wait');
               logger.log('debug', {
                 tweet,
                 tweetType,
@@ -63,10 +63,18 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
                 depth,
               });
 
-              resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
+              try {
+                resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
+              } catch (recursiveSearchTweetResponsesError) {
+                logger.log('error', 'Recursive `twitter/searchTweetResponses`', {
+                  errorObject: recursiveSearchTweetResponsesError,
+                });
+
+                reject(recursiveSearchTweetResponsesError);
+              }
             }, 15 * 60 * 1000);
           } else {
-            logger.log('error', 'Error in `searchTweetResponses` => `twitUserAuth.get`', {
+            logger.log('error', 'Error in `twitter/searchTweetResponses` => `twitUserAuth.get`', {
               endpoint: 'search/tweets',
               options: {
                 q: isReply ? `to:${userName}` : tweetURL(tweet),
@@ -74,7 +82,9 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
                 sinceId: tweetId,
               },
             },
-            error);
+            {
+              errorObject: error,
+            });
 
             reject(error);
           }
@@ -122,7 +132,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             childQuotesPromises.push(new Promise((_resolve) => {
               const childQuotes = childTweet.quotes || [];
 
-              logger.log('debug', 'Search for all child tweet quotes. Call `searchTweetResponses`', {
+              logger.log('debug', 'Search for all child tweet quotes. Call `twitter/searchTweetResponses`', {
                 tweet,
                 tweetType,
                 oldResponses,
@@ -134,10 +144,28 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             }));
           }
 
-          const childReplies = await Promise.all(childRepliesPromises);
-          const childQuotes = await Promise.all(childQuotesPromises);
+          let childReplies = [];
+
+          try {
+            childReplies = await Promise.all(childRepliesPromises);
+          } catch (childRepliesError) {
+            logger.log('error', '`childReplies` in `twitter/searchTweetResponses`', {
+              errorObject: childRepliesError,
+            });
+          }
 
           logger.log('debug', 'Resolve all childReplies promises');
+
+          let childQuotes = [];
+
+          try {
+            childQuotes = await Promise.all(childQuotesPromises);
+          } catch (childQuotesError) {
+            logger.log('error', '`childQuotes` in `twitter/searchTweetResponses`', {
+              errorObject: childQuotesError,
+            });
+          }
+
           logger.log('debug', 'Resolve all childQuotes promises');
 
           // Compose child tweet with replies and quotes.
@@ -181,7 +209,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
     );
   });
 
-  logger.log('info', '<<<< Exit `searchTweetResponses`');
+  logger.log('info', '<<<< Exit `twitter/searchTweetResponses`');
 
   return responsesPromise;
 };
