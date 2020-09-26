@@ -2,14 +2,21 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const getAllPosts = async () => {
-  logger.log('info', '>>>> Call getAllPosts');
+  logger.log('info', '>>>> Enter `firebase/getAllPosts`');
 
   try {
-    return await db.collection('posts').get();
-  } catch (error) {
-    logger.log('error', 'Error in setTweetQuotes()', error);
+    const collection = await db.collection('posts').get();
 
-    throw new Error('getAllPosts:', error);
+    logger.log('debug', '`firebase/getAllPosts` collection', collection);
+    logger.log('info', '>>>> Exit `firebase/getAllPosts`');
+
+    return collection;
+  } catch (error) {
+    logger.log('error', '`firebase/getAllPosts`', {
+      errorObject: error,
+    });
+
+    throw new Error('`firebase/getAllPosts`', error);
   }
 };
 

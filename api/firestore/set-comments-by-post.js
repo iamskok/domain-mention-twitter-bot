@@ -2,7 +2,7 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const setCommentsByPost = async (postTitle, comments) => {
-  logger.log('info', '>>>> Call setCommentsByPost');
+  logger.log('info', '>>>> Enter `firebase/setCommentsByPost`');
 
   try {
     return await db.doc(`posts/${postTitle}`)
@@ -13,14 +13,19 @@ const setCommentsByPost = async (postTitle, comments) => {
         {
           merge: true,
         },
-      );
+      ).then(() => {
+        logger.log('info', '>>>> Exit `firebase/setCommentsByPost`');
+      });
   } catch (error) {
-    logger.log('error', 'Error in setCommentsByPost()', {
+    logger.log('error', '`firebase/setCommentsByPost`', {
       postTitle,
       comments,
-    }, error);
+    },
+    {
+      errorObject: error,
+    });
 
-    throw new Error('setCommentsByPost:', error);
+    throw new Error('`firebase/setCommentsByPost`', error);
   }
 };
 

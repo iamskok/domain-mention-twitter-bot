@@ -2,23 +2,29 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const getTweetReplies = async (postTitle, tweetId) => {
-  logger.log('info', '>>>> Call getTweetReplies');
+  logger.log('info', '>>>> Enter `firebase/getTweetReplies`');
 
   try {
     const docRef = db.doc(`posts/${postTitle}`);
 
-    return (
+    const replies = (
       await docRef.collection('tweets').doc(tweetId).get()
-    )
-      .data()
-      .replies || [];
+    ).data().replies || [];
+
+    logger.log('debug', '`firebase/getTweetReplies` replies', replies);
+    logger.log('info', '>>>> Exit `firebase/getTweetReplies`');
+
+    return replies;
   } catch (error) {
-    logger.log('error', 'Error in getTweetReplies()', {
+    logger.log('error', '`firebase/getTweetReplies`', {
       postTitle,
       tweetId,
-    }, error);
+    },
+    {
+      errorObject: error,
+    });
 
-    throw new Error('getTweetReplies:', error);
+    throw new Error('`firebase/getTweetReplies`', error);
   }
 };
 

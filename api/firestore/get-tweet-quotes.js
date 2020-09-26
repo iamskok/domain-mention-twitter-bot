@@ -2,23 +2,29 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const getTweetQuotes = async (postTitle, tweetId) => {
-  logger.log('info', '>>>> Call getTweetQuotes');
+  logger.log('info', '>>>> Enter `firebase/getTweetQuotes`');
 
   try {
     const docRef = db.doc(`posts/${postTitle}`);
 
-    return (
+    const quotes = (
       await docRef.collection('tweets').doc(tweetId).get()
-    )
-      .data()
-      .quotes || [];
+    ).data().quotes || [];
+
+    logger.log('debug', '`firebase/getTweetQuotes` quotes', quotes);
+    logger.log('info', '>>>> Exit `firebase/getTweetQuotes`');
+
+    return quotes;
   } catch (error) {
-    logger.log('error', 'Error in getTweetQuotes()', {
+    logger.log('error', '`firebase/getTweetQuotes`', {
       postTitle,
       tweetId,
-    }, error);
+    },
+    {
+      errorObject: error,
+    });
 
-    throw new Error('getTweetQuotes:', error);
+    throw new Error('`firebase/getTweetQuotes`', error);
   }
 };
 

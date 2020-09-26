@@ -3,7 +3,7 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const setTweetQuote = async (postTitle, quote) => {
-  logger.log('info', '>>>> Call setTweetQuote');
+  logger.log('info', '>>>> Enter `firebase/setTweetQuote`');
 
   try {
     const docRef = await db.doc(`posts/${postTitle}`);
@@ -17,14 +17,19 @@ const setTweetQuote = async (postTitle, quote) => {
         {
           merge: true,
         },
-      );
+      ).then(() => {
+        logger.log('info', '>>>> Exit `firebase/setTweetQuote`');
+      });
   } catch (error) {
-    logger.log('error', 'Error in setTweetQuote()', {
+    logger.log('error', '`firebase/setTweetQuote`', {
       postTitle,
       quote,
-    }, error);
+    },
+    {
+      errorObject: error,
+    });
 
-    throw new Error('setTweetQuote:', error);
+    throw new Error('`firebase/setTweetQuote`', error);
   }
 };
 

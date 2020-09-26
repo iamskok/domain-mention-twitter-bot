@@ -2,7 +2,7 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const setTweet = async (postTitle, tweet) => {
-  logger.log('info', '>>>> Call setTweet');
+  logger.log('info', '>>>> Enter `firebase/setTweet`');
 
   try {
     const docRef = await db.doc(`posts/${postTitle}`);
@@ -18,15 +18,21 @@ const setTweet = async (postTitle, tweet) => {
 
     return docRef.collection('tweets')
       .doc(tweet.id_str)
-      .set(tweet);
+      .set(tweet)
+      .then(() => {
+        logger.log('info', '>>>> Exit `firebase/setTweet`');
+      });
   } catch (error) {
-    logger.log('error', 'Error in setTweet()', {
+    logger.log('error', '`firebase/setTweet`', {
       postTitle,
       id_str: tweet.id_str,
       tweet,
-    }, error);
+    },
+    {
+      errorObject: error,
+    });
 
-    throw new Error('setTweet:', error);
+    throw new Error('`firebase/setTweet`', error);
   }
 };
 

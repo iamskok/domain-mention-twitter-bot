@@ -2,16 +2,24 @@ import db from './db.js';
 import logger from '../../services/logger.js';
 
 const getTweetsByPost = async (postTitle) => {
-  logger.log('info', '>>>> Call getTweetsByPost');
+  logger.log('info', '>>>> Enter `firebase/getTweetsByPost`');
 
   try {
-    return await db.collection(`posts/${postTitle}/tweets`).get();
-  } catch (error) {
-    logger.log('error', 'Error in getTweetsByPost()', {
-      postTitle,
-    }, error);
+    const tweets = await db.collection(`posts/${postTitle}/tweets`).get();
 
-    throw new Error('getTweetsByPost:', error);
+    logger.log('debug', '`firebase/getTweetsByPost` tweets', tweets);
+    logger.log('info', '>>>> Exit `firebase/getTweetsByPost`');
+
+    return tweets;
+  } catch (error) {
+    logger.log('error', '`firebase/getTweetsByPost`', {
+      postTitle,
+    },
+    {
+      errorObject: error,
+    });
+
+    throw new Error('`firebase/getTweetsByPost`', error);
   }
 };
 
