@@ -7,6 +7,20 @@ winston.addColors(COLORS);
 
 const { createLogger, format, transports } = winston;
 
+// Transform log level into uppercase without loosing color encoding.
+const formatLogLevel = (level, levels = LEVELS) => {
+  const levelStrings = Object.keys(levels);
+  const levelsRegex = new RegExp(levelStrings.join('|'), 'gi');
+  const match = [...level.matchAll(levelsRegex)][0][0];
+
+  const indexOf = level.indexOf(match);
+  const newLevel = level.slice(0, indexOf)
+    + match.toUpperCase()
+    + level.slice(indexOf + level.length - indexOf);
+
+  return newLevel;
+};
+
 const formatOptions = [
   format.colorize({ all: true }),
   format.timestamp({
@@ -23,7 +37,7 @@ const formatOptions = [
     }) => {
       let restString = JSON.stringify(rest, undefined, 2);
       restString = restString === '{}' ? '' : restString;
-      return `[${timestamp}] ${level} - ${message} ${restString}`;
+      return `[${timestamp}] ${formatLogLevel(level)} - ${message} ${restString}`;
     },
   ),
 ];
