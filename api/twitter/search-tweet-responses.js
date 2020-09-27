@@ -66,12 +66,12 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
               try {
                 resolve(await searchTweetResponses(tweet, tweetType, oldResponses, depth));
-              } catch (recursiveSearchTweetResponsesError) {
-                logger.log('error', 'Recursive `twitter/searchTweetResponses`', {
-                  errorObject: recursiveSearchTweetResponsesError,
+              } catch (searchTweetResponsesError) {
+                logger.log('error', '`twitter/searchTweetResponses`', {
+                  errorObject: searchTweetResponsesError,
                 });
 
-                reject(recursiveSearchTweetResponsesError);
+                reject(searchTweetResponsesError);
               }
             }, TWITTER_TIMEOUT);
           } else {
