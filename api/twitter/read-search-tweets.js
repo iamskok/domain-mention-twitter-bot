@@ -59,8 +59,6 @@ const readSearchTweets = (domainName, setTweet) => {
               const postTitle = getPostTitle(url);
 
               if (postTitle) {
-                logger.log('verbose', `Add ${tweetURL(tweet)} tweet to ${postTitle}/tweet/${tweet.id_str} document`);
-
                 await setTweet(postTitle, tweet);
               }
             }

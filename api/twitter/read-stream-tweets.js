@@ -6,8 +6,6 @@ import logger from '../../services/logger';
 
 // Subscribe to the stream mentioning `domainName` via `statuses/filter` endpoint.
 const readStreamTweets = (domainName, setTweet) => {
-  logger.log('info', 'Start listening for twitter stream - `twitter/readStreamTweets`');
-
   twitUserAuth.stream(
     'statuses/filter',
     {
@@ -18,7 +16,7 @@ const readStreamTweets = (domainName, setTweet) => {
   ).on('tweet', (tweet) => {
     // Avoid catching retweets and quotes.
     if (!tweet.retweeted_status && !tweet.quoted_status_id_str) {
-      logger.log('info', `Received tweet ${tweetURL(tweet)}`);
+      logger.log('info', `Received tweet ${tweetURL(tweet)} from Twitter stream`);
       // Handle new tweet case.
       tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
         if (url.includes(domainName)) {
@@ -27,14 +25,28 @@ const readStreamTweets = (domainName, setTweet) => {
           const postTitle = getPostTitle(url);
 
           if (postTitle) {
-            logger.log('verbose', `Add ${tweetURL(tweet)} tweet to ${postTitle}/tweet/${tweet.id_str} document`);
-
             await setTweet(postTitle, normalizeTweet(tweet));
           }
         }
       });
     }
-  });
+  })
+    .on('limit', (limitMessage) => logger.log('warning', 'Limitation occurred in Twitter stream', { limitMessage }))
+    .on('disconnect', (disconnectMessage) => logger.log('warning', 'Disconnect from Twitter stream', { disconnectMessage }))
+    .on('connect', (request) => logger.log('debug', 'Connection attempt to Twitter stream', { request }))
+    .on('connected', (response) => {
+      logger.log('info', 'Connected to Twitter stream');
+      logger.log('debug', 'Connected to Twitter stream', { response });
+    })
+    .on('error', (error) => logger.log('error', 'Error occurred in Twitter stream API request or response', { errorObject: error }))
+    .on('warning', (warning) => logger.log('warning', 'Connection is falling behind in Twitter stream', { warning }))
+    .on('reconnect', (request, response, connectInterval) => {
+      logger.log('warning', 'Reconnection attempt to Twitter stream is scheduled', {
+        request,
+        response,
+        connectInterval,
+      });
+    });
 };
 
 export default readStreamTweets;
