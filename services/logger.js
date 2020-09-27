@@ -7,7 +7,7 @@ winston.addColors(COLORS);
 
 const { createLogger, format, transports } = winston;
 
-const customFormat = format.combine(
+const formatOptions = [
   format.colorize({ all: true }),
   format.timestamp({
     format: customTimestamp,
@@ -26,14 +26,22 @@ const customFormat = format.combine(
       return `[${timestamp}] ${level} - ${message} ${restString}`;
     },
   ),
-);
+];
+
+const customFormat = (colorize, options = formatOptions) => {
+  if (colorize) {
+    return format.combine(...options);
+  }
+
+  return format.combine(...options.slice(1));
+};
 
 const logger = createLogger({
   levels: LEVELS,
   level: 'debug',
   // Don't exit after logging an `uncaughtException`.
   exitOnError: false,
-  format: customFormat,
+  format: customFormat(false),
   transports: [
     // Write error logs to `/logs/error.log`.
     new transports.File({
@@ -66,7 +74,7 @@ const logger = createLogger({
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new transports.Console({
     level: 'verbose',
-    format: customFormat,
+    format: customFormat(true),
   }));
 }
 
