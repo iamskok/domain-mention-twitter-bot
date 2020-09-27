@@ -67,10 +67,10 @@ const readSearchTweets = (domainName, setTweet) => {
           });
         });
       }
+
+      logger.log('info', '>>>> Exit `twitter/readSearchTweets`');
     },
   );
-
-  logger.log('info', '>>>> Exit `twitter/readSearchTweets`');
 };
 
 export default readSearchTweets;

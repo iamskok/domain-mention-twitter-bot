@@ -52,10 +52,10 @@ const readUserTimelineTweets = (domainName, setTweet) => {
           });
         });
       }
+
+      logger.log('info', '>>>> Exit `twitter/readUserTimelineTweets`');
     },
   );
-
-  logger.log('info', '>>>> Exit `twitter/readUserTimelineTweets`');
 };
 
 export default readUserTimelineTweets;
