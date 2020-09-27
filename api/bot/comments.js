@@ -1,9 +1,9 @@
-import getAllPosts from '../firestore/get-all-posts.js';
-import getTweetsByPost from '../firestore/get-tweets-by-post.js';
-import setCommentsByPost from '../firestore/set-comments-by-post.js';
-import removeTweetResponses from '../../utils/remove-tweet-responses.js';
-import sortTweetsByTime from '../../utils/sort-tweets-by-time.js';
-import logger from '../../services/logger.js';
+import getAllPosts from '../firestore/get-all-posts';
+import getTweetsByPost from '../firestore/get-tweets-by-post';
+import setCommentsByPost from '../firestore/set-comments-by-post';
+import removeTweetResponses from '../../utils/remove-tweet-responses';
+import sortTweetsByTime from '../../utils/sort-tweets-by-time';
+import logger from '../../services/logger';
 
 const comments = () => {
   logger.log('info', '>>>> Enter `bot/comments`');

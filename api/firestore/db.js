@@ -1,5 +1,5 @@
-import firebase from '../../services/firebase.js';
-import logger from '../../services/logger.js';
+import firebase from '../../services/firebase';
+import logger from '../../services/logger';
 
 const db = [];
 

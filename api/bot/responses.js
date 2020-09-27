@@ -1,11 +1,11 @@
-import getTweetsByPost from '../firestore/get-tweets-by-post.js';
-import getTweetReplies from '../firestore/get-tweet-replies.js';
-import getTweetQuotes from '../firestore/get-tweet-quotes.js';
-import setTweetQuotes from '../firestore/set-tweet-quotes.js';
-import setTweetReplies from '../firestore/set-tweet-replies.js';
-import getAllPosts from '../firestore/get-all-posts.js';
-import searchTweetResponses from '../twitter/search-tweet-responses.js';
-import logger from '../../services/logger.js';
+import getTweetsByPost from '../firestore/get-tweets-by-post';
+import getTweetReplies from '../firestore/get-tweet-replies';
+import getTweetQuotes from '../firestore/get-tweet-quotes';
+import setTweetQuotes from '../firestore/set-tweet-quotes';
+import setTweetReplies from '../firestore/set-tweet-replies';
+import getAllPosts from '../firestore/get-all-posts';
+import searchTweetResponses from '../twitter/search-tweet-responses';
+import logger from '../../services/logger';
 
 const responses = () => {
   logger.log('info', '>>>> Enter `bot/responses`');

@@ -1,9 +1,9 @@
-import twitUserAuth from '../../services/twit-user-auth.js';
-import dedupeTweets from '../../utils/dedupe-tweets.js';
-import normalizeTweet from '../../utils/normalize-tweet.js';
-import tweetURL from '../../utils/tweet-url.js';
-import TWITTER_TIMEOUT from '../../constants/twitter.js';
-import logger from '../../services/logger.js';
+import twitUserAuth from '../../services/twit-user-auth';
+import dedupeTweets from '../../utils/dedupe-tweets';
+import normalizeTweet from '../../utils/normalize-tweet';
+import tweetURL from '../../utils/tweet-url';
+import TWITTER_TIMEOUT from '../../constants/twitter';
+import logger from '../../services/logger';
 
 const { RECURSION_DEPTH_LIMIT } = process.env;
 

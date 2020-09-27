@@ -1,8 +1,8 @@
-import timeline from './api/bot/timeline.js';
-import search from './api/bot/search.js';
-import responses from './api/bot/responses.js';
-import stream from './api/bot/stream.js';
-import comments from './api/bot/comments.js';
+import timeline from './api/bot/timeline';
+import search from './api/bot/search';
+import responses from './api/bot/responses';
+import stream from './api/bot/stream';
+import comments from './api/bot/comments';
 
 const { DOMAIN_NAME } = process.env;
 

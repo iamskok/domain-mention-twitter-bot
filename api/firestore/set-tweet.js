@@ -1,6 +1,6 @@
-import db from './db.js';
-import logger from '../../services/logger.js';
-import firestoreURL from '../../utils/firestore-url.js';
+import db from './db';
+import logger from '../../services/logger';
+import firestoreURL from '../../utils/firestore-url';
 
 const setTweet = async (postTitle, tweet) => {
   logger.log('info', '>>>> Enter `firebase/setTweet`');

@@ -1,8 +1,8 @@
-import twitUserAuth from '../../services/twit-user-auth.js';
-import getPostTitle from '../../utils/get-post-title.js';
-import normalizeTweet from '../../utils/normalize-tweet.js';
-import tweetURL from '../../utils/tweet-url.js';
-import logger from '../../services/logger.js';
+import twitUserAuth from '../../services/twit-user-auth';
+import getPostTitle from '../../utils/get-post-title';
+import normalizeTweet from '../../utils/normalize-tweet';
+import tweetURL from '../../utils/tweet-url';
+import logger from '../../services/logger';
 
 // Subscribe to the stream mentioning `domainName` via `statuses/filter` endpoint.
 const readStreamTweets = (domainName, setTweet) => {

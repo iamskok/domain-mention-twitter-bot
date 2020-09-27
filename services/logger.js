@@ -1,7 +1,7 @@
 import path from 'path';
 import winston from 'winston';
-import customTimestamp from '../utils/timestamp.js';
-import { LEVELS, COLORS } from '../constants/logger.js';
+import customTimestamp from '../utils/timestamp';
+import { LEVELS, COLORS } from '../constants/logger';
 
 winston.addColors(COLORS);
 

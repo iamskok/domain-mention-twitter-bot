@@ -1,7 +1,7 @@
 import Twit from 'twit';
 // eslint-disable-next-line no-unused-vars
-import dotenvConfig from '../config/dotenv.js';
-import TWIT_TIMEOUT from '../constants/twit.js';
+import dotenvConfig from '../config/dotenv';
+import TWIT_TIMEOUT from '../constants/twit';
 
 const {
   TWITTER_ACCESS_TOKEN,

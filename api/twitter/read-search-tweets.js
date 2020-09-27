@@ -1,8 +1,8 @@
-import twitAppAuth from '../../services/twit-app-auth.js';
-import getPostTitle from '../../utils/get-post-title.js';
-import tweetURL from '../../utils/tweet-url.js';
-import logger from '../../services/logger.js';
-import TWITTER_TIMEOUT from '../../constants/twitter.js';
+import twitAppAuth from '../../services/twit-app-auth';
+import getPostTitle from '../../utils/get-post-title';
+import tweetURL from '../../utils/tweet-url';
+import logger from '../../services/logger';
+import TWITTER_TIMEOUT from '../../constants/twitter';
 
 // Find tweets mentioning `domainName` via `search/tweets` endpoint.
 const readSearchTweets = (domainName, setTweet) => {

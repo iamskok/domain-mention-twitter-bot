@@ -1,6 +1,6 @@
-import setTweet from '../firestore/set-tweet.js';
-import readUserTimelineTweets from '../twitter/read-user-timeline-tweets.js';
-import logger from '../../services/logger.js';
+import setTweet from '../firestore/set-tweet';
+import readUserTimelineTweets from '../twitter/read-user-timeline-tweets';
+import logger from '../../services/logger';
 
 const timeline = (domainName) => {
   logger.log('info', '>>>> Enter `bot/timeline`');

@@ -1,9 +1,9 @@
-import twitUserAuth from '../../services/twit-user-auth.js';
-import getPostTitle from '../../utils/get-post-title.js';
-import tweetURL from '../../utils/tweet-url.js';
-import normalizeTweet from '../../utils/normalize-tweet.js';
-import logger from '../../services/logger.js';
-import TWITTER_TIMEOUT from '../../constants/twitter.js';
+import twitUserAuth from '../../services/twit-user-auth';
+import getPostTitle from '../../utils/get-post-title';
+import tweetURL from '../../utils/tweet-url';
+import normalizeTweet from '../../utils/normalize-tweet';
+import logger from '../../services/logger';
+import TWITTER_TIMEOUT from '../../constants/twitter';
 
 // Find all personal tweets mentioning `domainName` via `statuses/user_timeline` endpoint.
 const readUserTimelineTweets = (domainName, setTweet) => {
