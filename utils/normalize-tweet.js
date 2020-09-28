@@ -34,23 +34,45 @@ const setProfileImageUrls = (tweet) => {
   return transformedTweet;
 };
 
-// Remove nested array of coordinates (Firestore limitation).
-// https://stackoverflow.com/questions/54785637/cloud-functions-error-cannot-convert-an-array-value-in-an-array-value
-const removePlaceBoundingBoxCoordinates = (tweet) => {
-  const transformedTweet = { ...tweet };
+const removeExtraData = (tweet) => {
+  /* eslint-disable camelcase */
+  const {
+    created_at,
+    text,
+    id_str,
+    user: {
+      name,
+      profile_image_url_https,
+      screen_name,
+    },
+    entities,
+    in_reply_to_status_id_str,
+    quoted_status_id_str,
+    replies,
+    quotes,
+  } = { ...tweet };
 
-  delete transformedTweet?.place?.bounding_box?.coordinates;
-  delete transformedTweet?.quoted_status?.place?.bounding_box?.coordinates;
-  delete transformedTweet?.retweeted_status?.place?.bounding_box?.coordinates;
-  delete transformedTweet?.retweeted_status?.quoted_status?.place?.bounding_box?.coordinates;
-  delete transformedTweet?.quoted_status?.retweeted_status?.place?.bounding_box?.coordinates;
+  const transformedTweet = {
+    created_at,
+    text,
+    id_str,
+    user: {
+      name,
+      profile_image_url_https,
+      screen_name,
+    },
+    entities,
+    in_reply_to_status_id_str: in_reply_to_status_id_str || '',
+    quoted_status_id_str: quoted_status_id_str || '',
+    replies,
+    quotes,
+  };
+  /* eslint-enable camelcase */
 
   return transformedTweet;
 };
 
 // Apply all tweet updates at once.
-const normalizeTweet = (tweet) => removePlaceBoundingBoxCoordinates(
-  stringifyIds(setProfileImageUrls(tweet)),
-);
+const normalizeTweet = (tweet) => removeExtraData(stringifyIds(setProfileImageUrls(tweet)));
 
 export default normalizeTweet;
