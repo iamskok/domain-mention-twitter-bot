@@ -18,7 +18,7 @@
     "start": "node --es-module-specifier-resolution=node index.js",
     "eslint": "eslint --fix --cache .",
     "prettier": "prettier --write \"**/*.md\"",
-    "test": "jest --config .jestrc.json",
+    "test": "jest --config .jestrc.json --coverage",
     "test:watch": "yarn test -- --watch"
   },
   "devDependencies": {

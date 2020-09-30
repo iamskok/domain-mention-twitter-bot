@@ -1,5 +1,7 @@
 {
-  "testMatch": [
-    "**/?(*.)spec.js"
-  ]
+  "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**"
+    ],
+  "testEnvironment": "node"
 }
