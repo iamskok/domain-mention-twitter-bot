@@ -1,6 +1,5 @@
 import twitAppAuth from '../../services/twit-app-auth';
 import getPostTitle from '../../utils/get-post-title';
-import tweetURL from '../../utils/tweet-url';
 import logger from '../../services/logger';
 import TWITTER_TIMEOUT from '../../constants/twitter';
 

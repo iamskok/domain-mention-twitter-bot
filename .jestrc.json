@@ -1,7 +1,9 @@
 {
+  "testEnvironment": "node",
   "collectCoverageFrom": [
-      "**/*.js",
-      "!**/node_modules/**"
-    ],
-  "testEnvironment": "node"
+    "./src/**/*.js",
+    "!./src/config/**",
+    "!./src/constants/**",
+    "!**/node_modules/**"
+  ]
 }
