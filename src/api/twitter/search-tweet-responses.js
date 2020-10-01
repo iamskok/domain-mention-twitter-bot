@@ -115,7 +115,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             const childTweet = responses[i];
 
             // Create an array of child replies promises.
-            childRepliesPromises.push(new Promise((_resolve) => {
+            childRepliesPromises.push(new Promise((childRepliesResolve) => {
               const childReplies = childTweet.replies || [];
 
               logger.log('debug', 'Search for all child tweet replies. Call `searchTweetResponses`', {
@@ -126,11 +126,11 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
               });
 
               // Search for all replies of the child tweet.
-              _resolve(searchTweetResponses(childTweet, 'reply', childReplies, depth + 1));
+              childRepliesResolve(searchTweetResponses(childTweet, 'reply', childReplies, depth + 1));
             }));
 
             // Create an array of child quotes promises.
-            childQuotesPromises.push(new Promise((_resolve) => {
+            childQuotesPromises.push(new Promise((childQuotesResolve) => {
               const childQuotes = childTweet.quotes || [];
 
               logger.log('debug', 'Search for all child tweet quotes. Call `twitter/searchTweetResponses`', {
@@ -141,7 +141,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
               });
 
               // Search for all quotes of the child tweet.
-              _resolve(searchTweetResponses(childTweet, 'quote', childQuotes, depth + 1));
+              childQuotesResolve(searchTweetResponses(childTweet, 'quote', childQuotes, depth + 1));
             }));
           }
 
