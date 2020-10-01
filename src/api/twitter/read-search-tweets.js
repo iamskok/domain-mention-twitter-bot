@@ -1,5 +1,6 @@
 import twitAppAuth from '../../services/twit-app-auth';
 import getPostTitle from '../../utils/get-post-title';
+import tweetURL from '../../utils/tweet-url';
 import logger from '../../services/logger';
 import TWITTER_TIMEOUT from '../../constants/twitter';
 
@@ -34,7 +35,7 @@ const readSearchTweets = (domainName, setTweet) => {
             readSearchTweets(domainName, setTweet);
           }, TWITTER_TIMEOUT);
         } else {
-          logger.log('error', 'Error in `twitter/readSearchTweets` => `twitUserAuth.get`', {
+          logger.log('error', '`twitter/readSearchTweets` => `twitUserAuth.get`', {
             endpoint: 'search/tweets',
             options: {
               q: `url:${domainName}`,
@@ -53,7 +54,7 @@ const readSearchTweets = (domainName, setTweet) => {
         data.statuses.forEach((tweet) => {
           tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
             if (url.includes(domainName)) {
-              logger.log('debug', `Tweet includes ${domainName} URL`);
+              logger.log('verbose', `Found valid tweet ${tweetURL(tweet)} via Twitter search`);
 
               const postTitle = getPostTitle(url);
 

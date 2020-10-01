@@ -29,7 +29,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
     const tweetId = tweet.id_str;
     const isReply = tweetType === 'reply';
 
-    logger.log('verbose', `Manipulate ${tweetURL(tweet)} tweet`);
+    logger.log('verbose', `Search for tweet ${tweetURL(tweet)} responses`);
 
     logger.log('debug', '`twitter/searchTweetResponses` => `twitUserAuth.get` with', {
       endpoint: 'search/tweets',
@@ -75,7 +75,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
               }
             }, TWITTER_TIMEOUT);
           } else {
-            logger.log('error', 'Error in `twitter/searchTweetResponses` => `twitUserAuth.get`', {
+            logger.log('error', '`twitter/searchTweetResponses` => `twitUserAuth.get`', {
               endpoint: 'search/tweets',
               options: {
                 q: isReply ? `to:${userName}` : tweetURL(tweet),

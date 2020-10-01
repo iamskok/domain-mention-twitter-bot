@@ -16,11 +16,10 @@ const readStreamTweets = (domainName, setTweet) => {
   ).on('tweet', (tweet) => {
     // Avoid catching retweets and quotes.
     if (!tweet.retweeted_status && !tweet.quoted_status_id_str) {
-      logger.log('info', `Received tweet ${tweetURL(tweet)} from Twitter stream`);
       // Handle new tweet case.
       tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
         if (url.includes(domainName)) {
-          logger.log('debug', `Tweet includes ${domainName} URL`);
+          logger.log('info', `Received valid tweet ${tweetURL(tweet)} from Twitter stream`);
 
           const postTitle = getPostTitle(url);
 

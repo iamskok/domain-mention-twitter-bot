@@ -1,5 +1,6 @@
 import twitUserAuth from '../../services/twit-user-auth';
 import getPostTitle from '../../utils/get-post-title';
+import tweetURL from '../../utils/tweet-url';
 import normalizeTweet from '../../utils/normalize-tweet';
 import logger from '../../services/logger';
 import TWITTER_TIMEOUT from '../../constants/twitter';
@@ -26,7 +27,7 @@ const readUserTimelineTweets = (domainName, setTweet) => {
             readUserTimelineTweets(domainName, setTweet);
           }, TWITTER_TIMEOUT);
         } else {
-          logger.log('error', 'Error in `twitter/readUserTimelineTweets` => `twitUserAuth.get`', {
+          logger.log('error', '`twitter/readUserTimelineTweets` => `twitUserAuth.get`', {
             errorObject: error,
           });
 
@@ -38,7 +39,7 @@ const readUserTimelineTweets = (domainName, setTweet) => {
         data.map(normalizeTweet).forEach((tweet) => {
           tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
             if (url.includes(domainName)) {
-              logger.log('debug', `Tweet includes ${domainName} URL`);
+              logger.log('verbose', `Found valid tweet ${tweetURL(tweet)} in user timeline`);
 
               const postTitle = getPostTitle(url);
 
