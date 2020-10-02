@@ -30,4 +30,8 @@ describe('getPostTitle utility', () => {
     expect(getPostTitle('https://example.com/blog/favorites/javascript/'))
       .toBe(null);
   });
+
+  it('returns `null` if the URL pathname is `/`', () => {
+    expect(getPostTitle('https://example.com')).toBe(null);
+  });
 });
