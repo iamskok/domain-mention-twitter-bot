@@ -1,19 +1,21 @@
-// Extract post title from a given URL
+// Extract post title from a URL of a valid format.
+// format - https://example.com/blog/post-title.
 const getPostTitle = (url, base = 'blog') => {
-  let { pathname } = new URL(url);
-  let postTitle;
+  const { pathname } = new URL(url);
 
-  // Multiple `/` in the start of the string fixes accidental user typos.
-  while (pathname.startsWith('/')) {
-    pathname = pathname.slice(1);
+  // Check if the URL starts with `/blog/` and the pathname is two levels deep.
+  if (
+    pathname.split(`/${base}/`)[1]
+      .split('/')
+      .filter(Boolean).length === 1
+    && pathname.startsWith(`/${base}/`)
+  ) {
+    const slashRegex = new RegExp('/', 'g');
+
+    return pathname.split(`/${base}/`)[1].replace(slashRegex, '');
   }
 
-  // Multiple `/` in the end of the string fixes accidental user typos.
-  if (pathname.startsWith(`${base}/`)) {
-    postTitle = pathname.slice(base.length + 1).replace(/\//g, '');
-  }
-
-  return postTitle;
+  return null;
 };
 
 export default getPostTitle;
