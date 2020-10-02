@@ -3,7 +3,7 @@ const { FIREBASE_PROJECT_ID } = process.env;
 const firestoreURL = ({
   postTitle,
   tweetId,
-  tweet,
+  isTweetsCollection,
 } = {}) => {
   // Tweet document URL.
   if (postTitle && tweetId) {
@@ -11,7 +11,7 @@ const firestoreURL = ({
   }
 
   // Tweets collection URL.
-  if (postTitle && tweet) {
+  if (postTitle && isTweetsCollection) {
     return `https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2F${postTitle}~2Ftweets`;
   }
 
