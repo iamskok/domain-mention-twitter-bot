@@ -1,5 +1,7 @@
 import moment from 'moment';
 
-const timestamp = () => moment().format('YYYY-MM-DD HH:mm:ss:SSS');
+const loggerTimestamp = () => moment().format('YYYY-MM-DD HH:mm:ss:SSS');
 
-export default timestamp;
+const commentTimestamp = () => moment().format('MM-DD-YYYY');
+
+export { loggerTimestamp, commentTimestamp };

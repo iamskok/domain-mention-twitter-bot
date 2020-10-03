@@ -1,6 +1,6 @@
 import path from 'path';
 import winston from 'winston';
-import customTimestamp from '../utils/timestamp';
+import { loggerTimestamp } from '../utils/timestamp';
 import { LEVELS, COLORS } from '../constants/logger';
 
 winston.addColors(COLORS);
@@ -24,7 +24,7 @@ const formatLogLevel = (level, levels = LEVELS) => {
 const formatOptions = [
   format.colorize({ all: true }),
   format.timestamp({
-    format: customTimestamp,
+    format: loggerTimestamp,
   }),
   format.splat(),
   format.errors(),
