@@ -34,6 +34,7 @@ const setProfileImageUrls = (tweet) => {
   return transformedTweet;
 };
 
+// Remove all unused data.
 const removeExtraData = (tweet) => {
   /* eslint-disable camelcase */
   const {
@@ -62,8 +63,8 @@ const removeExtraData = (tweet) => {
       screen_name,
     },
     entities,
-    in_reply_to_status_id_str: in_reply_to_status_id_str || '',
-    quoted_status_id_str: quoted_status_id_str || '',
+    in_reply_to_status_id_str: in_reply_to_status_id_str || null,
+    quoted_status_id_str: quoted_status_id_str || null,
     replies,
     quotes,
   };

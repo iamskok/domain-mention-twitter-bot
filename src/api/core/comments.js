@@ -1,7 +1,7 @@
 import getAllPosts from '../firestore/get-all-posts';
 import getTweetsByPost from '../firestore/get-tweets-by-post';
 import setCommentsByPost from '../firestore/set-comments-by-post';
-import removeTweetResponses from '../../utils/remove-tweet-responses';
+import normalizeComment from '../../utils/normalize-comment';
 import sortTweetsByTime from '../../utils/sort-tweets-by-time';
 import logger from '../../services/logger';
 
@@ -24,7 +24,7 @@ const comments = () => {
       tweets.forEach((tweet) => sortTweetsByTime(tweet, commentsByPost));
 
       // Remove all children replies and quotes.
-      const normalizedCommentsByPost = commentsByPost.map(removeTweetResponses);
+      const normalizedCommentsByPost = commentsByPost.map(normalizeComment);
 
       setCommentsByPost(postTitle, normalizedCommentsByPost);
     });

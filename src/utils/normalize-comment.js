@@ -1,3 +1,5 @@
+import { commentTimestamp } from './timestamp';
+
 // Transform tweet in comment object.
 const normalizeComment = (tweet) => {
   const {
@@ -12,20 +14,13 @@ const normalizeComment = (tweet) => {
     entities,
   } = tweet;
 
-  // destructure entities
-  // remove truthy checks
-  // avatarURL => avatar
-  // screenName => handle
-  // profileURL => profile
-  // createdAt => date || timestamp (convert to human readable)
-
   const comment = {
-    createdAt: createdAt || null,
+    timestamp: createdAt ? commentTimestamp(createdAt) : null,
     url: `https://twitter.com/${screenName}/statuses/${id}`,
-    profileURL: `https://twitter.com/${screenName}`,
+    profile: `https://twitter.com/${screenName}`,
     name: name || null,
-    handle: screenName || null,
-    avatarURL: avatarURL || null,
+    handle: `@${screenName}`,
+    avatar: avatarURL || null,
     content: {
       text: text || null,
       ...entities,
