@@ -1,56 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dedupeTweets utility returns an array of new tweets when there are no old tweets 1`] = `
-Array [
-  Object {
-    "id_str": "4413510525045624835",
-  },
-  Object {
-    "id_str": "5513510525045624835",
-  },
-  Object {
-    "id_str": "6613510525045624835",
-  },
-]
-`;
-
-exports[`dedupeTweets utility returns an array of old tweets when there are no new tweets 1`] = `
-Array [
-  Object {
-    "id_str": "1113510525045624835",
-  },
-  Object {
-    "id_str": "2213510525045624835",
-  },
-  Object {
-    "id_str": "3313510525045624835",
-  },
-]
-`;
-
-exports[`dedupeTweets utility returns an array of unique tweets when new tweets have copies of the old tweets 1`] = `
-Array [
-  Object {
-    "id_str": "1113510525045624835",
-  },
-  Object {
-    "id_str": "2213510525045624835",
-  },
-  Object {
-    "id_str": "3313510525045624835",
-  },
-  Object {
-    "id_str": "4413510525045624835",
-  },
-  Object {
-    "id_str": "5513510525045624835",
-  },
-  Object {
-    "id_str": "6613510525045624835",
-  },
-]
-`;
-
 exports[`dedupeTweets utility returns array of new tweets when there are no old tweets 1`] = `
 Array [
   Object {
