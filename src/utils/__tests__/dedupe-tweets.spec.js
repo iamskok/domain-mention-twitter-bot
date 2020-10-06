@@ -14,7 +14,6 @@ describe('dedupeTweets utility', () => {
   ];
 
   it('returns array of unique tweets when new tweets have copies of the old tweets', () => {
-    console.log([...newTweets, { id_str: '1113510525045624835' }])
     expect(dedupeTweets(
       oldTweets,
       [
