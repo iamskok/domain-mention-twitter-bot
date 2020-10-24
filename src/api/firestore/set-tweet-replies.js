@@ -17,11 +17,11 @@ const setTweetReplies = async (postTitle, tweetId, replies) => {
       },
     ).then(() => {
       logger.log('debug', '`firebase/setTweetReplies` replies', { replies });
-      logger.log('verbose', `Save tweet replies in firebase ${firestoreURL({ postTitle, tweetId })}`);
+      logger.log('verbose', `firebase/setTweetReplies save tweet replies in firebase ${firestoreURL({ postTitle, tweetId })}`);
       logger.log('info', '>>>> Exit `firebase/setTweetReplies`');
     });
   } catch (error) {
-    logger.log('error', '`firebase/setTweetReplies`', {
+    logger.log('error', '`firebase/setTweetReplies` catch block', {
       postTitle,
       tweetId,
       replies,
@@ -29,9 +29,9 @@ const setTweetReplies = async (postTitle, tweetId, replies) => {
     {
       errorObject: error,
     });
-
-    throw new Error('`firebase/setTweetReplies`', error);
   }
+
+  return null;
 };
 
 export default setTweetReplies;

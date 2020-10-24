@@ -20,20 +20,20 @@ const setTweetQuote = async (postTitle, quote) => {
         },
       ).then(() => {
         logger.log('debug', '`firebase/setTweetQuote` quote', { quote });
-        logger.log('verbose', `Save tweet quote in firebase ${firestoreURL({ postTitle, tweetId: quote.quoted_status.id_str })}`);
+        logger.log('verbose', `firebase/setTweetQuote save tweet quote in firebase ${firestoreURL({ postTitle, tweetId: quote.quoted_status.id_str })}`);
         logger.log('info', '>>>> Exit `firebase/setTweetQuote`');
       });
   } catch (error) {
-    logger.log('error', '`firebase/setTweetQuote`', {
+    logger.log('error', '`firebase/setTweetQuote` catch block', {
       postTitle,
       quote,
     },
     {
       errorObject: error,
     });
-
-    throw new Error('`firebase/setTweetQuote`', error);
   }
+
+  return null;
 };
 
 export default setTweetQuote;

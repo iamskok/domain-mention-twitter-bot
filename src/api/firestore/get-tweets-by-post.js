@@ -9,20 +9,20 @@ const getTweetsByPost = async (postTitle) => {
     const tweets = await db.collection(`posts/${postTitle}/tweets`).get();
 
     logger.log('debug', '`firebase/getTweetsByPost` tweets', { tweets });
-    logger.log('verbose', `Get tweets by post from firebase ${firestoreURL({ postTitle })}`);
+    logger.log('verbose', `firebase/getTweetsByPost get tweets by post from firebase ${firestoreURL({ postTitle })}`);
     logger.log('info', '>>>> Exit `firebase/getTweetsByPost`');
 
     return tweets;
   } catch (error) {
-    logger.log('error', '`firebase/getTweetsByPost`', {
+    logger.log('error', '`firebase/getTweetsByPost` catch block', {
       postTitle,
     },
     {
       errorObject: error,
     });
-
-    throw new Error('`firebase/getTweetsByPost`', error);
   }
+
+  return [];
 };
 
 export default getTweetsByPost;

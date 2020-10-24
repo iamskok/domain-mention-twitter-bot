@@ -14,12 +14,12 @@ const getAllPosts = async () => {
 
     return collection;
   } catch (error) {
-    logger.log('error', '`firebase/getAllPosts`', {
+    logger.log('error', '`firebase/getAllPosts` catch block', {
       errorObject: error,
     });
-
-    throw new Error('`firebase/getAllPosts`', error);
   }
+
+  return [];
 };
 
 export default getAllPosts;

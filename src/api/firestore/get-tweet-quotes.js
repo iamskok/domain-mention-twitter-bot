@@ -16,21 +16,21 @@ const getTweetQuotes = async (postTitle, tweetId) => {
       tweetId,
       quotes,
     });
-    logger.log('verbose', `Get tweet quotes from firebase ${firestoreURL({ postTitle, tweetId })}`);
+    logger.log('verbose', `firebase/getTweetQuotes get tweet quotes from firebase ${firestoreURL({ postTitle, tweetId })}`);
     logger.log('info', '>>>> Exit `firebase/getTweetQuotes`');
 
     return quotes;
   } catch (error) {
-    logger.log('error', '`firebase/getTweetQuotes`', {
+    logger.log('error', '`firebase/getTweetQuotes` catch block', {
       postTitle,
       tweetId,
     },
     {
       errorObject: error,
     });
-
-    throw new Error('`firebase/getTweetQuotes`', error);
   }
+
+  return [];
 };
 
 export default getTweetQuotes;

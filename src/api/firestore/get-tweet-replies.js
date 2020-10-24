@@ -12,7 +12,7 @@ const getTweetReplies = async (postTitle, tweetId) => {
       await docRef.collection('tweets').doc(tweetId).get()
     ).data().replies || [];
 
-    logger.log('debug', '`firebase/getTweetReplies`', {
+    logger.log('debug', '`firebase/getTweetReplies` replies', {
       tweetId,
       replies,
     });
@@ -21,16 +21,16 @@ const getTweetReplies = async (postTitle, tweetId) => {
 
     return replies;
   } catch (error) {
-    logger.log('error', '`firebase/getTweetReplies`', {
+    logger.log('error', '`firebase/getTweetReplies` catch block', {
       postTitle,
       tweetId,
     },
     {
       errorObject: error,
     });
-
-    throw new Error('`firebase/getTweetReplies`', error);
   }
+
+  return [];
 };
 
 export default getTweetReplies;

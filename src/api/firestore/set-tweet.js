@@ -11,8 +11,8 @@ const setTweet = async (postTitle, tweet) => {
     // by adding at least one field to the document.
     docRef.set({ updated: Date.now() });
 
-    logger.log('debug', `Update ${postTitle} date`);
-    logger.log('debug', `Update "tweets" collection in ${postTitle} document`, {
+    logger.log('debug', `firebase/setTweet update ${postTitle} date`);
+    logger.log('debug', `firebase/setTweet update "tweets" collection in ${postTitle} document`, {
       id_str: tweet.id_str,
       tweet,
     });
@@ -22,11 +22,11 @@ const setTweet = async (postTitle, tweet) => {
       .set(tweet)
       .then(() => {
         logger.log('debug', '`firebase/setTweet` tweet', { tweet });
-        logger.log('verbose', `Save tweet in firebase ${firestoreURL({ postTitle, tweetId: tweet.id_str })}`);
+        logger.log('verbose', `firebase/setTweet save tweet in firebase ${firestoreURL({ postTitle, tweetId: tweet.id_str })}`);
         logger.log('info', '>>>> Exit `firebase/setTweet`');
       });
   } catch (error) {
-    logger.log('error', '`firebase/setTweet`', {
+    logger.log('error', '`firebase/setTweet` catch block', {
       postTitle,
       id_str: tweet.id_str,
       tweet,
@@ -34,9 +34,9 @@ const setTweet = async (postTitle, tweet) => {
     {
       errorObject: error,
     });
-
-    throw new Error('`firebase/setTweet`', error);
   }
+
+  return null;
 };
 
 export default setTweet;

@@ -8,11 +8,9 @@ try {
 
   logger.log('info', 'Initialise `firestore`');
 } catch (error) {
-  logger.log('error', '`db`', {
+  logger.log('error', '`db` catch block', {
     errorObject: error,
   });
-
-  throw new Error(error);
 }
 
 export default db[0];
