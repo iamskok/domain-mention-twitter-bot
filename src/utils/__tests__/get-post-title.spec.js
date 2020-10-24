@@ -34,4 +34,12 @@ describe('getPostTitle utility', () => {
   it('returns `null` if the URL pathname is `/`', () => {
     expect(getPostTitle('https://example.com')).toBe(null);
   });
+
+  it('returns `null` if the URL does not have pathname and ends with `/`', () => {
+    expect(getPostTitle('https://example.com/')).toBe(null);
+  });
+
+  it('returns `null` if the URL\'s pathname starts with `/blog`', () => {
+    expect(getPostTitle('https://example.com/blog')).toBe(null);
+  });
 });

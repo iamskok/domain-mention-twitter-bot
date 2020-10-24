@@ -11,7 +11,7 @@ const getPostTitle = (url, base = 'blog') => {
   if (
     pathname.replace(slashRegex, '')
     && pathname.split(`/${base}/`)[1]
-      .split('/')
+      ?.split('/')
       .filter(Boolean).length === 1
     && pathname.startsWith(`/${base}/`)
   ) {
