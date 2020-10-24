@@ -8,10 +8,10 @@ import searchTweetResponses from '../twitter/search-tweet-responses';
 import logger from '../../services/logger';
 
 const responses = () => {
-  logger.log('info', '>>>> Enter `bot/responses`');
+  logger.log('info', '>>>> Enter `core/responses`');
 
   getAllPosts().then((posts) => {
-    logger.log('debug', '`bot/responses` => `getAllPosts`', {
+    logger.log('debug', '`core/responses` call `getAllPosts` with:', {
       posts,
     });
 
@@ -41,11 +41,11 @@ const responses = () => {
       });
     });
   }).catch((error) => {
-    logger.log('error', '`bot/responses`', {
+    logger.log('error', '`core/responses` catch block', {
       errorObject: error,
     });
   }).finally(() => {
-    logger.log('info', '>>>> Exit `bot/responses`');
+    logger.log('info', '>>>> Exit `core/responses`');
   });
 };
 

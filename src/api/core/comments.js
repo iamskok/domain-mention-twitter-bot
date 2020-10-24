@@ -6,10 +6,10 @@ import sortTweetsByTime from '../../utils/sort-tweets-by-time';
 import logger from '../../services/logger';
 
 const comments = () => {
-  logger.log('info', '>>>> Enter `bot/comments`');
+  logger.log('info', '>>>> Enter `core/comments`');
 
   getAllPosts().then((posts) => {
-    logger.log('debug', '`bot/comments` => `getAllPosts`', {
+    logger.log('debug', '`core/comments` call `getAllPosts` with:', {
       posts,
     });
 
@@ -29,11 +29,11 @@ const comments = () => {
       setCommentsByPost(postTitle, normalizedCommentsByPost);
     });
   }).catch((error) => {
-    logger.log('error', '`bot/comments`', {
+    logger.log('error', '`core/comments` catch block', {
       errorObject: error,
     });
   }).finally(() => {
-    logger.log('info', '>>>> Exit `bot/comments`');
+    logger.log('info', '>>>> Exit `core/comments`');
   });
 };
 
