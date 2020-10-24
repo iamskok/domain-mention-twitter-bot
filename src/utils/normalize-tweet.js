@@ -65,8 +65,8 @@ const removeExtraData = (tweet) => {
     entities,
     in_reply_to_status_id_str: in_reply_to_status_id_str || null,
     quoted_status_id_str: quoted_status_id_str || null,
-    replies,
-    quotes,
+    replies: replies || null,
+    quotes: quotes || null,
   };
   /* eslint-enable camelcase */
 
