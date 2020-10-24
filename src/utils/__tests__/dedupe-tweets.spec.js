@@ -1,4 +1,4 @@
-import dedupeTweets from '../dedupe-tweets'
+import dedupeTweets from '../dedupe-tweets';
 
 describe('dedupeTweets utility', () => {
   const oldTweets = [
@@ -21,25 +21,25 @@ describe('dedupeTweets utility', () => {
         { id_str: '1113510525045624835' },
         { id_str: '2213510525045624835' },
         { id_str: '3313510525045624835' },
-      ]
+      ],
     )).toMatchSnapshot();
   });
 
   it('returns array of new tweets when there are no old tweets', () => {
     expect(dedupeTweets(
       [],
-      newTweets
+      newTweets,
     )).toMatchSnapshot();
   });
 
   it('returns array of old tweets when there are no new tweets', () => {
     expect(dedupeTweets(
       oldTweets,
-      []
+      [],
     )).toMatchSnapshot();
   });
 
   it('returns empty array when there are no old and new tweets', () => {
     expect(dedupeTweets([], [])).toHaveLength(0);
   });
-})
+});

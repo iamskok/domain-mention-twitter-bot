@@ -19,7 +19,7 @@ const readStreamTweets = (domainName, setTweet) => {
       // Handle new tweet case.
       tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
         if (url.includes(domainName)) {
-          logger.log('info', `Received valid tweet ${tweetURL(tweet)} from Twitter stream`);
+          logger.log('info', `twitter/readStreamTweets received tweet ${tweetURL(tweet)}, which satisfies search criteria`);
 
           const postTitle = getPostTitle(url);
 
@@ -30,17 +30,17 @@ const readStreamTweets = (domainName, setTweet) => {
       });
     }
   })
-    .on('limit', (limitMessage) => logger.log('warning', 'Limitation occurred in Twitter stream', { limitMessage }))
-    .on('disconnect', (disconnectMessage) => logger.log('warning', 'Disconnect from Twitter stream', { disconnectMessage }))
-    .on('connect', (request) => logger.log('debug', 'Connection attempt to Twitter stream', { request }))
+    .on('limit', (limitMessage) => logger.log('warning', 'twitter/readStreamTweets limitation occurred', { limitMessage }))
+    .on('disconnect', (disconnectMessage) => logger.log('warning', 'twitter/readStreamTweets got disconnected', { disconnectMessage }))
+    .on('connect', (request) => logger.log('debug', 'twitter/readStreamTweets connection attempt', { request }))
     .on('connected', (response) => {
-      logger.log('info', 'Connected to Twitter stream');
-      logger.log('debug', 'Connected to Twitter stream', { response });
+      logger.log('info', 'twitter/readStreamTweets got connected');
+      logger.log('debug', 'twitter/readStreamTweets got connected', { response });
     })
-    .on('error', (error) => logger.log('error', 'Error occurred in Twitter stream API request or response', { errorObject: error }))
-    .on('warning', (warning) => logger.log('warning', 'Connection is falling behind in Twitter stream', { warning }))
+    .on('error', (error) => logger.log('error', 'twitter/readStreamTweets received error in Twitter stream API request or response', { errorObject: error }))
+    .on('warning', (warning) => logger.log('warning', 'twitter/readStreamTweets connection is falling behind', { warning }))
     .on('reconnect', (request, response, connectInterval) => {
-      logger.log('warning', 'Reconnection attempt to Twitter stream is scheduled', {
+      logger.log('warning', 'twitter/readStreamTweets reconnection attempt', {
         request,
         response,
         connectInterval,

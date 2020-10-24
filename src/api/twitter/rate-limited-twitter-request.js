@@ -1,0 +1,43 @@
+import limiter from '../../services/limiter';
+import logger from '../../services/logger';
+
+const rateLimitedTwitterRequest = (
+  endpoint,
+  options,
+  twitAuth,
+) => new Promise((resolve, reject) => {
+  limiter.removeTokens(1, (error, remainingRequests) => {
+    logger.log('verbose', `twitter/rateLimitedTwitterRequest remaining requests: ${remainingRequests}`);
+
+    if (error) {
+      logger.log('error', '`twitter/rateLimitedTwitterRequest` limiter', {
+        errorObject: error,
+      });
+
+      reject(error);
+    } else {
+      twitAuth.get(endpoint, options, async (twitError, data, response) => {
+        if (twitError) {
+          logger.log('error', '`twitter/rateLimitedTwitterRequest` received error from `twitAuth.get`', {
+            errorObject: error,
+          });
+
+          return reject(twitError);
+        }
+
+        if (response.statusCode !== 200) {
+          logger.log('error', '`twitter/rateLimitedTwitterRequest` `twitAuth.get` received non 200 response status code', {
+            errorObject: error,
+          });
+
+          process.exit(1);
+          // return reject(twitError);
+        }
+
+        return resolve(data);
+      });
+    }
+  });
+});
+
+export default rateLimitedTwitterRequest;
