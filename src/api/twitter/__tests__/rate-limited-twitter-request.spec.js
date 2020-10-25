@@ -1,10 +1,9 @@
 import limiter from 'limiter';
 import rateLimitedTwitterRequest from '../rate-limited-twitter-request';
-// import twitUserAuth from '../../../services/twit-user-auth';
 
 const { RateLimiter } = limiter;
-const TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW = 3;
 
+const TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW = 3;
 const twitterLimiter = new RateLimiter(TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW, 'second');
 
 const twitUserAuthFactory = (twitError, data, response) => ({
