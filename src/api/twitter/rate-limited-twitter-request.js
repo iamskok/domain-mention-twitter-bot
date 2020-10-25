@@ -1,10 +1,11 @@
-import limiter from '../../services/limiter';
+import rateLimiter from '../../services/limiter';
 import logger from '../../services/logger';
 
 const rateLimitedTwitterRequest = (
   endpoint,
   options,
   twitAuth,
+  limiter = rateLimiter,
 ) => new Promise((resolve, reject) => {
   limiter.removeTokens(1, (error, remainingRequests) => {
     logger.log('verbose', `twitter/rateLimitedTwitterRequest remaining requests: ${remainingRequests}`);
@@ -30,8 +31,7 @@ const rateLimitedTwitterRequest = (
             errorObject: error,
           });
 
-          process.exit(1);
-          // return reject(twitError);
+          return reject(twitError);
         }
 
         return resolve(data);
