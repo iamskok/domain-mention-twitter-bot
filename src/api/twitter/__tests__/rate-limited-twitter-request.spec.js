@@ -3,7 +3,7 @@ import rateLimitedTwitterRequest from '../rate-limited-twitter-request';
 // import twitUserAuth from '../../../services/twit-user-auth';
 
 const { RateLimiter } = limiter;
-const TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW = 1;
+const TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW = 3;
 
 const twitterLimiter = new RateLimiter(TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW, 'second');
 
@@ -69,5 +69,65 @@ describe('rateLimitedTwitterRequest', () => {
         twitterLimiter,
       ),
     ).resolves.toEqual({});
+  });
+
+  it('returns response in more than a second when called 4 times in 3 seconds', (done) => {
+    const promises = [];
+
+    for (let i = 0; i < 4; i += 1) {
+      promises.push(
+        rateLimitedTwitterRequest(
+          'search/tweets',
+          {},
+          twitUserAuthFactory(
+            false,
+            {},
+            {
+              statusCode: 200,
+            },
+          ),
+          twitterLimiter,
+        ),
+      );
+    }
+
+    const t1 = Date.now();
+
+    Promise.all(promises).then(() => {
+      const t2 = Date.now();
+
+      expect(t2 - t1).toBeGreaterThanOrEqual(1000);
+      done();
+    });
+  });
+
+  it('returns response in less than a second when called 3 times in 3 seconds', (done) => {
+    const promises = [];
+
+    for (let i = 0; i < 3; i += 1) {
+      promises.push(
+        rateLimitedTwitterRequest(
+          'search/tweets',
+          {},
+          twitUserAuthFactory(
+            false,
+            {},
+            {
+              statusCode: 200,
+            },
+          ),
+          twitterLimiter,
+        ),
+      );
+    }
+
+    const t1 = Date.now();
+
+    Promise.all(promises).then(() => {
+      const t2 = Date.now();
+
+      expect(t2 - t1).toBeLessThanOrEqual(1000);
+      done();
+    });
   });
 });
