@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`searchTweetResponses returns single tweet quote 1`] = `
+Array [
+  Object {
+    "created_at": "2020-10-30T05:09:34.504617",
+    "entities": undefined,
+    "id_str": "554819234340788643",
+    "in_reply_to_status_id_str": "554819234340788641",
+    "quoted_status_id_str": null,
+    "quotes": Array [],
+    "replies": Array [],
+    "text": "Hello world",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "Marry",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses returns single tweet quote 2`] = `
+Array [
+  Object {
+    "created_at": "2020-10-30T05:09:44.504617",
+    "entities": undefined,
+    "id_str": "554819234340788642",
+    "in_reply_to_status_id_str": null,
+    "quoted_status_id_str": "554819234340788641",
+    "quotes": Array [],
+    "replies": Array [],
+    "text": "Hey!!",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "John",
+    },
+  },
+]
+`;

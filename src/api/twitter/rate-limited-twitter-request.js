@@ -40,4 +40,4 @@ const rateLimitedTwitterRequest = (
   });
 });
 
-export default rateLimitedTwitterRequest;
+export { rateLimitedTwitterRequest };

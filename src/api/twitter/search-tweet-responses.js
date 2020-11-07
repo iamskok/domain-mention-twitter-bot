@@ -3,7 +3,7 @@ import dedupeTweets from '../../utils/dedupe-tweets';
 import normalizeTweet from '../../utils/normalize-tweet';
 import tweetURL from '../../utils/tweet-url';
 import logger from '../../services/logger';
-import rateLimitedTwitterRequest from './rate-limited-twitter-request';
+import { rateLimitedTwitterRequest } from './rate-limited-twitter-request';
 
 const { RECURSION_DEPTH_LIMIT } = process.env;
 

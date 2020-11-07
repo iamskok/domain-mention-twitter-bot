@@ -1,5 +1,5 @@
 import limiter from 'limiter';
-import rateLimitedTwitterRequest from '../rate-limited-twitter-request';
+import { rateLimitedTwitterRequest } from '../rate-limited-twitter-request';
 
 const { RateLimiter } = limiter;
 

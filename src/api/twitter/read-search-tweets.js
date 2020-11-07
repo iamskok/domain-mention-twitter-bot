@@ -2,7 +2,7 @@ import twitAppAuth from '../../services/twit-app-auth';
 import getPostTitle from '../../utils/get-post-title';
 import tweetURL from '../../utils/tweet-url';
 import logger from '../../services/logger';
-import rateLimitedTwitterRequest from './rate-limited-twitter-request';
+import { rateLimitedTwitterRequest } from './rate-limited-twitter-request';
 
 // Find tweets thru `search/tweets` endpoint, which mention `domainName`.
 const readSearchTweets = (domainName, setTweet) => {
