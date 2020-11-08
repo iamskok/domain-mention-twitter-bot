@@ -21,17 +21,31 @@ const rateLimitedTwitterRequestMock = (endpoint, options, twitAuth, limiter) => 
 };
 
 describe('searchTweetResponses', () => {
-  it('returns single tweet reply', () => {
+  it('returns single tweet reply with child quote and reply', () => {
     jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
       .mockImplementation(rateLimitedTwitterRequestMock);
 
     expect(searchTweetResponses(tweetsMock[0], 'reply', [])).resolves.toMatchSnapshot();
   });
 
-  it('returns single tweet quote', () => {
+  it('returns single tweet quote with child quote and reply', () => {
     jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
       .mockImplementation(rateLimitedTwitterRequestMock);
 
     expect(searchTweetResponses(tweetsMock[0], 'quote', [])).resolves.toMatchSnapshot();
+  });
+
+  it('returns no quotes', () => {
+    jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
+      .mockImplementation(rateLimitedTwitterRequestMock);
+
+    expect(searchTweetResponses(tweetsMock[7], 'quote', [])).resolves.toEqual([]);
+  });
+
+  it('returns no replies', () => {
+    jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
+      .mockImplementation(rateLimitedTwitterRequestMock);
+
+    expect(searchTweetResponses(tweetsMock[7], 'quote', [])).resolves.toEqual([]);
   });
 });
