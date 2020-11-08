@@ -2,6 +2,8 @@ import * as rateLimitedTwitterRequestModule from '../rate-limited-twitter-reques
 import searchTweetResponses from '../search-tweet-responses';
 import tweetsMock from '../../../mocks/tweets';
 
+const { RECURSION_DEPTH_LIMIT } = process.env;
+
 const rateLimitedTwitterRequestMock = (endpoint, options, twitAuth, limiter) => {
   const isReply = !!options.q.includes('to:');
 
@@ -25,27 +27,41 @@ describe('searchTweetResponses', () => {
     jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
       .mockImplementation(rateLimitedTwitterRequestMock);
 
-    expect(searchTweetResponses(tweetsMock[0], 'reply', [])).resolves.toMatchSnapshot();
+    expect(searchTweetResponses(tweetsMock[0], 'reply', [], RECURSION_DEPTH_LIMIT)).resolves.toMatchSnapshot();
   });
 
   it('returns single tweet quote with child quote and reply', () => {
     jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
       .mockImplementation(rateLimitedTwitterRequestMock);
 
-    expect(searchTweetResponses(tweetsMock[0], 'quote', [])).resolves.toMatchSnapshot();
+    expect(searchTweetResponses(tweetsMock[0], 'quote', [], RECURSION_DEPTH_LIMIT)).resolves.toMatchSnapshot();
   });
 
   it('returns no quotes', () => {
     jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
       .mockImplementation(rateLimitedTwitterRequestMock);
 
-    expect(searchTweetResponses(tweetsMock[7], 'quote', [])).resolves.toEqual([]);
+    expect(searchTweetResponses(tweetsMock[7], 'quote', [], RECURSION_DEPTH_LIMIT)).resolves.toEqual([]);
   });
 
   it('returns no replies', () => {
     jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
       .mockImplementation(rateLimitedTwitterRequestMock);
 
-    expect(searchTweetResponses(tweetsMock[7], 'quote', [])).resolves.toEqual([]);
+    expect(searchTweetResponses(tweetsMock[7], 'quote', [], RECURSION_DEPTH_LIMIT)).resolves.toEqual([]);
+  });
+
+  it('exceeds `RECURSION_DEPTH_LIMIT` and returns quote with no child quotes and replies', () => {
+    jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
+      .mockImplementation(rateLimitedTwitterRequestMock);
+
+    expect(searchTweetResponses(tweetsMock[0], 'quote', [], 1)).resolves.toMatchSnapshot();
+  });
+
+  it('exceeds `RECURSION_DEPTH_LIMIT` and returns reply with no child quotes and replies', () => {
+    jest.spyOn(rateLimitedTwitterRequestModule, 'rateLimitedTwitterRequest')
+      .mockImplementation(rateLimitedTwitterRequestMock);
+
+    expect(searchTweetResponses(tweetsMock[0], 'reply', [], 1)).resolves.toMatchSnapshot();
   });
 });

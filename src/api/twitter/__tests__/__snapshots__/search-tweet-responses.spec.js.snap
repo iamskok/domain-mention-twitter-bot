@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
+    "entities": undefined,
+    "id_str": "111111111111111111",
+    "in_reply_to_status_id_str": null,
+    "quoted_status_id_str": "000000000000000000",
+    "text": "Hey!!",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "John",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 2`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:34:24 +0000 2020",
+    "entities": undefined,
+    "id_str": "222222222222222222",
+    "in_reply_to_status_id_str": "000000000000000000",
+    "quoted_status_id_str": null,
+    "text": "Hello world",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "Marry",
+    },
+  },
+]
+`;
+
 exports[`searchTweetResponses returns no quotes 1`] = `
 Array [
   Object {

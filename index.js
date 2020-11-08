@@ -3,9 +3,9 @@ import responses from './src/api/core/responses';
 import stream from './src/api/core/stream';
 import comments from './src/api/core/comments';
 
-const { DOMAIN_NAME } = process.env;
+const { DOMAIN_NAME, RECURSION_DEPTH_LIMIT } = process.env;
 
 search(DOMAIN_NAME);
-responses();
+responses(RECURSION_DEPTH_LIMIT);
 comments();
 stream(DOMAIN_NAME);

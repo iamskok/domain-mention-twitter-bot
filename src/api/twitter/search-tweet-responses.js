@@ -5,21 +5,20 @@ import tweetURL from '../../utils/tweet-url';
 import logger from '../../services/logger';
 import { rateLimitedTwitterRequest } from './rate-limited-twitter-request';
 
-const { RECURSION_DEPTH_LIMIT } = process.env;
-
 // Search for tweet replies or quotes with nested replies/quotes
-const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
+const searchTweetResponses = (tweet, tweetType, oldResponses, recursionDepthLimit, depth = 0) => {
   logger.log('info', '>>>> Enter `twitter/searchTweetResponses`');
   logger.log('debug', 'Call `twitter/searchTweetResponses` with', {
     tweet,
     tweetType,
     oldResponses,
+    recursionDepthLimit,
     depth,
   });
 
   const responsesPromise = new Promise((resolve, reject) => {
-    if (depth >= RECURSION_DEPTH_LIMIT) {
-      logger.log('verbose', `'searchTweetResponses' depth limit - ${depth} exceeded recursion depth limit - ${RECURSION_DEPTH_LIMIT}`);
+    if (depth >= recursionDepthLimit) {
+      logger.log('verbose', `'searchTweetResponses' depth limit - ${depth} exceeded recursion depth limit - ${recursionDepthLimit}`);
 
       resolve(undefined);
       return;
@@ -82,11 +81,12 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             tweet,
             tweetType,
             oldResponses,
+            recursionDepthLimit,
             depth: depth + 1,
           });
 
           // Search for all replies of the child tweet.
-          childRepliesResolve(searchTweetResponses(childTweet, 'reply', childReplies, depth + 1));
+          childRepliesResolve(searchTweetResponses(childTweet, 'reply', childReplies, recursionDepthLimit, depth + 1));
         }));
 
         // Create an array of child quotes promises.
@@ -97,11 +97,12 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
             tweet,
             tweetType,
             oldResponses,
+            recursionDepthLimit,
             depth: depth + 1,
           });
 
           // Search for all quotes of the child tweet.
-          childQuotesResolve(searchTweetResponses(childTweet, 'quote', childQuotes, depth + 1));
+          childQuotesResolve(searchTweetResponses(childTweet, 'quote', childQuotes, recursionDepthLimit, depth + 1));
         }));
       }
 
@@ -140,7 +141,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
           logger.log('debug', '`twitter/searchTweetResponses` push `childReply` in `childTweet.replies` array', childReplies[i]);
         } else {
-          // Handle `undefined` value if `RECURSION_DEPTH_LIMIT` is exceeded.
+          // Handle `undefined` value if `recursionDepthLimit` is exceeded.
           delete childTweet.replies;
 
           logger.log('debug', '`twitter/searchTweetResponses` delete `childTweet.replies`');
@@ -151,7 +152,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, depth = 0) => {
 
           logger.log('debug', '`twitter/searchTweetResponses` push `childQuote` in `childTweet.quotes` array', childQuotes[i]);
         } else {
-          // Handle `undefined` value if `RECURSION_DEPTH_LIMIT` is exceeded.
+          // Handle `undefined` value if `recursionDepthLimit` is exceeded.
           delete childTweet.quotes;
 
           logger.log('debug', '`twitter/searchTweetResponses` delete `childTweet.quotes`');

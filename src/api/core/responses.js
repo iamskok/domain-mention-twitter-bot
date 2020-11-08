@@ -7,7 +7,7 @@ import getAllPosts from '../firestore/get-all-posts';
 import searchTweetResponses from '../twitter/search-tweet-responses';
 import logger from '../../services/logger';
 
-const responses = () => {
+const responses = (recursionDepthLimit) => {
   logger.log('info', '>>>> Enter `core/responses`');
 
   getAllPosts().then((posts) => {
@@ -26,8 +26,8 @@ const responses = () => {
         const oldReplies = await getTweetReplies(postTitle, tweetId);
         const oldQuotes = await getTweetQuotes(postTitle, tweetId);
 
-        const allReplies = await searchTweetResponses(tweetData, 'reply', oldReplies);
-        const allQuotes = await searchTweetResponses(tweetData, 'quote', oldQuotes);
+        const allReplies = await searchTweetResponses(tweetData, 'reply', oldReplies, recursionDepthLimit);
+        const allQuotes = await searchTweetResponses(tweetData, 'quote', oldQuotes, recursionDepthLimit);
 
         // Prevent adding `undefined` in the DB.
         if (allReplies) {
