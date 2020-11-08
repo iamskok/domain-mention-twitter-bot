@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`readStreamTweets returns \`javascript\` post title tweet with URL entities, which is not a quote or retweet 1`] = `
+Object {
+  "created_at": "Wed Oct 10 05:40:24 +0000 2020",
+  "entities": Object {
+    "urls": Array [
+      Object {
+        "expanded_url": "https://example.com/blog/javascript",
+      },
+    ],
+  },
+  "id_str": "88888888888888888888",
+  "in_reply_to_status_id_str": null,
+  "quoted_status_id_str": null,
+  "quotes": null,
+  "replies": null,
+  "text": "1st tweet with URL - http://t.co/12345",
+  "user": Object {
+    "name": undefined,
+    "profile_image_url_https": undefined,
+    "screen_name": "Mark",
+  },
+}
+`;
+
+exports[`readStreamTweets returns \`react\` post title tweet with URL entities, which is not a quote or retweet 1`] = `
+Object {
+  "created_at": "Wed Oct 10 06:40:24 +0000 2020",
+  "entities": Object {
+    "urls": Array [
+      Object {
+        "expanded_url": "https://example.com/blog/react",
+      },
+    ],
+  },
+  "id_str": "030303030303030303",
+  "in_reply_to_status_id_str": null,
+  "quoted_status_id_str": null,
+  "quotes": null,
+  "replies": null,
+  "text": "2nd tweet with URL - http://t.co/54321",
+  "user": Object {
+    "name": undefined,
+    "profile_image_url_https": undefined,
+    "screen_name": "Joe",
+  },
+}
+`;
+
+exports[`readStreamTweets returns undefined for quoted tweet 1`] = `undefined`;
+
+exports[`readStreamTweets returns undefined for retweeted tweet 1`] = `undefined`;
+
+exports[`readStreamTweets returns undefined for tweet without URL entities 1`] = `undefined`;

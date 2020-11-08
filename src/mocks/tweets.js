@@ -68,4 +68,77 @@ export default [
     text: 'JavaScript 4ever',
     user: { screen_name: 'Eric' },
   },
+
+  // Stream tweets
+  // 1st tweet with URL entities
+  {
+    created_at: 'Wed Oct 10 05:40:24 +0000 2020',
+    id_str: '88888888888888888888',
+    text: '1st tweet with URL - http://t.co/12345',
+    user: { screen_name: 'Mark' },
+    entities: {
+      urls: [
+        {
+          expanded_url: 'https://example.com/blog/javascript',
+        },
+      ],
+    },
+  },
+  // 2nd tweet with URL entities
+  {
+    created_at: 'Wed Oct 10 06:40:24 +0000 2020',
+    id_str: '030303030303030303',
+    text: '2nd tweet with URL - http://t.co/54321',
+    user: { screen_name: 'Joe' },
+    entities: {
+      urls: [
+        {
+          expanded_url: 'https://example.com/blog/react',
+        },
+      ],
+    },
+  },
+  // Quoted tweet with URL entities
+  {
+    created_at: 'Wed Oct 10 05:40:24 +0000 2020',
+    id_str: '010101010101010101',
+    text: 'Quoted Tweet with URL - http://t.co/11111',
+    user: { screen_name: 'Evan' },
+    quoted_status_id_str: '999999999999999999',
+    entities: {
+      urls: [
+        {
+          expanded_url: 'https://example.com/blog/go',
+        },
+      ],
+    },
+  },
+  // Retweeted tweet with URL entities
+  {
+    created_at: 'Wed Oct 10 06:44:24 +0000 2020',
+    id_str: '040404040404040404',
+    text: 'Quoted Tweet with URL - http://t.co/33333',
+    user: { screen_name: 'Amanda' },
+    retweeted_status: {
+      tweet: {
+        user: {
+          screen_name: 'Alice',
+        },
+      },
+    },
+    entities: {
+      urls: [
+        {
+          expanded_url: 'https://example.com/blog/typescript',
+        },
+      ],
+    },
+  },
+  // Tweet without URL entities
+  {
+    created_at: 'Wed Oct 10 05:40:24 +0000 2020',
+    id_str: '020202020202020202',
+    text: 'Tweet without URL',
+    user: { screen_name: 'George' },
+  },
 ];

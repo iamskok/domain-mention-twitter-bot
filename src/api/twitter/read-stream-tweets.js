@@ -11,13 +11,13 @@ const readStreamTweets = (domainName, setTweet) => {
     {
       // Check "Track" section https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/guides/basic-stream-parameters
       // Use “example com” as the track parameter for “example.com”
-      track: domainName.replace('.', ' '),
+      track: domainName?.replace('.', ' '),
     },
   ).on('tweet', (tweet) => {
     // Avoid catching retweets and quotes.
     if (!tweet.retweeted_status && !tweet.quoted_status_id_str) {
       // Handle new tweet case.
-      tweet.entities.urls.forEach(async ({ expanded_url: url }) => {
+      tweet.entities?.urls?.some(async ({ expanded_url: url }) => {
         if (url.includes(domainName)) {
           logger.log('info', `twitter/readStreamTweets received tweet ${tweetURL(tweet)}, which satisfies search criteria`);
 
@@ -25,8 +25,11 @@ const readStreamTweets = (domainName, setTweet) => {
 
           if (postTitle) {
             await setTweet(postTitle, normalizeTweet(tweet));
+            return true;
           }
         }
+
+        return false;
       });
     }
   })
