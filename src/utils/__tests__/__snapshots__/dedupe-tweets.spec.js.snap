@@ -3,13 +3,13 @@
 exports[`dedupeTweets utility returns array of new tweets when there are no old tweets 1`] = `
 Array [
   Object {
-    "id_str": "4413510525045624835",
+    "id_str": "444444444444444444",
   },
   Object {
-    "id_str": "5513510525045624835",
+    "id_str": "555555555555555555",
   },
   Object {
-    "id_str": "6613510525045624835",
+    "id_str": "666666666666666666",
   },
 ]
 `;
@@ -17,13 +17,13 @@ Array [
 exports[`dedupeTweets utility returns array of old tweets when there are no new tweets 1`] = `
 Array [
   Object {
-    "id_str": "1113510525045624835",
+    "id_str": "111111111111111111",
   },
   Object {
-    "id_str": "2213510525045624835",
+    "id_str": "222222222222222222",
   },
   Object {
-    "id_str": "3313510525045624835",
+    "id_str": "333333333333333333",
   },
 ]
 `;
@@ -31,22 +31,45 @@ Array [
 exports[`dedupeTweets utility returns array of unique tweets when new tweets have copies of the old tweets 1`] = `
 Array [
   Object {
-    "id_str": "1113510525045624835",
+    "id_str": "111111111111111111",
   },
   Object {
-    "id_str": "2213510525045624835",
+    "id_str": "222222222222222222",
   },
   Object {
-    "id_str": "3313510525045624835",
+    "id_str": "333333333333333333",
   },
   Object {
-    "id_str": "4413510525045624835",
+    "id_str": "444444444444444444",
   },
   Object {
-    "id_str": "5513510525045624835",
+    "id_str": "555555555555555555",
   },
   Object {
-    "id_str": "6613510525045624835",
+    "id_str": "666666666666666666",
+  },
+]
+`;
+
+exports[`dedupeTweets utility returns array of unique tweets when old tweets have copies of the new tweets 1`] = `
+Array [
+  Object {
+    "id_str": "111111111111111111",
+  },
+  Object {
+    "id_str": "222222222222222222",
+  },
+  Object {
+    "id_str": "333333333333333333",
+  },
+  Object {
+    "id_str": "444444444444444444",
+  },
+  Object {
+    "id_str": "555555555555555555",
+  },
+  Object {
+    "id_str": "666666666666666666",
   },
 ]
 `;
