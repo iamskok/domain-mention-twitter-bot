@@ -19,16 +19,10 @@ const stringifyIds = (tweet) => {
 // By default tweeter serves 48x48 profile images.
 const setProfileImageUrls = (tweet) => {
   const transformedTweet = { ...tweet };
-  // Increase profile image size to 400x400 in tweet replies.
-  if (tweet?.user?.profile_image_url_https) {
+  // Increase profile image size to 400x400.
+  if (tweet.user?.profile_image_url_https) {
     transformedTweet.user.profile_image_url_https = tweet.user.profile_image_url_https
       .replace(/_normal/, '_400x400');
-  }
-
-  // Increase profile image size to 400x400 in tweet quotes.
-  if (tweet?.quoted_status?.user?.profile_image_url_https) {
-    transformedTweet.quoted_status.user.profile_image_url_https = tweet
-      .quoted_status.user.profile_image_url_https.replace(/_normal/, '_400x400');
   }
 
   return transformedTweet;
