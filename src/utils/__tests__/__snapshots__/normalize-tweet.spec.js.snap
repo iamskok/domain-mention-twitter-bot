@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalizeTweet returns normalized tweet 1`] = `
+Object {
+  "created_at": "Sat Nov 14 18:14:07 +0000 2020",
+  "entities": Object {
+    "hashtags": Array [],
+    "symbols": Array [],
+    "urls": Array [
+      Object {
+        "display_url": "skok.club",
+        "expanded_url": "http://skok.club",
+        "indices": Array [
+          0,
+          23,
+        ],
+        "url": "https://t.co/4qg8i7N2NZ",
+      },
+    ],
+    "user_mentions": Array [],
+  },
+  "id_str": "1327676200005869570",
+  "in_reply_to_status_id_str": null,
+  "quoted_status_id_str": null,
+  "quotes": null,
+  "replies": null,
+  "text": "https://t.co/4qg8i7N2NZ tweet",
+  "user": Object {
+    "name": "Pavel K",
+    "profile_image_url_https": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+    "screen_name": "bbk136",
+  },
+}
+`;
+
+exports[`normalizeTweet returns normalized tweet quote 1`] = `
+Object {
+  "created_at": "Sat Nov 14 18:12:48 +0000 2020",
+  "entities": Object {
+    "hashtags": Array [],
+    "symbols": Array [],
+    "urls": Array [
+      Object {
+        "display_url": "skok.club",
+        "expanded_url": "http://skok.club",
+        "indices": Array [
+          0,
+          23,
+        ],
+        "url": "https://t.co/4qg8i7N2NZ",
+      },
+    ],
+    "user_mentions": Array [],
+  },
+  "id_str": "1327675869255643136",
+  "in_reply_to_status_id_str": null,
+  "quoted_status_id_str": "1305258930394861570",
+  "quotes": null,
+  "replies": null,
+  "text": "https://t.co/4qg8i7N2NZ quote",
+  "user": Object {
+    "name": "Pavel K",
+    "profile_image_url_https": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+    "screen_name": "bbk136",
+  },
+}
+`;
+
+exports[`normalizeTweet returns normalized tweet reply 1`] = `
+Object {
+  "created_at": "Sat Nov 14 18:11:31 +0000 2020",
+  "entities": Object {
+    "hashtags": Array [],
+    "symbols": Array [],
+    "urls": Array [
+      Object {
+        "display_url": "skok.club",
+        "expanded_url": "http://skok.club",
+        "indices": Array [
+          14,
+          37,
+        ],
+        "url": "https://t.co/4qg8i7N2NZ",
+      },
+    ],
+    "user_mentions": Array [
+      Object {
+        "id": 837337609974112300,
+        "id_str": "837337609974112256",
+        "indices": Array [
+          0,
+          13,
+        ],
+        "name": "San Diego CPA",
+        "screen_name": "CPA_SanDiego",
+      },
+    ],
+  },
+  "id_str": "1327675544016723969",
+  "in_reply_to_status_id_str": "1305258930394861570",
+  "quoted_status_id_str": null,
+  "quotes": null,
+  "replies": null,
+  "text": "@CPA_SanDiego https://t.co/4qg8i7N2NZ test",
+  "user": Object {
+    "name": "Pavel K",
+    "profile_image_url_https": "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+    "screen_name": "bbk136",
+  },
+}
+`;
