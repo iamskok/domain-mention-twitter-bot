@@ -1,6 +1,6 @@
 import db from './db';
 import logger from '../../services/logger';
-import firestoreURL from '../../utils/firestore-url';
+import firestoreUrl from '../../utils/firestore-url';
 
 const setTweetQuotes = async (postTitle, tweetId, quotes) => {
   logger.log('info', '>>>> Enter `firebase/setTweetQuotes`');
@@ -17,7 +17,7 @@ const setTweetQuotes = async (postTitle, tweetId, quotes) => {
       },
     ).then(() => {
       logger.log('debug', '`firebase/setTweetQuotes` quotes', { quotes });
-      logger.log('verbose', `firebase/setTweetQuotes save tweet quotes in firebase ${firestoreURL({ postTitle, tweetId })}`);
+      logger.log('verbose', `firebase/setTweetQuotes save tweet quotes in firebase ${firestoreUrl({ postTitle, tweetId })}`);
       logger.log('info', '>>>> Exit `firebase/setTweetQuotes`');
     });
   } catch (error) {

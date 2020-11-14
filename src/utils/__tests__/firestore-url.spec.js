@@ -1,29 +1,27 @@
-import firestoreURL from '../firestore-url';
+import firestoreUrl from '../firestore-url';
+import firestoreUrlMock from '../../mocks/firestoreUrl';
 
 const { FIREBASE_PROJECT_ID } = process.env;
+const { postTitle, tweetId, isTweetsCollection } = firestoreUrlMock;
 
-describe('firestoreURL utility', () => {
-  const postTitle = 'jest-testing';
-  const tweetId = '1311730829291327492';
-  const isTweetsCollection = true;
-
+describe('firestoreUrl utility', () => {
   it('returns tweet document URL', () => {
-    expect(firestoreURL({ postTitle, tweetId }))
-      .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2Fjest-testing~2Ftweets~2F1311730829291327492`);
+    expect(firestoreUrl({ postTitle, tweetId }))
+      .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2F${postTitle}~2Ftweets~2F${tweetId}`);
   });
 
   it('returns tweets collection URL', () => {
-    expect(firestoreURL({ postTitle, isTweetsCollection }))
-      .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2Fjest-testing~2Ftweets`);
+    expect(firestoreUrl({ postTitle, isTweetsCollection }))
+      .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2F${postTitle}~2Ftweets`);
   });
 
   it('returns post document URL', () => {
-    expect(firestoreURL({ postTitle }))
-      .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2Fjest-testing`);
+    expect(firestoreUrl({ postTitle }))
+      .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts~2F${postTitle}`);
   });
 
   it('returns post collection URL', () => {
-    expect(firestoreURL())
+    expect(firestoreUrl())
       .toBe(`https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts`);
   });
 });

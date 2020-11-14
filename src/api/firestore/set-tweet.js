@@ -1,6 +1,6 @@
 import db from './db';
 import logger from '../../services/logger';
-import firestoreURL from '../../utils/firestore-url';
+import firestoreUrl from '../../utils/firestore-url';
 
 const setTweet = async (postTitle, tweet) => {
   logger.log('info', '>>>> Enter `firebase/setTweet`');
@@ -22,7 +22,7 @@ const setTweet = async (postTitle, tweet) => {
       .set(tweet)
       .then(() => {
         logger.log('debug', '`firebase/setTweet` tweet', { tweet });
-        logger.log('verbose', `firebase/setTweet save tweet in firebase ${firestoreURL({ postTitle, tweetId: tweet.id_str })}`);
+        logger.log('verbose', `firebase/setTweet save tweet in firebase ${firestoreUrl({ postTitle, tweetId: tweet.id_str })}`);
         logger.log('info', '>>>> Exit `firebase/setTweet`');
       });
   } catch (error) {

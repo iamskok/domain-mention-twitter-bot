@@ -1,6 +1,6 @@
 const { FIREBASE_PROJECT_ID } = process.env;
 
-const firestoreURL = ({
+const firestoreUrl = ({
   postTitle,
   tweetId,
   isTweetsCollection,
@@ -24,4 +24,4 @@ const firestoreURL = ({
   return `https://console.firebase.google.com/project/${FIREBASE_PROJECT_ID}/firestore/data~2Fposts`;
 };
 
-export default firestoreURL;
+export default firestoreUrl;

@@ -1,6 +1,6 @@
 import db from './db';
 import logger from '../../services/logger';
-import firestoreURL from '../../utils/firestore-url';
+import firestoreUrl from '../../utils/firestore-url';
 
 const getTweetQuotes = async (postTitle, tweetId) => {
   logger.log('info', '>>>> Enter `firebase/getTweetQuotes`');
@@ -16,7 +16,7 @@ const getTweetQuotes = async (postTitle, tweetId) => {
       tweetId,
       quotes,
     });
-    logger.log('verbose', `firebase/getTweetQuotes get tweet quotes from firebase ${firestoreURL({ postTitle, tweetId })}`);
+    logger.log('verbose', `firebase/getTweetQuotes get tweet quotes from firebase ${firestoreUrl({ postTitle, tweetId })}`);
     logger.log('info', '>>>> Exit `firebase/getTweetQuotes`');
 
     return quotes;
