@@ -1,5 +1,5 @@
 import dedupeTweets from '../dedupe-tweets';
-import duplacateTweetsMock from '../../mocks/duplicateTweets';
+import duplacateTweetsMock from '../../tests/mocks/duplicateTweets';
 
 describe('dedupeTweets utility', () => {
   it('returns array of unique tweets when new tweets have copies of the old tweets', () => {

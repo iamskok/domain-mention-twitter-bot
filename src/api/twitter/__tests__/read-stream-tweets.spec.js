@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import readStreamTweets from '../read-stream-tweets';
 import twitUserAuth from '../../../services/twit-user-auth';
-import tweetsMock from '../../../mocks/tweets';
+import tweetsMock from '../../../tests/mocks/tweets';
 import getPostTitle from '../../../utils/get-post-title';
 
 const mockedEmitter = new EventEmitter();

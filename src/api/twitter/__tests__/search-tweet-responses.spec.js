@@ -1,6 +1,6 @@
 import * as rateLimitedTwitterRequestModule from '../rate-limited-twitter-request';
 import searchTweetResponses from '../search-tweet-responses';
-import tweetsMock from '../../../mocks/tweets';
+import tweetsMock from '../../../tests/mocks/tweets';
 
 const { RECURSION_DEPTH_LIMIT } = process.env;
 
