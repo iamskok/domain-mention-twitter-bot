@@ -10,7 +10,7 @@ const firestoreMock = {
   async setTweet(postTitle, tweet) {
     this.data[postTitle] = tweet;
   },
-  async getTweet(postTitle) {
+  async getTweetByPost(postTitle) {
     return Promise.resolve(this.data[postTitle]);
   },
 };
@@ -20,7 +20,7 @@ const expectedSnapshot = (tweetMock, postTitle, done) => {
     mockedEmitter.emit('tweet', tweetMock);
 
     setTimeout(async () => {
-      expect(firestoreMock.getTweet(postTitle)).resolves.toMatchSnapshot();
+      expect(firestoreMock.getTweetByPost(postTitle)).resolves.toMatchSnapshot();
       mockedEmitter.removeAllListeners('tweet');
       done();
     }, 1000);
