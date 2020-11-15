@@ -5,11 +5,6 @@ const setFirebaseUpdated = (oldResponses, allResponses) => {
     [...allSet].filter((x) => !oldSet.has(x)),
   );
 
-  console.log('^^^^ difference', difference);
-  console.log('^^^^ difference.size', difference.size);
-  console.log('^^^^ oldResponses', oldResponses);
-  console.log('^^^^ allResponses', allResponses);
-
   if (difference.size) {
     return true;
   }
