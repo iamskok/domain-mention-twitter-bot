@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalizeComment returns comment object 1`] = `
+Object {
+  "avatar": null,
+  "content": Object {
+    "text": null,
+  },
+  "handle": "@netlify",
+  "name": null,
+  "profile": "https://twitter.com/netlify",
+  "timestamp": null,
+  "url": "https://twitter.com/netlify/statuses/1324842247691657216",
+}
+`;
