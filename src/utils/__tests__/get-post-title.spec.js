@@ -1,5 +1,5 @@
 import getPostTitle from '../get-post-title';
-import domain from '../../tests/options/getPostTitle';
+import domain from '../../tests/options/domain';
 
 describe('getPostTitle utility', () => {
   it('returns post title from a URL which includes `/blog/` pathname', () => {

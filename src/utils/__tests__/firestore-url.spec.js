@@ -1,8 +1,8 @@
 import firestoreUrl from '../firestore-url';
-import firestoreUrlOptions from '../../tests/options/firestoreUrl';
+import firestoreOptions from '../../tests/options/firestore';
 
 const { FIREBASE_PROJECT_ID } = process.env;
-const { postTitle, tweetId, isTweetsCollection } = firestoreUrlOptions;
+const { postTitle, tweetId, isTweetsCollection } = firestoreOptions;
 
 describe('firestoreUrl utility', () => {
   it('returns tweet document URL', () => {
