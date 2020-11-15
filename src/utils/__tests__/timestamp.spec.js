@@ -1,15 +1,16 @@
 import { loggerTimestamp, commentTimestamp } from '../timestamp';
+import timestamp from '../../tests/options/timestamp';
 
 describe('loggerTimestamp utility', () => {
   it('returns formatted `YYYY-MM-DD HH:mm:ss:SSS` string', () => {
-    expect(loggerTimestamp('2020-10-03T00:00:00.000Z'))
+    expect(loggerTimestamp(timestamp.logger))
       .toBe('2020-10-03 00:00:00:000');
   });
 });
 
 describe('commentTimestamp utility', () => {
   it('returns formatted `MM-DD-YYYY` string', () => {
-    expect(commentTimestamp('Sun Oct 03 00:00:00 +0000 2020'))
+    expect(commentTimestamp(timestamp.comment))
       .toBe('10-03-2020');
   });
 });
