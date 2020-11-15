@@ -1,6 +1,6 @@
 // Ascending sort of all children replies and quotes based on timestamp.
-const sortTweetsByTime = (tweet, comments) => {
-  comments.push(tweet);
+const sortTweetsByTime = (tweet) => {
+  const comments = [tweet];
 
   const { replies = [], quotes = [] } = tweet;
 
@@ -9,7 +9,7 @@ const sortTweetsByTime = (tweet, comments) => {
       (a, b) => new Date(a.created_at).valueOf() - new Date(b.created_at).valueOf(),
     );
 
-  children.forEach((child) => sortTweetsByTime(child, comments));
+  children.forEach((child) => comments.push(sortTweetsByTime(child)));
 
   return comments;
 };

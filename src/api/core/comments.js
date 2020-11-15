@@ -14,14 +14,13 @@ const comments = () => {
     });
 
     posts.forEach(async (post) => {
-      const commentsByPost = [];
       const tweets = [];
 
       const postTitle = post.id;
       const tweetsByPost = await getTweetsByPost(postTitle);
 
       tweetsByPost.forEach((tweet) => tweets.push(tweet.data()));
-      tweets.forEach((tweet) => sortTweetsByTime(tweet, commentsByPost));
+      const commentsByPost = tweets.map((tweet) => sortTweetsByTime(tweet)).flat(Infinity);
 
       // Remove all children replies and quotes.
       const normalizedCommentsByPost = commentsByPost.map(normalizeComment);
