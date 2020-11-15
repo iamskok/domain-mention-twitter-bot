@@ -20,13 +20,13 @@ const getTweetReplies = async (postTitle, tweetId) => {
     logger.log('info', '>>>> Exit `firebase/getTweetReplies`');
 
     return replies;
-  } catch (error) {
+  } catch ({ message }) {
     logger.log('error', '`firebase/getTweetReplies` catch block', {
       postTitle,
       tweetId,
     },
     {
-      errorObject: error,
+      errorObject: message,
     });
   }
 

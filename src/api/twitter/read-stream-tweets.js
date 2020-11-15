@@ -40,7 +40,7 @@ const readStreamTweets = (domainName, setTweet) => {
       logger.log('info', 'twitter/readStreamTweets got connected');
       logger.log('debug', 'twitter/readStreamTweets got connected', { response });
     })
-    .on('error', (error) => logger.log('error', 'twitter/readStreamTweets received error in Twitter stream API request or response', { errorObject: error }))
+    .on('error', ({ message }) => logger.log('error', 'twitter/readStreamTweets received error in Twitter stream API request or response', { errorObject: message }))
     .on('warning', (warning) => logger.log('warning', 'twitter/readStreamTweets connection is falling behind', { warning }))
     .on('reconnect', (request, response, connectInterval) => {
       logger.log('warning', 'twitter/readStreamTweets reconnection attempt', {

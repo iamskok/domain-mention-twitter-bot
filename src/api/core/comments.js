@@ -27,9 +27,9 @@ const comments = () => {
 
       setCommentsByPost(postTitle, normalizedCommentsByPost);
     });
-  }).catch((error) => {
+  }).catch(({ message }) => {
     logger.log('error', '`core/comments` catch block', {
-      errorObject: error,
+      errorObject: message,
     });
   }).finally(() => {
     logger.log('info', '>>>> Exit `core/comments`');

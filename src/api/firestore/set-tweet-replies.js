@@ -20,14 +20,14 @@ const setTweetReplies = async (postTitle, tweetId, replies) => {
       logger.log('verbose', `firebase/setTweetReplies save tweet replies in firebase ${firestoreUrl({ postTitle, tweetId })}`);
       logger.log('info', '>>>> Exit `firebase/setTweetReplies`');
     });
-  } catch (error) {
+  } catch ({ message }) {
     logger.log('error', '`firebase/setTweetReplies` catch block', {
       postTitle,
       tweetId,
       replies,
     },
     {
-      errorObject: error,
+      errorObject: message,
     });
   }
 

@@ -20,7 +20,7 @@ const rateLimitedTwitterRequest = (
       twitAuth.get(endpoint, options, async (twitError, data, response) => {
         if (twitError) {
           logger.log('error', '`twitter/rateLimitedTwitterRequest` received error from `twitAuth.get`', {
-            errorObject: error,
+            errorObject: twitError.message,
           });
 
           return reject(twitError);
@@ -28,7 +28,7 @@ const rateLimitedTwitterRequest = (
 
         if (response.statusCode !== 200) {
           logger.log('error', '`twitter/rateLimitedTwitterRequest` `twitAuth.get` received non 200 response status code', {
-            errorObject: error,
+            errorObject: error.message,
           });
 
           return reject(twitError);

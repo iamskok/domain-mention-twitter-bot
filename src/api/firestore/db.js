@@ -7,9 +7,9 @@ try {
   db[0] = firebase.firestore();
 
   logger.log('info', 'Initialise `firestore`');
-} catch (error) {
+} catch ({ message }) {
   logger.log('error', '`db` catch block', {
-    errorObject: error,
+    errorObject: message,
   });
 }
 

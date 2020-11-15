@@ -166,7 +166,7 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, recursionDepthLimi
       resolve(updatedResponses);
 
       logger.log('debug', '`twitter/searchTweetResponses` resolve `updatedResponses`');
-    }).catch((error) => {
+    }).catch(({ message }) => {
       logger.log('error', '`twitter/searchTweetResponses` catch block in `twitUserAuth.get`', {
         endpoint: 'search/tweets',
         options: {
@@ -176,10 +176,10 @@ const searchTweetResponses = (tweet, tweetType, oldResponses, recursionDepthLimi
         },
       },
       {
-        errorObject: error,
+        errorObject: message,
       });
 
-      reject(error);
+      reject(message);
     });
   });
 

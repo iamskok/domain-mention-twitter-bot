@@ -13,9 +13,9 @@ const getAllPosts = async () => {
     logger.log('info', '>>>> Exit `firebase/getAllPosts`');
 
     return collection;
-  } catch (error) {
+  } catch ({ message }) {
     logger.log('error', '`firebase/getAllPosts` catch block', {
-      errorObject: error,
+      errorObject: message,
     });
   }
 
