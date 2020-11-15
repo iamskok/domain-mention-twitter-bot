@@ -125,7 +125,8 @@ describe('rateLimitedTwitterRequest', () => {
     Promise.all(promises).then(() => {
       const t2 = Date.now();
 
-      expect(t2 - t1).toBeLessThanOrEqual(1000);
+      // Add extra 1% because time in JS is not accurate.
+      expect(t2 - t1).toBeLessThanOrEqual(1000 + 10);
       done();
     });
   });
