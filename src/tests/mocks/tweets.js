@@ -134,6 +134,21 @@ export default [
       ],
     },
   },
+  // Reply tweet with URL entities
+  {
+    created_at: 'Wed Oct 10 06:44:24 +0000 2020',
+    id_str: '050505050505050505',
+    text: 'Quoted Tweet with URL - http://t.co/33333',
+    user: { screen_name: 'George' },
+    in_reply_to_status_id_str: '060606060606060606',
+    entities: {
+      urls: [
+        {
+          expanded_url: 'https://example.com/blog/python',
+        },
+      ],
+    },
+  },
   // Tweet without URL entities
   {
     created_at: 'Wed Oct 10 05:40:24 +0000 2020',
