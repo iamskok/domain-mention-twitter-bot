@@ -16,7 +16,7 @@
     "winston": "^3.3.3"
   },
   "scripts": {
-    "start": "node --es-module-specifier-resolution=node index.js",
+    "start": "node --es-module-specifier-resolution=node src/index.js",
     "eslint": "eslint --fix --cache .",
     "prettier": "prettier --write \"**/*.{md,json}\"",
     "test": "TZ=UTC jest --config .jestrc.json --coverage",
