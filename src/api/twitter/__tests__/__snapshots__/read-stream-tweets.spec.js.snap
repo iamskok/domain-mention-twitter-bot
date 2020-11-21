@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`readStreamTweets returns \`javascript\` post title tweet with URL entities, which is not a quote or retweet 1`] = `
+exports[`readStreamTweets returns \`javascript\` post title tweet with URL entities, which is not a quote, reply, or retweet 1`] = `
 Object {
   "created_at": "Wed Oct 10 05:40:24 +0000 2020",
   "entities": Object {
@@ -24,7 +24,7 @@ Object {
 }
 `;
 
-exports[`readStreamTweets returns \`react\` post title tweet with URL entities, which is not a quote or retweet 1`] = `
+exports[`readStreamTweets returns \`react\` post title tweet with URL entities, which is not a quote, reply, or retweet 1`] = `
 Object {
   "created_at": "Wed Oct 10 06:40:24 +0000 2020",
   "entities": Object {
@@ -49,6 +49,8 @@ Object {
 `;
 
 exports[`readStreamTweets returns undefined for quoted tweet 1`] = `undefined`;
+
+exports[`readStreamTweets returns undefined for reply tweet 1`] = `undefined`;
 
 exports[`readStreamTweets returns undefined for retweeted tweet 1`] = `undefined`;
 

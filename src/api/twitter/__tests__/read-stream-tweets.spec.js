@@ -28,7 +28,7 @@ const expectedSnapshot = (tweetMock, postTitle, done) => {
 };
 
 describe('readStreamTweets', () => {
-  it('returns `javascript` post title tweet with URL entities, which is not a quote or retweet', (done) => {
+  it('returns `javascript` post title tweet with URL entities, which is not a quote, reply, or retweet', (done) => {
     jest.spyOn(twitUserAuth, 'stream')
       .mockImplementation(() => mockedEmitter);
 
@@ -40,7 +40,7 @@ describe('readStreamTweets', () => {
     expectedSnapshot(tweetsMock[8], postTitle, done);
   });
 
-  it('returns `react` post title tweet with URL entities, which is not a quote or retweet', (done) => {
+  it('returns `react` post title tweet with URL entities, which is not a quote, reply, or retweet', (done) => {
     jest.spyOn(twitUserAuth, 'stream')
       .mockImplementation(() => mockedEmitter);
 
@@ -76,12 +76,24 @@ describe('readStreamTweets', () => {
     expectedSnapshot(tweetsMock[11], postTitle, done);
   });
 
+  it('returns undefined for reply tweet', (done) => {
+    jest.spyOn(twitUserAuth, 'stream')
+      .mockImplementation(() => mockedEmitter);
+
+    const url = 'https://example.com/blog/python';
+    const postTitle = getPostTitle(url);
+
+    readStreamTweets(postTitle, firestoreMock.setTweet.bind(firestoreMock));
+
+    expectedSnapshot(tweetsMock[12], postTitle, done);
+  });
+
   it('returns undefined for tweet without URL entities', (done) => {
     jest.spyOn(twitUserAuth, 'stream')
       .mockImplementation(() => mockedEmitter);
 
     readStreamTweets(undefined, firestoreMock.setTweet.bind(firestoreMock));
 
-    expectedSnapshot(tweetsMock[12], undefined, done);
+    expectedSnapshot(tweetsMock[13], undefined, done);
   });
 });
