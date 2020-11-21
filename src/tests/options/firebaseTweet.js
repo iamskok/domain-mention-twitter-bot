@@ -153,10 +153,11 @@ const firebaseTweet = {
     quotes: [],
     id_str: '1324842247691657216',
     user: { screen_name: 'netlify' },
+    extended_tweet: { full_text: 'Hello world' },
     replies: [
       {
         created_at: 'Sat Nov 07 18:42:34 +0000 2020',
-        text: '@Netlify 😂 nice one',
+        extended_tweet: { full_text: '@Netlify 😂 nice one' },
         id_str: '1325146642585067521',
         quoted_status_id_str: null,
         replies: [],

@@ -4,7 +4,7 @@ exports[`normalizeComment returns comment object 1`] = `
 Object {
   "avatar": null,
   "content": Object {
-    "text": null,
+    "text": "Hello world",
   },
   "handle": "@netlify",
   "name": null,

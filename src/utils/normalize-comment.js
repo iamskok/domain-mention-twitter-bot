@@ -5,7 +5,9 @@ const normalizeComment = (tweet) => {
   const {
     created_at: createdAt,
     id_str: id,
-    text,
+    extended_tweet: {
+      full_text: text,
+    },
     user: {
       screen_name: screenName,
       name,

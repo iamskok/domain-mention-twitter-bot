@@ -33,7 +33,9 @@ const removeExtraData = (tweet) => {
   /* eslint-disable camelcase */
   const {
     created_at,
-    text,
+    extended_tweet: {
+      full_text,
+    },
     id_str,
     user: {
       name,
@@ -49,7 +51,9 @@ const removeExtraData = (tweet) => {
 
   const transformedTweet = {
     created_at,
-    text,
+    extended_tweet: {
+      full_text,
+    },
     id_str,
     user: {
       name,
