@@ -53,8 +53,6 @@ const responses = (recursionDepthLimit) => {
         await Promise.all(tweetPromises);
       })()));
 
-      console.log('Promise.all', postPromises.length);
-
       return Promise.all(postPromises);
     }).catch(({ message }) => {
       logger.log('error', '`core/responses` catch block', {
