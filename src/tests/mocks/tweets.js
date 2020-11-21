@@ -3,7 +3,8 @@ export default [
   {
     created_at: 'Wed Oct 10 01:19:24 +0000 2020',
     id_str: '000000000000000000',
-    extended_tweet: { full_text: 'Hey eveyone!' },
+    text: 'Hey eveyone!...',
+    extended_tweet: { full_text: 'Hey eveyone! More than 140 characters............................................................................................................' },
     user: { screen_name: 'Mike' },
   },
 
@@ -12,7 +13,7 @@ export default [
   {
     created_at: 'Wed Oct 10 01:30:24 +0000 2020',
     id_str: '111111111111111111',
-    extended_tweet: { full_text: 'Hey!!' },
+    text: 'Hey!!',
     user: { screen_name: 'John' },
     quoted_status_id_str: '000000000000000000',
   },
@@ -20,7 +21,7 @@ export default [
   {
     created_at: 'Wed Oct 10 01:34:24 +0000 2020',
     id_str: '222222222222222222',
-    extended_tweet: { full_text: 'Hello world' },
+    text: 'Hello world',
     user: { screen_name: 'Marry' },
     in_reply_to_status_id_str: '000000000000000000',
   },
@@ -30,7 +31,7 @@ export default [
   {
     created_at: 'Wed Oct 10 01:50:24 +0000 2020',
     id_str: '333333333333333333',
-    extended_tweet: { full_text: 'Yo!' },
+    text: 'Yo!',
     user: { screen_name: 'Lisa' },
     quoted_status_id_str: '111111111111111111',
   },
@@ -38,7 +39,7 @@ export default [
   {
     created_at: 'Wed Oct 10 01:40:24 +0000 2020',
     id_str: '444444444444444444',
-    extended_tweet: { full_text: 'How are you guys?' },
+    text: 'How are you guys?',
     user: { screen_name: 'Beth' },
     in_reply_to_status_id_str: '111111111111111111',
   },
@@ -48,7 +49,7 @@ export default [
   {
     created_at: 'Wed Oct 10 02:30:24 +0000 2020',
     id_str: '555555555555555555',
-    extended_tweet: { full_text: 'How are you guys?' },
+    text: 'How are you guys?',
     user: { screen_name: 'Bob' },
     in_reply_to_status_id_str: '222222222222222222',
   },
@@ -56,7 +57,7 @@ export default [
   {
     created_at: 'Wed Oct 10 02:40:24 +0000 2020',
     id_str: '666666666666666666',
-    extended_tweet: { full_text: 'Hello friends!' },
+    text: 'Hello friends!',
     user: { screen_name: 'Cindy' },
     quoted_status_id_str: '222222222222222222',
   },
@@ -65,7 +66,7 @@ export default [
   {
     created_at: 'Wed Oct 10 04:40:24 +0000 2020',
     id_str: '777777777777777777',
-    extended_tweet: { full_text: 'JavaScript 4ever' },
+    text: 'JavaScript 4ever',
     user: { screen_name: 'Eric' },
   },
 
@@ -74,7 +75,7 @@ export default [
   {
     created_at: 'Wed Oct 10 05:40:24 +0000 2020',
     id_str: '88888888888888888888',
-    extended_tweet: { full_text: '1st tweet with URL - http://t.co/12345' },
+    text: '1st tweet with URL - http://t.co/12345',
     user: { screen_name: 'Mark' },
     entities: {
       urls: [
@@ -88,7 +89,7 @@ export default [
   {
     created_at: 'Wed Oct 10 06:40:24 +0000 2020',
     id_str: '030303030303030303',
-    extended_tweet: { full_text: '2nd tweet with URL - http://t.co/54321' },
+    text: '2nd tweet with URL - http://t.co/54321',
     user: { screen_name: 'Joe' },
     entities: {
       urls: [
@@ -102,7 +103,7 @@ export default [
   {
     created_at: 'Wed Oct 10 05:40:24 +0000 2020',
     id_str: '010101010101010101',
-    extended_tweet: { full_text: 'Quoted Tweet with URL - http://t.co/11111' },
+    text: 'Quoted Tweet with URL - http://t.co/11111',
     user: { screen_name: 'Evan' },
     quoted_status_id_str: '999999999999999999',
     entities: {
@@ -117,7 +118,7 @@ export default [
   {
     created_at: 'Wed Oct 10 06:44:24 +0000 2020',
     id_str: '040404040404040404',
-    extended_tweet: { full_text: 'Quoted Tweet with URL - http://t.co/33333' },
+    tweet: 'Quoted Tweet with URL - http://t.co/33333',
     user: { screen_name: 'Amanda' },
     retweeted_status: {
       tweet: {
@@ -138,7 +139,7 @@ export default [
   {
     created_at: 'Wed Oct 10 06:44:24 +0000 2020',
     id_str: '050505050505050505',
-    extended_tweet: { full_text: 'Quoted Tweet with URL - http://t.co/33333' },
+    text: 'Quoted Tweet with URL - http://t.co/33333',
     user: { screen_name: 'George' },
     in_reply_to_status_id_str: '060606060606060606',
     entities: {
@@ -153,7 +154,7 @@ export default [
   {
     created_at: 'Wed Oct 10 05:40:24 +0000 2020',
     id_str: '020202020202020202',
-    extended_tweet: { full_text: 'Tweet without URL' },
+    text: 'Tweet without URL',
     user: { screen_name: 'George' },
   },
 ];

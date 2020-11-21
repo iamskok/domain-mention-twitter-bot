@@ -1,15 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`normalizeComment returns comment object 1`] = `
+exports[`normalizeComment returns comment object with extended text field 1`] = `
 Object {
-  "avatar": null,
-  "content": Object {
-    "text": "Hello world",
-  },
-  "handle": "@netlify",
-  "name": null,
-  "profile": "https://twitter.com/netlify",
+  "entities": null,
+  "text": "Hello world with more than 140 characters....................................................................................................",
   "timestamp": null,
   "url": "https://twitter.com/netlify/statuses/1324842247691657216",
+  "user": Object {
+    "avatar": null,
+    "handle": "@netlify",
+    "name": null,
+    "profile": "https://twitter.com/netlify",
+  },
+}
+`;
+
+exports[`normalizeComment returns comment object with regular text field 1`] = `
+Object {
+  "entities": null,
+  "text": "Hello world ...",
+  "timestamp": null,
+  "url": "https://twitter.com/netlify/statuses/1324842247691657216",
+  "user": Object {
+    "avatar": null,
+    "handle": "@netlify",
+    "name": null,
+    "profile": "https://twitter.com/netlify",
+  },
 }
 `;

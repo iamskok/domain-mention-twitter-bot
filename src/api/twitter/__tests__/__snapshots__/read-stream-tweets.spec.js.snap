@@ -10,14 +10,13 @@ Object {
       },
     ],
   },
-  "extended_tweet": Object {
-    "full_text": "1st tweet with URL - http://t.co/12345",
-  },
+  "extended_tweet": null,
   "id_str": "88888888888888888888",
   "in_reply_to_status_id_str": null,
   "quoted_status_id_str": null,
   "quotes": null,
   "replies": null,
+  "text": "1st tweet with URL - http://t.co/12345",
   "user": Object {
     "name": undefined,
     "profile_image_url_https": undefined,
@@ -36,14 +35,13 @@ Object {
       },
     ],
   },
-  "extended_tweet": Object {
-    "full_text": "2nd tweet with URL - http://t.co/54321",
-  },
+  "extended_tweet": null,
   "id_str": "030303030303030303",
   "in_reply_to_status_id_str": null,
   "quoted_status_id_str": null,
   "quotes": null,
   "replies": null,
+  "text": "2nd tweet with URL - http://t.co/54321",
   "user": Object {
     "name": undefined,
     "profile_image_url_https": undefined,

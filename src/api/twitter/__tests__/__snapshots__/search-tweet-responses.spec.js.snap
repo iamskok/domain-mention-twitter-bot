@@ -1,111 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 1`] = `
-Array [
-  Object {
-    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
-    "entities": undefined,
-    "extended_tweet": Object {
-      "full_text": "Hey!!",
-    },
-    "id_str": "111111111111111111",
-    "in_reply_to_status_id_str": null,
-    "quoted_status_id_str": "000000000000000000",
-    "user": Object {
-      "name": undefined,
-      "profile_image_url_https": undefined,
-      "screen_name": "John",
-    },
-  },
-]
-`;
-
-exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 2`] = `
+exports[`searchTweetResponses 1 returns single tweet reply with child quote and reply 1`] = `
 Array [
   Object {
     "created_at": "Wed Oct 10 01:34:24 +0000 2020",
     "entities": undefined,
-    "extended_tweet": Object {
-      "full_text": "Hello world",
-    },
-    "id_str": "222222222222222222",
-    "in_reply_to_status_id_str": "000000000000000000",
-    "quoted_status_id_str": null,
-    "user": Object {
-      "name": undefined,
-      "profile_image_url_https": undefined,
-      "screen_name": "Marry",
-    },
-  },
-]
-`;
-
-exports[`searchTweetResponses returns no quotes 1`] = `
-Array [
-  Object {
-    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
-    "entities": undefined,
-    "extended_tweet": Object {
-      "full_text": "Hey!!",
-    },
-    "id_str": "111111111111111111",
-    "in_reply_to_status_id_str": null,
-    "quoted_status_id_str": "000000000000000000",
-    "quotes": Array [
-      Object {
-        "created_at": "Wed Oct 10 01:50:24 +0000 2020",
-        "entities": undefined,
-        "extended_tweet": Object {
-          "full_text": "Yo!",
-        },
-        "id_str": "333333333333333333",
-        "in_reply_to_status_id_str": null,
-        "quoted_status_id_str": "111111111111111111",
-        "quotes": Array [],
-        "replies": Array [],
-        "user": Object {
-          "name": undefined,
-          "profile_image_url_https": undefined,
-          "screen_name": "Lisa",
-        },
-      },
-    ],
-    "replies": Array [
-      Object {
-        "created_at": "Wed Oct 10 01:40:24 +0000 2020",
-        "entities": undefined,
-        "extended_tweet": Object {
-          "full_text": "How are you guys?",
-        },
-        "id_str": "444444444444444444",
-        "in_reply_to_status_id_str": "111111111111111111",
-        "quoted_status_id_str": null,
-        "quotes": Array [],
-        "replies": Array [],
-        "user": Object {
-          "name": undefined,
-          "profile_image_url_https": undefined,
-          "screen_name": "Beth",
-        },
-      },
-    ],
-    "user": Object {
-      "name": undefined,
-      "profile_image_url_https": undefined,
-      "screen_name": "John",
-    },
-  },
-]
-`;
-
-exports[`searchTweetResponses returns single tweet quote with child quote and reply 1`] = `
-Array [
-  Object {
-    "created_at": "Wed Oct 10 01:34:24 +0000 2020",
-    "entities": undefined,
-    "extended_tweet": Object {
-      "full_text": "Hello world",
-    },
+    "extended_tweet": null,
     "id_str": "222222222222222222",
     "in_reply_to_status_id_str": "000000000000000000",
     "quoted_status_id_str": null,
@@ -113,14 +13,13 @@ Array [
       Object {
         "created_at": "Wed Oct 10 02:40:24 +0000 2020",
         "entities": undefined,
-        "extended_tweet": Object {
-          "full_text": "Hello friends!",
-        },
+        "extended_tweet": null,
         "id_str": "666666666666666666",
         "in_reply_to_status_id_str": null,
         "quoted_status_id_str": "222222222222222222",
         "quotes": Array [],
         "replies": Array [],
+        "text": "Hello friends!",
         "user": Object {
           "name": undefined,
           "profile_image_url_https": undefined,
@@ -132,14 +31,13 @@ Array [
       Object {
         "created_at": "Wed Oct 10 02:30:24 +0000 2020",
         "entities": undefined,
-        "extended_tweet": Object {
-          "full_text": "How are you guys?",
-        },
+        "extended_tweet": null,
         "id_str": "555555555555555555",
         "in_reply_to_status_id_str": "222222222222222222",
         "quoted_status_id_str": null,
         "quotes": Array [],
         "replies": Array [],
+        "text": "How are you guys?",
         "user": Object {
           "name": undefined,
           "profile_image_url_https": undefined,
@@ -147,6 +45,248 @@ Array [
         },
       },
     ],
+    "text": "Hello world",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "Marry",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses 2 returns single tweet quote with child quote and reply 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "111111111111111111",
+    "in_reply_to_status_id_str": null,
+    "quoted_status_id_str": "000000000000000000",
+    "quotes": Array [
+      Object {
+        "created_at": "Wed Oct 10 01:50:24 +0000 2020",
+        "entities": undefined,
+        "extended_tweet": null,
+        "id_str": "333333333333333333",
+        "in_reply_to_status_id_str": null,
+        "quoted_status_id_str": "111111111111111111",
+        "quotes": Array [],
+        "replies": Array [],
+        "text": "Yo!",
+        "user": Object {
+          "name": undefined,
+          "profile_image_url_https": undefined,
+          "screen_name": "Lisa",
+        },
+      },
+    ],
+    "replies": Array [
+      Object {
+        "created_at": "Wed Oct 10 01:40:24 +0000 2020",
+        "entities": undefined,
+        "extended_tweet": null,
+        "id_str": "444444444444444444",
+        "in_reply_to_status_id_str": "111111111111111111",
+        "quoted_status_id_str": null,
+        "quotes": Array [],
+        "replies": Array [],
+        "text": "How are you guys?",
+        "user": Object {
+          "name": undefined,
+          "profile_image_url_https": undefined,
+          "screen_name": "Beth",
+        },
+      },
+    ],
+    "text": "Hey!!",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "John",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses 3 exceeds \`RECURSION_DEPTH_LIMIT\` and returns quote with no child quotes and replies 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "111111111111111111",
+    "in_reply_to_status_id_str": null,
+    "quoted_status_id_str": "000000000000000000",
+    "text": "Hey!!",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "John",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses 4 exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:34:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "222222222222222222",
+    "in_reply_to_status_id_str": "000000000000000000",
+    "quoted_status_id_str": null,
+    "text": "Hello world",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "Marry",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns quote with no child quotes and replies 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "111111111111111111",
+    "in_reply_to_status_id_str": null,
+    "quoted_status_id_str": "000000000000000000",
+    "text": "Hey!!",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "John",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:34:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "222222222222222222",
+    "in_reply_to_status_id_str": "000000000000000000",
+    "quoted_status_id_str": null,
+    "text": "Hello world",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "Marry",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses returns single tweet quote with child quote and reply 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:30:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "111111111111111111",
+    "in_reply_to_status_id_str": null,
+    "quoted_status_id_str": "000000000000000000",
+    "quotes": Array [
+      Object {
+        "created_at": "Wed Oct 10 01:50:24 +0000 2020",
+        "entities": undefined,
+        "extended_tweet": null,
+        "id_str": "333333333333333333",
+        "in_reply_to_status_id_str": null,
+        "quoted_status_id_str": "111111111111111111",
+        "quotes": Array [],
+        "replies": Array [],
+        "text": "Yo!",
+        "user": Object {
+          "name": undefined,
+          "profile_image_url_https": undefined,
+          "screen_name": "Lisa",
+        },
+      },
+    ],
+    "replies": Array [
+      Object {
+        "created_at": "Wed Oct 10 01:40:24 +0000 2020",
+        "entities": undefined,
+        "extended_tweet": null,
+        "id_str": "444444444444444444",
+        "in_reply_to_status_id_str": "111111111111111111",
+        "quoted_status_id_str": null,
+        "quotes": Array [],
+        "replies": Array [],
+        "text": "How are you guys?",
+        "user": Object {
+          "name": undefined,
+          "profile_image_url_https": undefined,
+          "screen_name": "Beth",
+        },
+      },
+    ],
+    "text": "Hey!!",
+    "user": Object {
+      "name": undefined,
+      "profile_image_url_https": undefined,
+      "screen_name": "John",
+    },
+  },
+]
+`;
+
+exports[`searchTweetResponses returns single tweet reply with child quote and reply 1`] = `
+Array [
+  Object {
+    "created_at": "Wed Oct 10 01:34:24 +0000 2020",
+    "entities": undefined,
+    "extended_tweet": null,
+    "id_str": "222222222222222222",
+    "in_reply_to_status_id_str": "000000000000000000",
+    "quoted_status_id_str": null,
+    "quotes": Array [
+      Object {
+        "created_at": "Wed Oct 10 02:40:24 +0000 2020",
+        "entities": undefined,
+        "extended_tweet": null,
+        "id_str": "666666666666666666",
+        "in_reply_to_status_id_str": null,
+        "quoted_status_id_str": "222222222222222222",
+        "quotes": Array [],
+        "replies": Array [],
+        "text": "Hello friends!",
+        "user": Object {
+          "name": undefined,
+          "profile_image_url_https": undefined,
+          "screen_name": "Cindy",
+        },
+      },
+    ],
+    "replies": Array [
+      Object {
+        "created_at": "Wed Oct 10 02:30:24 +0000 2020",
+        "entities": undefined,
+        "extended_tweet": null,
+        "id_str": "555555555555555555",
+        "in_reply_to_status_id_str": "222222222222222222",
+        "quoted_status_id_str": null,
+        "quotes": Array [],
+        "replies": Array [],
+        "text": "How are you guys?",
+        "user": Object {
+          "name": undefined,
+          "profile_image_url_https": undefined,
+          "screen_name": "Bob",
+        },
+      },
+    ],
+    "text": "Hello world",
     "user": Object {
       "name": undefined,
       "profile_image_url_https": undefined,
