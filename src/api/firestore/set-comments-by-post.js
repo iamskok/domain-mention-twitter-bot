@@ -19,13 +19,13 @@ const setCommentsByPost = async (postTitle, comments) => {
         logger.log('verbose', `firebase/setCommentsByPost save post comments in firebase ${firestoreUrl({ postTitle })}`);
         logger.log('info', '>>>> Exit `firebase/setCommentsByPost`');
       });
-  } catch ({ message }) {
+  } catch (error) {
     logger.log('error', '`firebase/setCommentsByPost` catch block', {
       postTitle,
       comments,
     },
     {
-      errorObject: message,
+      error,
     });
   }
 

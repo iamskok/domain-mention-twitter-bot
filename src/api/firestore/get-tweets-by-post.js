@@ -13,12 +13,12 @@ const getTweetsByPost = async (postTitle) => {
     logger.log('info', '>>>> Exit `firebase/getTweetsByPost`');
 
     return tweets;
-  } catch ({ message }) {
+  } catch (error) {
     logger.log('error', '`firebase/getTweetsByPost` catch block', {
       postTitle,
     },
     {
-      errorObject: message,
+      error,
     });
   }
 

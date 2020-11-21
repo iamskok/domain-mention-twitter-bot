@@ -54,9 +54,9 @@ const responses = (recursionDepthLimit) => {
       })()));
 
       return Promise.all(postPromises);
-    }).catch(({ message }) => {
+    }).catch((error) => {
       logger.log('error', '`core/responses` catch block', {
-        errorObject: message,
+        error,
       });
     }).finally(() => {
       resolve(isFirebaseUpdated);
