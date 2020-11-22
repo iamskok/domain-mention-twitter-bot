@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+import dotenvConfig from './config/dotenv';
 import extendError from './utils/extend-error';
 import responses from './api/core/responses';
 import stream from './api/core/stream';
