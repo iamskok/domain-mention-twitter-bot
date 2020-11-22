@@ -10,10 +10,10 @@ const { DOMAIN_NAME, RECURSION_DEPTH_LIMIT } = process.env;
 
 stream(DOMAIN_NAME);
 
-// setInterval(() => {
-//   responses(RECURSION_DEPTH_LIMIT).then((isFirebaseUpdated) => {
-//     if (isFirebaseUpdated) {
-//       comments();
-//     }
-//   });
-// }, RESPONSES_INTERVAL);
+setInterval(() => {
+  responses(RECURSION_DEPTH_LIMIT).then((isFirebaseUpdated) => {
+    if (isFirebaseUpdated) {
+      comments();
+    }
+  });
+}, RESPONSES_INTERVAL);
