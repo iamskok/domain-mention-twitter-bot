@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: 14.x
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: yarn --frozen-lockfile
 
     - name: Create `.env` File
@@ -57,7 +57,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Docker Build and push
+    - name: Docker Build and Push
       uses: docker/build-push-action@v2
       with:
         push: ${{ github.event_name != 'pull_request' }}
@@ -75,7 +75,7 @@ jobs:
     #     source: '.env'
     #     target: '/root/app/'
 
-    - name: executing remote ssh commands using password
+    - name: Execute Remote SSH Commands
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -86,4 +86,5 @@ jobs:
           --script 'docker stop $(docker ps -aq)'
           --script 'docker system prune -a -f'
           --script 'cd /root/app'
+          --script 'docker pull iamskok/twitter-bot'
           --script 'nohup docker run --env-file .env -v ${PWD}/secrets:/app/secrets iamskok/twitter-bot > nohup.out 2> nohup.err < /dev/null &'
