@@ -86,5 +86,4 @@ jobs:
           --script 'docker stop $(docker ps -aq)'
           --script 'docker system prune -a -f'
           --script 'cd /root/app'
-          --script 'docker pull iamskok/twitter-bot'
           --script 'nohup docker run --env-file .env -v ${PWD}/secrets:/app/secrets iamskok/twitter-bot > nohup.out 2> nohup.err < /dev/null &'
