@@ -1,9 +1,9 @@
 dist
 node_modules
-firebase-adminsdk.json
 TODO.md
 .env
 .DS_Store
 .eslintcache
 logs
 coverage
+secrets
