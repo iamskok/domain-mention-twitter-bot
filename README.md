@@ -25,6 +25,31 @@ DOMAIN_NAME=example.com
 RECURSION_DEPTH_LIMIT=5
 ```
 
+## Docker Host Configuration
+
+Install ansible playbooks:
+
+```sh
+ansible-galaxy install gantsign.oh-my-zsh \
+  geerlingguy.docker
+```
+
+Run docker host playbook:
+
+```sh
+ansible-playbook site.yml -i hosts
+```
+
+## Github Action Secrets
+
+* DOCKERHUB_TOKEN
+* DOCKERHUB_USERNAME
+* HOST
+* KEY
+* PORT
+* USERNAME
+* + all environment variables from `.env`
+
 ## DB export
 
 1. Use `FIREBASE_STORAGE_BUCKET` variable in `gcloud firestore export`
