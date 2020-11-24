@@ -25,5 +25,5 @@ RUN mkdir -p /usr/local/gcloud \
 # Adding the package path to local
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 
-CMD gcloud auth activate-service-account --key-file=/app/secrets/firebase-adminsdk.json \
-  && GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/firebase-adminsdk.json yarn start
+CMD gcloud auth activate-service-account --key-file=/app/service-account/firebase-adminsdk.json \
+  && GOOGLE_APPLICATION_CREDENTIALS=/app/service-account/firebase-adminsdk.json yarn start
