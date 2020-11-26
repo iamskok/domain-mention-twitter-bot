@@ -1,11 +1,12 @@
-- name: Configure Docker Host
-  hosts: all
-  roles:
-    - geerlingguy.docker
+- hosts: all
 
-- name: Install Oh My Zsh
-  hosts: all
+  pre_tasks:
+    - apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
   roles:
+    - role: geerlingguy.docker
     - role: gantsign.oh-my-zsh
       users:
         - username: root
@@ -13,33 +14,27 @@
             theme: steeef
             plugins:
               - git
-              # - colorize
               - last-working-dir
               - docker
               - z
 
-- hosts: all
   tasks:
-    - name: Create Project Directory
+    - name: Create project directory
       file:
         path: /home/twitter-bot
         state: directory
-    - name: Copy `.env`
+
+    - name: Copy environment variables
       copy:
         src: ./.env
         dest: /home/twitter-bot/.env
-    - name: Create Service Account Directory
+
+    - name: Create service account directory
       file:
         path: /home/twitter-bot/service-account
         state: directory
-    - name: Copy firebase-adminsdk.json
+
+    - name: Copy Firebase Admin SDK credentials
       copy:
         src: ./firebase-adminsdk.json
         dest: /home/twitter-bot/service-account/firebase-adminsdk.json
-
-# - name: Install Pygments
-#   hosts: all
-#   apt:
-#     name: python3-pygments
-#     state: latest
-#     update_cache: yes

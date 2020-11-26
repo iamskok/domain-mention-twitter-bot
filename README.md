@@ -25,14 +25,21 @@ DOMAIN_NAME=example.com
 RECURSION_DEPTH_LIMIT=5
 ```
 
+Generate [Firebase Admin SDK credentials](https://console.firebase.google.com/u/0/project/iamskok/settings/serviceaccounts/adminsdk) and copy in `./firebase-adminsdk.json`.
+
 ## Terraform
 
-`DO_PAT` - Digital Ocean person access token.
+- `DO_TOKEN` - Digital Ocean person access token. Can be found in [personal access token section](https://cloud.digitalocean.com/account/api/tokens).
+- `DO_SSH_KEY_NAME` - Digital Ocean SSH key name. Can be found in [SSH keys section](https://cloud.digitalocean.com/account/security).
+- `DO_SSH_USER` - Digital Ocean SSH username. Defaults to `root`.
+- `SSH_PRIVATE_KEY_PATH` - Path to SSH private key on the host machine. E.g `$HOME/.ssh/id_rsa`.
 
 ```sh
 terraform apply \
-  -var "do_token=${DO_PAT}" \
-  -var "pvt_key=$HOME/.ssh/id_rsa"
+  -var "do_token=${DO_TOKEN}" \
+  -var "do_ssh_user=${DO_SSH_USER}" \
+  -var "do_ssh_key_name=${DO_SSH_KEY_NAME}" \
+  -var "ssh_private_key=${SSH_PRIVATE_KEY_PATH}"
 ```
 
 ## Docker Host Configuration
@@ -44,20 +51,22 @@ ansible-galaxy install gantsign.oh-my-zsh \
   geerlingguy.docker
 ```
 
-Run docker host playbook:
+*Ansible playbook gets executed by Terraform's `local-exec` provisioner*
+
+Manual run of docker host playbook:
 
 ```sh
-ansible-playbook site.yml -i hosts
+ansible-playbook -i <ip-address>, provision.yml -u root
 ```
 
 ## Github Action Secrets
 
-* `DOCKERHUB_TOKEN`
+* `DOCKERHUB_TOKEN` (generate [your token](https://hub.docker.com/settings/security))
 * `DOCKERHUB_USERNAME`
-* `HOST`
-* `KEY`
-* `PORT`
-* `USERNAME`
+* `HOST` (becomes available after running terraform script)
+* `KEY` (private SSH key)
+* `PORT` (by default it's `22`)
+* `USERNAME` (by default Digital Ocean sets it to `root`)
 * All environment variables from `.env` file.
 
 ## DB export

@@ -1,37 +1,57 @@
+variable "do_token" {}
+variable "do_ssh_user" {}
+variable "do_ssh_key_name" {}
+variable "ssh_private_key" {}
+
 terraform {
   required_providers {
     digitalocean = {
-      source = "digitalocean/digitalocean"
-      version = "1.22.2"
+      source  = "digitalocean/digitalocean"
+      version = "2.2.0"
     }
   }
 }
-
-variable "do_token" {}
-variable "pvt_key" {}
 
 provider "digitalocean" {
   token = var.do_token
 }
 
 data "digitalocean_ssh_key" "terraform" {
-  name       = "Home" # Name of SSH key in DO
+  name = var.do_ssh_key_name
 }
 
-resource "digitalocean_droplet" "prod" {
-  image = "ubuntu-18-04-x64"
-  name = "prod"
-  region = "sfo3"
-  size = "s-1vcpu-1gb"
+resource "digitalocean_droplet" "production" {
+  image              = "ubuntu-20-04-x64"
+  name               = "production"
+  region             = "sfo3"
+  size               = "s-1vcpu-1gb"
   private_networking = true
-  ssh_keys = [
-    data.digitalocean_ssh_key.terraform.id
-  ]
+  ssh_keys           = [data.digitalocean_ssh_key.terraform.id]
+
   connection {
-    host = self.ipv4_address
-    user = "root"
-    type = "ssh"
-    private_key = file(var.pvt_key)
-    timeout = "2m"
+    type        = "ssh"
+    user        = var.do_ssh_user
+    host        = self.ipv4_address
+    private_key = file(var.ssh_private_key)
+    timeout     = "2m"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = var.do_ssh_user
+      host        = self.ipv4_address
+      private_key = file(var.ssh_private_key)
+      timeout     = "2m"
+    }
+
+    inline = [
+      "sleep 20",
+      "echo 'Ready to envoke `local-exec` provisioner'"
+    ]
+  }
+
+  provisioner "local-exec" {
+    command = "ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i ${self.ipv4_address}, provision.yml -u ${var.do_ssh_user}"
   }
 }
