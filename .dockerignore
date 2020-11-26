@@ -1,0 +1,6 @@
+**/*
+!src/
+!package.json
+!yarn.lock
+!.babelrc.json
+!index.js

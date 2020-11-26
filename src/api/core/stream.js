@@ -3,11 +3,9 @@ import readStreamTweets from '../twitter/read-stream-tweets';
 import logger from '../../services/logger';
 
 const stream = (domainName) => {
-  logger.log('info', '>>>> Enter `core/stream`');
+  logger.log('info', '>>>> Start `core/stream`');
 
   readStreamTweets(domainName, setTweet);
-
-  logger.log('info', '>>>> Exit `core/stream`');
 };
 
 export default stream;

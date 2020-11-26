@@ -1,6 +1,4 @@
 import Twit from 'twit';
-// eslint-disable-next-line no-unused-vars
-import dotenvConfig from '../config/dotenv';
 import TWIT_TIMEOUT from '../constants/twit';
 
 const {

@@ -1,3 +1,3 @@
-const RESPONSES_INTERVAL = 60 * 60 * 1000;
+const RESPONSES_INTERVAL = 30 * 60 * 1000;
 
 export default RESPONSES_INTERVAL;

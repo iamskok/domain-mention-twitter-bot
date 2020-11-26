@@ -3,7 +3,8 @@ export default [
   {
     created_at: 'Wed Oct 10 01:19:24 +0000 2020',
     id_str: '000000000000000000',
-    text: 'Hey eveyone!',
+    text: 'Hey eveyone!...',
+    extended_tweet: { full_text: 'Hey eveyone! More than 140 characters............................................................................................................' },
     user: { screen_name: 'Mike' },
   },
 
@@ -117,7 +118,7 @@ export default [
   {
     created_at: 'Wed Oct 10 06:44:24 +0000 2020',
     id_str: '040404040404040404',
-    text: 'Quoted Tweet with URL - http://t.co/33333',
+    tweet: 'Quoted Tweet with URL - http://t.co/33333',
     user: { screen_name: 'Amanda' },
     retweeted_status: {
       tweet: {
@@ -130,6 +131,21 @@ export default [
       urls: [
         {
           expanded_url: 'https://example.com/blog/typescript',
+        },
+      ],
+    },
+  },
+  // Reply tweet with URL entities
+  {
+    created_at: 'Wed Oct 10 06:44:24 +0000 2020',
+    id_str: '050505050505050505',
+    text: 'Quoted Tweet with URL - http://t.co/33333',
+    user: { screen_name: 'George' },
+    in_reply_to_status_id_str: '060606060606060606',
+    entities: {
+      urls: [
+        {
+          expanded_url: 'https://example.com/blog/python',
         },
       ],
     },

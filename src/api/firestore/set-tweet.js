@@ -25,14 +25,14 @@ const setTweet = async (postTitle, tweet) => {
         logger.log('verbose', `firebase/setTweet save tweet in firebase ${firestoreUrl({ postTitle, tweetId: tweet.id_str })}`);
         logger.log('info', '>>>> Exit `firebase/setTweet`');
       });
-  } catch ({ message }) {
+  } catch (error) {
     logger.log('error', '`firebase/setTweet` catch block', {
       postTitle,
       id_str: tweet.id_str,
       tweet,
     },
     {
-      errorObject: message,
+      error,
     });
   }
 

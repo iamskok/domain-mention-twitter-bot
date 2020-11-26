@@ -1,10 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 1`] = `
+exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns quote with no child quotes and replies 1`] = `
 Array [
   Object {
     "created_at": "Wed Oct 10 01:30:24 +0000 2020",
     "entities": undefined,
+    "extended_tweet": null,
     "id_str": "111111111111111111",
     "in_reply_to_status_id_str": null,
     "quoted_status_id_str": "000000000000000000",
@@ -18,11 +19,12 @@ Array [
 ]
 `;
 
-exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 2`] = `
+exports[`searchTweetResponses exceeds \`RECURSION_DEPTH_LIMIT\` and returns reply with no child quotes and replies 1`] = `
 Array [
   Object {
     "created_at": "Wed Oct 10 01:34:24 +0000 2020",
     "entities": undefined,
+    "extended_tweet": null,
     "id_str": "222222222222222222",
     "in_reply_to_status_id_str": "000000000000000000",
     "quoted_status_id_str": null,
@@ -36,11 +38,12 @@ Array [
 ]
 `;
 
-exports[`searchTweetResponses returns no quotes 1`] = `
+exports[`searchTweetResponses returns single tweet quote with child quote and reply 1`] = `
 Array [
   Object {
     "created_at": "Wed Oct 10 01:30:24 +0000 2020",
     "entities": undefined,
+    "extended_tweet": null,
     "id_str": "111111111111111111",
     "in_reply_to_status_id_str": null,
     "quoted_status_id_str": "000000000000000000",
@@ -48,6 +51,7 @@ Array [
       Object {
         "created_at": "Wed Oct 10 01:50:24 +0000 2020",
         "entities": undefined,
+        "extended_tweet": null,
         "id_str": "333333333333333333",
         "in_reply_to_status_id_str": null,
         "quoted_status_id_str": "111111111111111111",
@@ -65,6 +69,7 @@ Array [
       Object {
         "created_at": "Wed Oct 10 01:40:24 +0000 2020",
         "entities": undefined,
+        "extended_tweet": null,
         "id_str": "444444444444444444",
         "in_reply_to_status_id_str": "111111111111111111",
         "quoted_status_id_str": null,
@@ -88,11 +93,12 @@ Array [
 ]
 `;
 
-exports[`searchTweetResponses returns single tweet quote with child quote and reply 1`] = `
+exports[`searchTweetResponses returns single tweet reply with child quote and reply 1`] = `
 Array [
   Object {
     "created_at": "Wed Oct 10 01:34:24 +0000 2020",
     "entities": undefined,
+    "extended_tweet": null,
     "id_str": "222222222222222222",
     "in_reply_to_status_id_str": "000000000000000000",
     "quoted_status_id_str": null,
@@ -100,6 +106,7 @@ Array [
       Object {
         "created_at": "Wed Oct 10 02:40:24 +0000 2020",
         "entities": undefined,
+        "extended_tweet": null,
         "id_str": "666666666666666666",
         "in_reply_to_status_id_str": null,
         "quoted_status_id_str": "222222222222222222",
@@ -117,6 +124,7 @@ Array [
       Object {
         "created_at": "Wed Oct 10 02:30:24 +0000 2020",
         "entities": undefined,
+        "extended_tweet": null,
         "id_str": "555555555555555555",
         "in_reply_to_status_id_str": "222222222222222222",
         "quoted_status_id_str": null,

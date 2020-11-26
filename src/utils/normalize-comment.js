@@ -6,6 +6,7 @@ const normalizeComment = (tweet) => {
     created_at: createdAt,
     id_str: id,
     text,
+    extended_tweet: extendedTweet,
     user: {
       screen_name: screenName,
       name,
@@ -17,13 +18,13 @@ const normalizeComment = (tweet) => {
   const comment = {
     timestamp: createdAt ? commentTimestamp(createdAt) : null,
     url: `https://twitter.com/${screenName}/statuses/${id}`,
-    profile: `https://twitter.com/${screenName}`,
-    name: name || null,
-    handle: `@${screenName}`,
-    avatar: avatarURL || null,
-    content: {
-      text: text || null,
-      ...entities,
+    text: extendedTweet?.full_text ? extendedTweet.full_text : text,
+    entities: entities || null,
+    user: {
+      name: name || null,
+      avatar: avatarURL || null,
+      handle: `@${screenName}`,
+      profile: `https://twitter.com/${screenName}`,
     },
   };
 

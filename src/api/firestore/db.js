@@ -1,16 +1,19 @@
 import firebase from '../../services/firebase';
 import logger from '../../services/logger';
 
-const db = [];
+// eslint-disable-next-line no-underscore-dangle
+let _db = null;
 
 try {
-  db[0] = firebase.firestore();
+  _db = firebase.firestore();
 
   logger.log('info', 'Initialise `firestore`');
-} catch ({ message }) {
+} catch (error) {
   logger.log('error', '`db` catch block', {
-    errorObject: message,
+    error,
   });
 }
 
-export default db[0];
+const DB = _db;
+
+export default DB;

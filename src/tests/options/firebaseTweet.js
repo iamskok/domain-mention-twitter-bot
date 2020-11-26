@@ -149,41 +149,50 @@ const firebaseTweet = {
     ],
   },
 
-  comment: {
-    quotes: [],
-    id_str: '1324842247691657216',
-    user: { screen_name: 'netlify' },
-    replies: [
-      {
-        created_at: 'Sat Nov 07 18:42:34 +0000 2020',
-        text: '@Netlify 😂 nice one',
-        id_str: '1325146642585067521',
-        quoted_status_id_str: null,
-        replies: [],
-        entities: {
-          urls: [],
-          symbols: [],
-          user_mentions: [
-            {
-              id: 2571501973,
-              indices: [0, 8],
-              screen_name: 'Netlify',
-              name: 'Netlify',
-              id_str: '2571501973',
-            },
-          ],
-          hashtags: [],
+  comment: [
+    {
+      quotes: [],
+      id_str: '1324842247691657216',
+      user: { screen_name: 'netlify' },
+      text: 'Hello world ...',
+      extended_tweet: { full_text: 'Hello world with more than 140 characters....................................................................................................' },
+      replies: [
+        {
+          created_at: 'Sat Nov 07 18:42:34 +0000 2020',
+          text: '@Netlify 😂 nice one',
+          id_str: '1325146642585067521',
+          quoted_status_id_str: null,
+          replies: [],
+          entities: {
+            urls: [],
+            symbols: [],
+            user_mentions: [
+              {
+                id: 2571501973,
+                indices: [0, 8],
+                screen_name: 'Netlify',
+                name: 'Netlify',
+                id_str: '2571501973',
+              },
+            ],
+            hashtags: [],
+          },
+          user: {
+            profile_image_url_https: 'https://pbs.twimg.com/profile_images/1054223429887553537/Ue6qp9dN_400x400.jpg',
+            name: 'Thomas Sankara',
+            screen_name: 'TSBSankara',
+          },
+          quotes: [],
+          in_reply_to_status_id_str: '1324842247691657216',
         },
-        user: {
-          profile_image_url_https: 'https://pbs.twimg.com/profile_images/1054223429887553537/Ue6qp9dN_400x400.jpg',
-          name: 'Thomas Sankara',
-          screen_name: 'TSBSankara',
-        },
-        quotes: [],
-        in_reply_to_status_id_str: '1324842247691657216',
-      },
-    ],
-  },
+      ],
+    },
+    {
+      id_str: '1324842247691657216',
+      user: { screen_name: 'netlify' },
+      text: 'Hello world ...',
+    },
+  ],
 };
 
 export default firebaseTweet;

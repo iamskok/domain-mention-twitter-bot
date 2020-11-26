@@ -20,13 +20,13 @@ const getTweetQuotes = async (postTitle, tweetId) => {
     logger.log('info', '>>>> Exit `firebase/getTweetQuotes`');
 
     return quotes;
-  } catch ({ message }) {
+  } catch (error) {
     logger.log('error', '`firebase/getTweetQuotes` catch block', {
       postTitle,
       tweetId,
     },
     {
-      errorObject: message,
+      error,
     });
   }
 

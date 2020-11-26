@@ -12,7 +12,7 @@ const rateLimitedTwitterRequest = (
 
     if (error) {
       logger.log('error', '`twitter/rateLimitedTwitterRequest` limiter', {
-        errorObject: error,
+        error,
       });
 
       reject(error);
@@ -20,7 +20,7 @@ const rateLimitedTwitterRequest = (
       twitAuth.get(endpoint, options, async (twitError, data, response) => {
         if (twitError) {
           logger.log('error', '`twitter/rateLimitedTwitterRequest` received error from `twitAuth.get`', {
-            errorObject: twitError.message,
+            error: twitError,
           });
 
           return reject(twitError);
@@ -28,10 +28,16 @@ const rateLimitedTwitterRequest = (
 
         if (response.statusCode !== 200) {
           logger.log('error', '`twitter/rateLimitedTwitterRequest` `twitAuth.get` received non 200 response status code', {
-            errorObject: error.message,
+            error: twitError,
+            statusCode: response.statusCode,
           });
 
-          return reject(twitError);
+          if (twitError) {
+            return reject(twitError);
+          }
+          return reject(
+            new Error(`Response came back with status code ${response.statusCode}`),
+          );
         }
 
         return resolve(data);
@@ -40,4 +46,5 @@ const rateLimitedTwitterRequest = (
   });
 });
 
+// eslint-disable-next-line import/prefer-default-export
 export { rateLimitedTwitterRequest };
