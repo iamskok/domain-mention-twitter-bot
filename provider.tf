@@ -20,9 +20,9 @@ data "digitalocean_ssh_key" "terraform" {
   name = var.do_ssh_key_name
 }
 
-resource "digitalocean_droplet" "production" {
+resource "digitalocean_droplet" "docker-host" {
   image              = "ubuntu-20-04-x64"
-  name               = "production"
+  name               = "docker-host"
   region             = "sfo3"
   size               = "s-1vcpu-1gb"
   private_networking = true
