@@ -62,8 +62,6 @@ jobs:
       with:
         push: ${{ github.event_name != 'pull_request' }}
         tags: iamskok/twitter-bot
-        context: .
-        file: ./Dockerfile
 
     - name: Execute Remote SSH Commands
       uses: appleboy/ssh-action@master
