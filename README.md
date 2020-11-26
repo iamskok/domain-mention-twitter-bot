@@ -25,6 +25,16 @@ DOMAIN_NAME=example.com
 RECURSION_DEPTH_LIMIT=5
 ```
 
+## Terraform
+
+`DO_PAT` - Digital Ocean person access token.
+
+```sh
+terraform apply \
+  -var "do_token=${DO_PAT}" \
+  -var "pvt_key=$HOME/.ssh/id_rsa"
+```
+
 ## Docker Host Configuration
 
 Install ansible playbooks:
@@ -42,13 +52,13 @@ ansible-playbook site.yml -i hosts
 
 ## Github Action Secrets
 
-* DOCKERHUB_TOKEN
-* DOCKERHUB_USERNAME
-* HOST
-* KEY
-* PORT
-* USERNAME
-* + all environment variables from `.env`
+* `DOCKERHUB_TOKEN`
+* `DOCKERHUB_USERNAME`
+* `HOST`
+* `KEY`
+* `PORT`
+* `USERNAME`
+* All environment variables from `.env` file.
 
 ## DB export
 
