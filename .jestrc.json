@@ -1,4 +1,5 @@
 {
+  "setupFiles": ["./src/config/dotenv"],
   "testEnvironment": "node",
   "collectCoverageFrom": [
     "./src/**/*.js",

@@ -53,12 +53,10 @@ const responses = (recursionDepthLimit) => {
         await Promise.all(tweetPromises);
       })()));
 
-      console.log('Promise.all', postPromises.length);
-
       return Promise.all(postPromises);
-    }).catch(({ message }) => {
+    }).catch((error) => {
       logger.log('error', '`core/responses` catch block', {
-        errorObject: message,
+        error,
       });
     }).finally(() => {
       resolve(isFirebaseUpdated);

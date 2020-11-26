@@ -2,6 +2,6 @@
 // Reduce the max allowed limit to be safe.
 const TWITTER_SEARCH_RATE_LIMIT = 175;
 // Calculate the max allowed limit per minute.
-const TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW = Math.floor(TWITTER_SEARCH_RATE_LIMIT / 15);
+const TWITTER_SEARCH_WINDOW_RATE_LIMIT = Math.floor(TWITTER_SEARCH_RATE_LIMIT / 15);
 
-export default TWITTER_SEARCH_RATE_LIMIT_PER_WINDOW;
+export default TWITTER_SEARCH_WINDOW_RATE_LIMIT;

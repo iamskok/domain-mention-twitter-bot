@@ -1,0 +1,40 @@
+- hosts: all
+
+  pre_tasks:
+    - apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+  roles:
+    - role: geerlingguy.docker
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: root
+          oh_my_zsh:
+            theme: steeef
+            plugins:
+              - git
+              - last-working-dir
+              - docker
+              - z
+
+  tasks:
+    - name: Create project directory
+      file:
+        path: /home/twitter-bot
+        state: directory
+
+    - name: Copy environment variables
+      copy:
+        src: ./.env
+        dest: /home/twitter-bot/.env
+
+    - name: Create service account directory
+      file:
+        path: /home/twitter-bot/service-account
+        state: directory
+
+    - name: Copy Firebase Admin SDK credentials
+      copy:
+        src: ./firebase-adminsdk.json
+        dest: /home/twitter-bot/service-account/firebase-adminsdk.json

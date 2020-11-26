@@ -1,6 +1,4 @@
 import admin from 'firebase-admin';
-// eslint-disable-next-line no-unused-vars
-import dotenvConfig from '../config/dotenv';
 
 const {
   FIREBASE_API_KEY,
