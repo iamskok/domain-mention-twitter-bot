@@ -37,14 +37,6 @@ resource "digitalocean_droplet" "production" {
   }
 
   provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = var.do_ssh_user
-      host        = self.ipv4_address
-      private_key = file(var.ssh_private_key)
-      timeout     = "2m"
-    }
-
     inline = [
       "sleep 20",
       "echo 'Ready to envoke `local-exec` provisioner'"
