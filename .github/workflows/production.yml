@@ -67,6 +67,7 @@ jobs:
 
     - name: Execute Remote SSH Commands
       uses: appleboy/ssh-action@master
+      if: ${{ github.event_name != 'pull_request' }}
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
@@ -77,4 +78,4 @@ jobs:
           --script 'docker system prune -a -f'
           --script 'cd /home/twitter-bot'
           --script 'docker pull iamskok/twitter-bot'
-          --script 'nohup docker run --env-file .env -v ${PWD}/service-account:/app/service-account -v ${PWD}/logs:/app/logs iamskok/twitter-bot > nohup.out 2> nohup.err < /dev/null &'
+          --script 'nohup docker run --env-file .env -v ${PWD}/service-account:/app/service-account -v ${PWD}/logs:/app/logs iamskok/twitter-bot > docker.output 2> docker.error < /dev/null &'
