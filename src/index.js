@@ -12,6 +12,8 @@ const { DOMAIN_NAME, RECURSION_DEPTH_LIMIT } = process.env;
 
 stream(DOMAIN_NAME);
 
+comments();
+
 setInterval(() => {
   responses(RECURSION_DEPTH_LIMIT).then((isFirebaseUpdated) => {
     if (isFirebaseUpdated) {
