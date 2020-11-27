@@ -1,6 +1,8 @@
 **/*
+**/.*
 !src/
+src/tests
 !package.json
 !yarn.lock
 !.babelrc.json
-!index.js
+!.env
