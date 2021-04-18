@@ -23,7 +23,7 @@ jobs:
       run: yarn --frozen-lockfile
 
     - name: Create `.env` File
-      uses: SpicyPizza/create-envfile@v1.0
+      uses: SpicyPizza/create-envfile@1.1
       with:
         envkey_TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
         envkey_TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
