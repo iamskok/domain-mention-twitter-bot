@@ -8,7 +8,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "firebase-admin": "^9.1.1",
     "limiter": "^1.1.5",
     "moment": "^2.29.0",
