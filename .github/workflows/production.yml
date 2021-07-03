@@ -23,8 +23,10 @@ jobs:
       run: yarn --frozen-lockfile
 
     - name: Create `.env` File
-      uses: SpicyPizza/create-envfile@v1.0
+      uses: SpicyPizza/create-envfile@1.1
       with:
+        file_name: .env
+        github_workspace: ${{ github.workspace }}
         envkey_TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
         envkey_TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
         envkey_TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
@@ -39,7 +41,6 @@ jobs:
         envkey_FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
         envkey_DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
         envkey_RECURSION_DEPTH_LIMIT: ${{ secrets.RECURSION_DEPTH_LIMIT }}
-        file_name: .env
 
     - name: Run Tests
       run: yarn test
