@@ -12,7 +12,7 @@
     "dotenv": "^10.0.0",
     "firebase-admin": "^9.1.1",
     "jest": "^27.0.6",
-    "limiter": "^1.1.5",
+    "limiter": "^2.0.0",
     "moment": "^2.29.0",
     "twit": "^2.2.11",
     "winston": "^3.3.3"
