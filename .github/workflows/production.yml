@@ -22,7 +22,7 @@ jobs:
       run: yarn --frozen-lockfile
 
     - name: Create `.env` File
-      uses: SpicyPizza/create-envfile@1.1
+      uses: SpicyPizza/create-envfile@v1.3
       with:
         file_name: .env
         github_workspace: ${{ github.workspace }}
